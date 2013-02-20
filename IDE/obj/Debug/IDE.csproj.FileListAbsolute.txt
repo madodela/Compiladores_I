@@ -1,0 +1,7 @@
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\bin\Debug\IDE.exe
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\bin\Debug\IDE.pdb
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\obj\Debug\IDE.csprojResolveAssemblyReference.cache
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\obj\Debug\IDE.MainForm.resources
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\obj\Debug\IDE.csproj.GenerateResource.Cache
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\obj\Debug\IDE.exe
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\obj\Debug\IDE.pdb
