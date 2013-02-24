@@ -87,8 +87,9 @@ namespace IDE
 									this.Guardar_Archivo,
 									this.Guardar_Como_Archivo,
 									this.Cerrar_Archivo});
+			this.archivoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("archivoToolStripMenuItem.Image")));
 			this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-			this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+			this.archivoToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
 			this.archivoToolStripMenuItem.Text = "Archivo";
 			// 
 			// Abrir_Archivo
@@ -102,6 +103,7 @@ namespace IDE
 			// 
 			// Nuevo_Archivo
 			// 
+			this.Nuevo_Archivo.Image = ((System.Drawing.Image)(resources.GetObject("Nuevo_Archivo.Image")));
 			this.Nuevo_Archivo.Name = "Nuevo_Archivo";
 			this.Nuevo_Archivo.Size = new System.Drawing.Size(152, 22);
 			this.Nuevo_Archivo.Text = "Nuevo";
@@ -111,6 +113,7 @@ namespace IDE
 			// Guardar_Archivo
 			// 
 			this.Guardar_Archivo.Enabled = false;
+			this.Guardar_Archivo.Image = ((System.Drawing.Image)(resources.GetObject("Guardar_Archivo.Image")));
 			this.Guardar_Archivo.Name = "Guardar_Archivo";
 			this.Guardar_Archivo.Size = new System.Drawing.Size(152, 22);
 			this.Guardar_Archivo.Text = "Guardar";
@@ -120,6 +123,7 @@ namespace IDE
 			// Guardar_Como_Archivo
 			// 
 			this.Guardar_Como_Archivo.Enabled = false;
+			this.Guardar_Como_Archivo.Image = ((System.Drawing.Image)(resources.GetObject("Guardar_Como_Archivo.Image")));
 			this.Guardar_Como_Archivo.Name = "Guardar_Como_Archivo";
 			this.Guardar_Como_Archivo.Size = new System.Drawing.Size(152, 22);
 			this.Guardar_Como_Archivo.Text = "Guardar Como";
@@ -129,6 +133,7 @@ namespace IDE
 			// Cerrar_Archivo
 			// 
 			this.Cerrar_Archivo.Enabled = false;
+			this.Cerrar_Archivo.Image = ((System.Drawing.Image)(resources.GetObject("Cerrar_Archivo.Image")));
 			this.Cerrar_Archivo.Name = "Cerrar_Archivo";
 			this.Cerrar_Archivo.Size = new System.Drawing.Size(152, 22);
 			this.Cerrar_Archivo.Text = "Cerrar";
@@ -152,16 +157,18 @@ namespace IDE
 			// 
 			// salirToolStripMenuItem
 			// 
+			this.salirToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("salirToolStripMenuItem.Image")));
 			this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-			this.salirToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+			this.salirToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
 			this.salirToolStripMenuItem.Text = "Salir";
 			this.salirToolStripMenuItem.ToolTipText = "Salir del programa";
 			this.salirToolStripMenuItem.Click += new System.EventHandler(this.SalirClick);
 			// 
 			// acercaDeToolStripMenuItem
 			// 
+			this.acercaDeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("acercaDeToolStripMenuItem.Image")));
 			this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-			this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
+			this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(97, 20);
 			this.acercaDeToolStripMenuItem.Text = "Acerca De...";
 			this.acercaDeToolStripMenuItem.ToolTipText = "Info. sobre el programa y los desarrolladores.";
 			this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.AcercaDeClick);
