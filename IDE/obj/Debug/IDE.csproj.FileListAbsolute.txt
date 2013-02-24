@@ -5,3 +5,11 @@ C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\obj\Debug\IDE.MainFor
 C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\obj\Debug\IDE.csproj.GenerateResource.Cache
 C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\obj\Debug\IDE.exe
 C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\obj\Debug\IDE.pdb
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\bin\Debug\IDE.exe
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\bin\Debug\IDE.pdb
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\obj\Debug\IDE.MainForm.resources
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\obj\Debug\IDE.exe
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\obj\Debug\IDE.pdb

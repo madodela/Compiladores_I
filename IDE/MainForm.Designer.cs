@@ -36,6 +36,7 @@ namespace IDE
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.Abrir_Archivo = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,6 +93,7 @@ namespace IDE
 			// 
 			// Abrir_Archivo
 			// 
+			this.Abrir_Archivo.Image = ((System.Drawing.Image)(resources.GetObject("Abrir_Archivo.Image")));
 			this.Abrir_Archivo.Name = "Abrir_Archivo";
 			this.Abrir_Archivo.Size = new System.Drawing.Size(152, 22);
 			this.Abrir_Archivo.Text = "Abrir";
