@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Archivo.cs" />
+    <Compile Include="LectorSintaxis.cs" />
+    <Compile Include="LiberadorDeParpadeoCodeArea.cs" />
     <Compile Include="MainForm.cs" />
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -1,0 +1,14 @@
+[Funciones]
+add
+remove
+find
+equals
+compareTo
+rest
+[Keywords]
+int
+float
+double
+bool
+string
+char

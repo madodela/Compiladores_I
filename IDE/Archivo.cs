@@ -19,13 +19,10 @@ namespace IDE
 		private String Ubicacion;
 		public Archivo()
 		{
-			
+			Nombre="";
+			Ubicacion="";
 		}
-		public Archivo(String Nombre, String Ubicacion)
-		{
-			this.Nombre=Nombre;
-			this.Ubicacion=Ubicacion;
-		}
+
 		public String Nombre_de_Archivo
 		{
 			get

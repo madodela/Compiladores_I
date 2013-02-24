@@ -52,10 +52,10 @@ namespace IDE
 			this.menuStrip2 = new System.Windows.Forms.MenuStrip();
 			this.léxicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.sintacticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.Code_Area = new System.Windows.Forms.TextBox();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
+			this.Code_Area = new System.Windows.Forms.RichTextBox();
 			this.menuStrip1.SuspendLayout();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -108,6 +108,7 @@ namespace IDE
 			// 
 			// Guardar_Archivo
 			// 
+			this.Guardar_Archivo.Enabled = false;
 			this.Guardar_Archivo.Name = "Guardar_Archivo";
 			this.Guardar_Archivo.Size = new System.Drawing.Size(152, 22);
 			this.Guardar_Archivo.Text = "Guardar";
@@ -116,6 +117,7 @@ namespace IDE
 			// 
 			// Guardar_Como_Archivo
 			// 
+			this.Guardar_Como_Archivo.Enabled = false;
 			this.Guardar_Como_Archivo.Name = "Guardar_Como_Archivo";
 			this.Guardar_Como_Archivo.Size = new System.Drawing.Size(152, 22);
 			this.Guardar_Como_Archivo.Text = "Guardar Como";
@@ -124,6 +126,7 @@ namespace IDE
 			// 
 			// Cerrar_Archivo
 			// 
+			this.Cerrar_Archivo.Enabled = false;
 			this.Cerrar_Archivo.Name = "Cerrar_Archivo";
 			this.Cerrar_Archivo.Size = new System.Drawing.Size(152, 22);
 			this.Cerrar_Archivo.Text = "Cerrar";
@@ -132,6 +135,7 @@ namespace IDE
 			// 
 			// compilarToolStripMenuItem
 			// 
+			this.compilarToolStripMenuItem.Enabled = false;
 			this.compilarToolStripMenuItem.Name = "compilarToolStripMenuItem";
 			this.compilarToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
 			this.compilarToolStripMenuItem.Text = "Compilar";
@@ -162,6 +166,8 @@ namespace IDE
 			// 
 			// panel1
 			// 
+			this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+									| System.Windows.Forms.AnchorStyles.Right)));
 			this.panel1.Controls.Add(this.splitContainer1);
 			this.panel1.Controls.Add(this.menuStrip2);
 			this.panel1.Location = new System.Drawing.Point(436, 27);
@@ -175,7 +181,7 @@ namespace IDE
 			this.splitContainer1.Location = new System.Drawing.Point(0, 24);
 			this.splitContainer1.Name = "splitContainer1";
 			this.splitContainer1.Size = new System.Drawing.Size(443, 337);
-			this.splitContainer1.SplitterDistance = 218;
+			this.splitContainer1.SplitterDistance = 211;
 			this.splitContainer1.TabIndex = 1;
 			// 
 			// menuStrip2
@@ -203,18 +209,10 @@ namespace IDE
 			this.sintacticoToolStripMenuItem.Size = new System.Drawing.Size(215, 20);
 			this.sintacticoToolStripMenuItem.Text = "Sintáctico";
 			// 
-			// Code_Area
-			// 
-			this.Code_Area.Location = new System.Drawing.Point(12, 27);
-			this.Code_Area.Multiline = true;
-			this.Code_Area.Name = "Code_Area";
-			this.Code_Area.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.Code_Area.Size = new System.Drawing.Size(418, 361);
-			this.Code_Area.TabIndex = 4;
-			this.Code_Area.WordWrap = false;
-			// 
 			// tabControl1
 			// 
+			this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+									| System.Windows.Forms.AnchorStyles.Right)));
 			this.tabControl1.Controls.Add(this.tabPage1);
 			this.tabControl1.Controls.Add(this.tabPage2);
 			this.tabControl1.Location = new System.Drawing.Point(12, 401);
@@ -243,17 +241,33 @@ namespace IDE
 			this.tabPage2.Text = "Errores";
 			this.tabPage2.UseVisualStyleBackColor = true;
 			// 
+			// Code_Area
+			// 
+			this.Code_Area.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+									| System.Windows.Forms.AnchorStyles.Left) 
+									| System.Windows.Forms.AnchorStyles.Right)));
+			this.Code_Area.Enabled = false;
+			this.Code_Area.Location = new System.Drawing.Point(12, 51);
+			this.Code_Area.Name = "Code_Area";
+			this.Code_Area.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
+			this.Code_Area.Size = new System.Drawing.Size(418, 337);
+			this.Code_Area.TabIndex = 6;
+			this.Code_Area.Text = "";
+			this.Code_Area.WordWrap = false;
+			this.Code_Area.TextChanged += new System.EventHandler(this.Code_AreaTextChanged);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(883, 522);
-			this.Controls.Add(this.tabControl1);
 			this.Controls.Add(this.Code_Area);
+			this.Controls.Add(this.tabControl1);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "IDE";
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
@@ -270,7 +284,7 @@ namespace IDE
 		private System.Windows.Forms.TabPage tabPage2;
 		private System.Windows.Forms.TabPage tabPage1;
 		private System.Windows.Forms.TabControl tabControl1;
-		private System.Windows.Forms.TextBox Code_Area;
+		private System.Windows.Forms.RichTextBox Code_Area;
 		private System.Windows.Forms.ToolStripMenuItem fuenteToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem sintacticoToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem léxicoToolStripMenuItem;
