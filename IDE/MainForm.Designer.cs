@@ -57,6 +57,7 @@ namespace IDE
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.Code_Area = new System.Windows.Forms.RichTextBox();
+			this.numberedLabel = new System.Windows.Forms.Label();
 			this.menuStrip1.SuspendLayout();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -256,20 +257,32 @@ namespace IDE
 									| System.Windows.Forms.AnchorStyles.Left) 
 									| System.Windows.Forms.AnchorStyles.Right)));
 			this.Code_Area.Enabled = false;
-			this.Code_Area.Location = new System.Drawing.Point(12, 51);
+			this.Code_Area.Location = new System.Drawing.Point(51, 51);
 			this.Code_Area.Name = "Code_Area";
 			this.Code_Area.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
-			this.Code_Area.Size = new System.Drawing.Size(418, 337);
+			this.Code_Area.Size = new System.Drawing.Size(379, 337);
 			this.Code_Area.TabIndex = 6;
 			this.Code_Area.Text = "";
 			this.Code_Area.WordWrap = false;
+			this.Code_Area.VScroll += new System.EventHandler(this.codeArea_vScroll);
+			this.Code_Area.FontChanged += new System.EventHandler(this.codeArea_fontChanged);
 			this.Code_Area.TextChanged += new System.EventHandler(this.Code_AreaTextChanged);
+			this.Code_Area.Resize += new System.EventHandler(this.codeArea_resize);
+			// 
+			// numberedLabel
+			// 
+			this.numberedLabel.Location = new System.Drawing.Point(12, 51);
+			this.numberedLabel.Name = "numberedLabel";
+			this.numberedLabel.Size = new System.Drawing.Size(40, 329);
+			this.numberedLabel.TabIndex = 7;
+			this.numberedLabel.Text = "1";
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(883, 522);
+			this.Controls.Add(this.numberedLabel);
 			this.Controls.Add(this.Code_Area);
 			this.Controls.Add(this.tabControl1);
 			this.Controls.Add(this.panel1);
@@ -290,6 +303,7 @@ namespace IDE
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.Label numberedLabel;
 		private System.Windows.Forms.TabPage tabPage2;
 		private System.Windows.Forms.TabPage tabPage1;
 		private System.Windows.Forms.TabControl tabControl1;

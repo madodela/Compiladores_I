@@ -1,6 +1,7 @@
 ﻿/*
  * Created by SharpDevelop.
- * User: Jose Luis
+ * User:María Dolores Delgado Lara 
+ * 		Jose Luis Díaz Montellano
  * Date: 19/02/2013
  * Time: 04:29 p.m.
  * 
@@ -197,6 +198,7 @@ namespace IDE
 		void FuenteClick(object sender, EventArgs e)
 		{
 			FontDialog Text_Font=new FontDialog();
+			Text_Font.MaxSize=17;
 			if(Text_Font.ShowDialog() == DialogResult.OK)
 			{
 				Code_Area.Font=Text_Font.Font;
@@ -225,6 +227,7 @@ namespace IDE
 			//Colorear en la linea actual
 			
 			ColorearSintaxis(false);
+			updateNumberLabel();
 			
 		}
 		
@@ -242,17 +245,17 @@ namespace IDE
 			}
 			return color;
 		}
-	    private bool esComentario(string s)
-		{
-			string testString = s.Trim();
-			if ( (testString.Length >= 2) &&
-				 (testString[0] == '/')	  &&
-				 (testString[1] == '/')	  
-				)
-				return true;
-
-			return false;
-		}
+//	    private bool esComentario(string s)
+//		{
+//			string testString = s.Trim();
+//			if ( (testString.Length >= 2) &&
+//				 (testString[0] == '/')	  &&
+//				 (testString[1] == '/')	  
+//				)
+//				return true;
+//
+//			return false;
+//		}
 	    
 	    private int AnalizarPalabras(string s)
 		{
@@ -308,6 +311,7 @@ namespace IDE
 	    	
 	    		string palabraAnterior = "";
 				int contador = AnalizarPalabras(Texto);
+				
 				for  (int i = 0; i < contador; i++)
 				{
 					Palabra_y_Posicion pp=buffer[i];
@@ -336,16 +340,66 @@ namespace IDE
 					}
 					else
 					{
+							
+							
 						Color color = AsignarColor(pp.Palabra);
 						Code_Area.Select(pp.Posicion + posicionInicial, pp.Tamaño);
-						Code_Area.SelectionColor = color;
+						 Code_Area.SelectionColor = color;
 					}
 
 					palabraAnterior = pp.Palabra;
+					
 	    	}
 				
 	    	Code_Area.Select(InicioSeleccionActual, TamañoSeleccionActual);
+	    	
 	    	IDE.LiberadorDeParpadeoCodeArea.paint=true;
 	    }
+		
+		void codeArea_vScroll(object sender, EventArgs e)
+		{
+			updateNumberLabel();
+		}
+		
+		void codeArea_resize(object sender, EventArgs e)
+		{
+			 codeArea_vScroll(null, null);
+		}
+		
+		void codeArea_fontChanged(object sender, EventArgs e)
+		{
+			if(Code_Area.Font.Size < 18){
+				numberedLabel.Font = Code_Area.Font;
+			}
+			updateNumberLabel();
+			codeArea_vScroll(null, null);
+		}
+		
+		private void updateNumberLabel()
+		{
+			//we get index of first visible char and number of first visible line
+			Point pos = new Point(0, 0);
+			int firstIndex = Code_Area.GetCharIndexFromPosition(pos);
+			int firstLine = Code_Area.GetLineFromCharIndex(firstIndex);
+
+			//now we get index of last visible char and number of last visible line
+			pos.X = ClientRectangle.Width;
+			pos.Y = ClientRectangle.Height;
+			int lastIndex = Code_Area.GetCharIndexFromPosition(pos);
+			int lastLine = Code_Area.GetLineFromCharIndex(lastIndex);
+
+			//this is point position of last visible char, we'll use its Y value for calculating numberLabel size
+			pos = Code_Area.GetPositionFromCharIndex(lastIndex);
+
+			
+			//finally, renumber label
+			numberedLabel.Text = "";
+			for (int i = firstLine; i <= lastLine + 1; i++)
+			{
+				numberedLabel.Text += i + 1 + "\n";
+			}
+
+		}
+
 	}
 }

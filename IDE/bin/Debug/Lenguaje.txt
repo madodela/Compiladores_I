@@ -1,10 +1,6 @@
 [Funciones]
-add
-remove
-find
-equals
-compareTo
-rest
+read
+write
 [Keywords]
 int
 float
@@ -12,3 +8,11 @@ double
 bool
 string
 char
+if
+then
+else
+fi
+do
+until
+while
+program

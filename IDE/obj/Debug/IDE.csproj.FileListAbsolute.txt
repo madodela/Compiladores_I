@@ -13,3 +13,17 @@ C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\obj\Debug\GenerateResource.rea
 C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\obj\Debug\GenerateResource.write.1.tlog
 C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\obj\Debug\IDE.exe
 C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\obj\Debug\IDE.pdb
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\bin\Debug\IDE.exe
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\bin\Debug\IDE.pdb
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\obj\Debug\IDE.csprojResolveAssemblyReference.cache
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\obj\Debug\IDE.MainForm.resources
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\obj\Debug\IDE.csproj.GenerateResource.Cache
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\obj\Debug\IDE.exe
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\obj\Debug\IDE.pdb
+C:\Users\Jose Luis\Desktop\IDE\bin\Debug\IDE.exe
+C:\Users\Jose Luis\Desktop\IDE\bin\Debug\IDE.pdb
+C:\Users\Jose Luis\Desktop\IDE\obj\Debug\IDE.csprojResolveAssemblyReference.cache
+C:\Users\Jose Luis\Desktop\IDE\obj\Debug\IDE.MainForm.resources
+C:\Users\Jose Luis\Desktop\IDE\obj\Debug\IDE.csproj.GenerateResource.Cache
+C:\Users\Jose Luis\Desktop\IDE\obj\Debug\IDE.exe
+C:\Users\Jose Luis\Desktop\IDE\obj\Debug\IDE.pdb
