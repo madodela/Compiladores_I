@@ -17,8 +17,8 @@ namespace Analizador_Lexico
 			//KEYWORDS
 			TKN_IF, TKN_THEN, TKN_ELSE, TKN_FI, TKN_DO, TKN_UNTIL, TKN_WHILE,
 			TKN_READ, TKN_WRITE, TKN_FLOAT, TKN_INT, TKN_BOOL, TKN_PROGRAM,
-			//SIMBOLS
-			TKN_ADD, TKN_MINUS, TK_PRODUCT, TKN_DIVISION, TKN_LTHAN,
+			//SYMBOLS
+			TKN_ADD, TKN_MINUS, TKN_PRODUCT, TKN_DIVISION, TKN_LTHAN,
 			TKN_LETHAN, TKN_GTHAN, TKN_GETHAN, TKN_EQUAL, TKN_NEQUAL,
 			TKN_ASSIGN, TKN_SEMICOLON, TKN_COMMA, TKN_LPARENT, TKN_RPARENT,
 			TKN_LBRACE, TKN_RBRACE, TKN_COMMENT, TKN_MLCOMMENT,
@@ -86,7 +86,7 @@ namespace Analizador_Lexico
 			int i;
 			for(i=0;i<ReserveWords.Length;i++){
 				
-				if(ReserveWords[i].Lexema.Equals(s)){					
+				if(ReserveWords[i].Lexema.Equals(s)){
 					tok.TokenType=ReserveWords[i].TokenType;
 					tok.Lexema=ReserveWords[i].Lexema;
 					goto EndFunction;
@@ -94,7 +94,7 @@ namespace Analizador_Lexico
 			}
 			tok.Lexema=s;
 			tok.TokenType=token_types.TKN_ID;
-		EndFunction:;
+			EndFunction:;
 		}
 		char GetChar(StreamReader readerFile){
 			if(ncol==0 || ncol==n){
@@ -127,7 +127,7 @@ namespace Analizador_Lexico
 				switch(state){//Selection of state
 						case States.IN_START:{
 							c=GetChar(readerFile);
-							while(isDelim(c)){//While the character is a delimiter 
+							while(isDelim(c)){//While the character is a delimiter
 								c=GetChar(readerFile);
 							}
 							if(Char.IsLetterOrDigit(c)){
@@ -145,6 +145,16 @@ namespace Analizador_Lexico
 							}
 							else if(c==')'){
 								token.TokenType=token_types.TKN_RPARENT;
+								state=States.IN_DONE;
+								token.Lexema+=c.ToString();
+							}
+							else if(c=='}'){
+								token.TokenType=token_types.TKN_RBRACE;
+								state=States.IN_DONE;
+								token.Lexema+=c.ToString();
+							}
+							else if(c=='{'){
+								token.TokenType=token_types.TKN_LBRACE;
 								state=States.IN_DONE;
 								token.Lexema+=c.ToString();
 							}
@@ -169,6 +179,16 @@ namespace Analizador_Lexico
 							}
 							else if(c=='-'){
 								token.TokenType=token_types.TKN_MINUS;
+								state=States.IN_DONE;
+								token.Lexema+=c.ToString();
+							}
+							else if(c=='*'){
+								token.TokenType=token_types.TKN_PRODUCT;
+								state=States.IN_DONE;
+								token.Lexema+=c.ToString();
+							}
+							else if(c=='/'){
+								token.TokenType=token_types.TKN_DIVISION;
 								state=States.IN_DONE;
 								token.Lexema+=c.ToString();
 							}
@@ -215,7 +235,7 @@ namespace Analizador_Lexico
 			}//end while
 			if(token.TokenType== token_types.TKN_ERROR){
 				Console.WriteLine("Line {0}:{1}, Error:Character {2} does not"+
-				              "match any token.",nline,ncol,c);
+				                  "match any token.",nline,ncol,c);
 			}
 			return token;
 		}
