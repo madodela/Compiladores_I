@@ -1,0 +1,5 @@
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\Analizador_Lexico\Analizador_Lexico\obj\Debug\Analizador_Lexico.csprojResolveAssemblyReference.cache
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\Analizador_Lexico\Analizador_Lexico\bin\Debug\Analizador_Lexico.exe
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\Analizador_Lexico\Analizador_Lexico\bin\Debug\Analizador_Lexico.pdb
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\Analizador_Lexico\Analizador_Lexico\obj\Debug\Analizador_Lexico.exe
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\Analizador_Lexico\Analizador_Lexico\obj\Debug\Analizador_Lexico.pdb
