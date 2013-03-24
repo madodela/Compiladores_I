@@ -32,7 +32,7 @@ namespace Analizador_Lexico
 		
 		public enum States{
 			IN_START, IN_ID, IN_NUM, IN_LPAREN, IN_RPAREN, IN_SEMICOLON,
-			IN_COMMA, IN_ASSING, IN_ADD, IN_MINUS, IN_EOF, IN_ERROR, IN_DONE
+			IN_COMMA, IN_EQU, IN_NEQU, IN_ADD, IN_MINUS, IN_EOF, IN_ERROR, IN_DONE, IN_LESS, IN_GR
 		};
 		public class Token{
 			token_types tokenval;
@@ -168,8 +168,13 @@ namespace Analizador_Lexico
 								state= States.IN_DONE;
 								token.Lexema+=c.ToString();
 							}
-							else if(c==':'){
-								state=States.IN_ASSING;
+							else if(c=='='){
+								state=States.IN_EQU;
+								token.TokenType=token_types.TKN_ASSIGN;
+								token.Lexema+=c.ToString();
+							}
+							else if(c=='!'){
+								state=States.IN_NEQU;
 								token.Lexema+=c.ToString();
 							}
 							else if(c=='+'){
@@ -192,6 +197,16 @@ namespace Analizador_Lexico
 								state=States.IN_DONE;
 								token.Lexema+=c.ToString();
 							}
+							else if(c=='<'){
+								token.TokenType=token_types.TKN_LTHAN;
+								state=States.IN_LESS;
+								token.Lexema+=c.ToString();
+							}
+							else if(c=='>'){
+								token.TokenType=token_types.TKN_GTHAN;
+								state=States.IN_GR;
+								token.Lexema+=c.ToString();
+							}
 							else if(c=='$'){
 								token.TokenType=token_types.TKN_EOF;
 								state=States.IN_DONE;
@@ -211,6 +226,50 @@ namespace Analizador_Lexico
 								state=States.IN_DONE;
 								unGetChar();
 							}
+							break;
+						}
+						case States.IN_LESS:{ 
+							c=GetChar(readerFile);
+							if(c=='='){//pudiera ser el operador <= 
+								token.Lexema+=c.ToString();
+								token.TokenType=token_types.TKN_LETHAN;
+							}else{//o solo ser <
+								unGetChar();
+							}
+							state=States.IN_DONE;
+							break;
+						}
+						case States.IN_GR:{
+							c=GetChar(readerFile);
+							if(c=='='){//pudiera ser el operador >=
+								token.Lexema+=c.ToString();
+								token.TokenType=token_types.TKN_GETHAN;
+							}else{//o solo ser >
+								unGetChar();
+							}
+							state=States.IN_DONE;
+							break;
+						}
+						case States.IN_NEQU: {
+							c=GetChar(readerFile);
+							if (c=='=') {
+								token.Lexema+=c.ToString();
+								token.TokenType=token_types.TKN_NEQUAL;
+							}
+							state=States.IN_DONE;
+							//unGetChar();
+							break;
+						}
+						case States.IN_EQU:{
+							c=GetChar(readerFile);
+							if(c=='='){
+								token.Lexema+=c.ToString();
+								token.TokenType=token_types.TKN_EQUAL;
+							}else{
+								unGetChar();
+							}
+							state=States.IN_DONE;
+							//unGetChar();
 							break;
 						}
 						case States.IN_ID:{
@@ -253,8 +312,8 @@ namespace Analizador_Lexico
 				}
 				Console.WriteLine("Analized Lines {0}",nline);
 			}
-			catch(FileNotFoundException e){Console.WriteLine("File Not Found");}
-			catch(ArgumentException e){Console.WriteLine("Cannot read file");}
+			catch(FileNotFoundException e){Console.WriteLine("File Not Found" + e);}
+			catch(ArgumentException e){Console.WriteLine("Cannot read file" + e);}
 		}
 		public static void Main(string[] args)
 		{

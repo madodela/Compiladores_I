@@ -9,7 +9,7 @@ program {
 	x=0; // comentario 1
 	y=4; /* comentario 2 */
 	do {
-		if(x<y)
+		if(x!=y)
 			y=y-1;
 		fi
 	} while(y>=0);
