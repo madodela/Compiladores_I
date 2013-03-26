@@ -51,16 +51,24 @@ namespace IDE
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
+			this.ErrorList = new System.Windows.Forms.ListView();
+			this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+			this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
 			this.Code_Area = new System.Windows.Forms.RichTextBox();
 			this.numberedLabel = new System.Windows.Forms.Label();
 			this.tabControl2 = new System.Windows.Forms.TabControl();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
+			this.TokenList = new System.Windows.Forms.ListView();
+			this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+			this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
 			this.tabPage4 = new System.Windows.Forms.TabPage();
 			this.tabPage5 = new System.Windows.Forms.TabPage();
 			this.tabPage6 = new System.Windows.Forms.TabPage();
 			this.menuStrip1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
+			this.tabPage2.SuspendLayout();
 			this.tabControl2.SuspendLayout();
+			this.tabPage3.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -155,6 +163,7 @@ namespace IDE
 			this.compilarToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
 			this.compilarToolStripMenuItem.Text = "Compilar";
 			this.compilarToolStripMenuItem.ToolTipText = "Compilar el código actual";
+			this.compilarToolStripMenuItem.Click += new System.EventHandler(this.CompilarToolStripMenuItemClick);
 			// 
 			// fuenteToolStripMenuItem
 			// 
@@ -194,7 +203,7 @@ namespace IDE
 			this.tabControl1.Location = new System.Drawing.Point(12, 401);
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(698, 109);
+			this.tabControl1.Size = new System.Drawing.Size(736, 109);
 			this.tabControl1.TabIndex = 5;
 			// 
 			// tabPage1
@@ -202,20 +211,46 @@ namespace IDE
 			this.tabPage1.Location = new System.Drawing.Point(4, 22);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage1.Size = new System.Drawing.Size(690, 83);
+			this.tabPage1.Size = new System.Drawing.Size(728, 83);
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "Resultados";
 			this.tabPage1.UseVisualStyleBackColor = true;
 			// 
 			// tabPage2
 			// 
+			this.tabPage2.Controls.Add(this.ErrorList);
 			this.tabPage2.Location = new System.Drawing.Point(4, 22);
 			this.tabPage2.Name = "tabPage2";
 			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage2.Size = new System.Drawing.Size(859, 83);
+			this.tabPage2.Size = new System.Drawing.Size(728, 83);
 			this.tabPage2.TabIndex = 1;
 			this.tabPage2.Text = "Errores";
 			this.tabPage2.UseVisualStyleBackColor = true;
+			// 
+			// ErrorList
+			// 
+			this.ErrorList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+									this.columnHeader3,
+									this.columnHeader4});
+			this.ErrorList.FullRowSelect = true;
+			this.ErrorList.GridLines = true;
+			this.ErrorList.Location = new System.Drawing.Point(0, 0);
+			this.ErrorList.MultiSelect = false;
+			this.ErrorList.Name = "ErrorList";
+			this.ErrorList.ShowGroups = false;
+			this.ErrorList.Size = new System.Drawing.Size(728, 83);
+			this.ErrorList.TabIndex = 0;
+			this.ErrorList.UseCompatibleStateImageBehavior = false;
+			this.ErrorList.View = System.Windows.Forms.View.Details;
+			// 
+			// columnHeader3
+			// 
+			this.columnHeader3.Text = "Error";
+			// 
+			// columnHeader4
+			// 
+			this.columnHeader4.Text = "Descripción";
+			this.columnHeader4.Width = 663;
 			// 
 			// Code_Area
 			// 
@@ -226,7 +261,7 @@ namespace IDE
 			this.Code_Area.Location = new System.Drawing.Point(51, 51);
 			this.Code_Area.Name = "Code_Area";
 			this.Code_Area.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
-			this.Code_Area.Size = new System.Drawing.Size(260, 337);
+			this.Code_Area.Size = new System.Drawing.Size(337, 337);
 			this.Code_Area.TabIndex = 6;
 			this.Code_Area.Text = "";
 			this.Code_Area.WordWrap = false;
@@ -251,28 +286,56 @@ namespace IDE
 			this.tabControl2.Controls.Add(this.tabPage4);
 			this.tabControl2.Controls.Add(this.tabPage5);
 			this.tabControl2.Controls.Add(this.tabPage6);
-			this.tabControl2.Location = new System.Drawing.Point(337, 51);
+			this.tabControl2.Location = new System.Drawing.Point(402, 51);
 			this.tabControl2.Name = "tabControl2";
 			this.tabControl2.SelectedIndex = 0;
-			this.tabControl2.Size = new System.Drawing.Size(369, 329);
+			this.tabControl2.Size = new System.Drawing.Size(350, 337);
 			this.tabControl2.TabIndex = 8;
 			// 
 			// tabPage3
 			// 
+			this.tabPage3.Controls.Add(this.TokenList);
 			this.tabPage3.Location = new System.Drawing.Point(4, 22);
 			this.tabPage3.Name = "tabPage3";
 			this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage3.Size = new System.Drawing.Size(294, 303);
+			this.tabPage3.Size = new System.Drawing.Size(342, 311);
 			this.tabPage3.TabIndex = 0;
 			this.tabPage3.Text = "Léxico";
 			this.tabPage3.UseVisualStyleBackColor = true;
+			// 
+			// TokenList
+			// 
+			this.TokenList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+									| System.Windows.Forms.AnchorStyles.Left) 
+									| System.Windows.Forms.AnchorStyles.Right)));
+			this.TokenList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+									this.columnHeader1,
+									this.columnHeader2});
+			this.TokenList.FullRowSelect = true;
+			this.TokenList.GridLines = true;
+			this.TokenList.Location = new System.Drawing.Point(0, 0);
+			this.TokenList.Name = "TokenList";
+			this.TokenList.Size = new System.Drawing.Size(342, 311);
+			this.TokenList.TabIndex = 0;
+			this.TokenList.UseCompatibleStateImageBehavior = false;
+			this.TokenList.View = System.Windows.Forms.View.Details;
+			// 
+			// columnHeader1
+			// 
+			this.columnHeader1.Text = "Tipo de Token";
+			this.columnHeader1.Width = 165;
+			// 
+			// columnHeader2
+			// 
+			this.columnHeader2.Text = "Lexema";
+			this.columnHeader2.Width = 167;
 			// 
 			// tabPage4
 			// 
 			this.tabPage4.Location = new System.Drawing.Point(4, 22);
 			this.tabPage4.Name = "tabPage4";
 			this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage4.Size = new System.Drawing.Size(294, 303);
+			this.tabPage4.Size = new System.Drawing.Size(342, 311);
 			this.tabPage4.TabIndex = 1;
 			this.tabPage4.Text = "Sintáctico";
 			this.tabPage4.UseVisualStyleBackColor = true;
@@ -282,7 +345,7 @@ namespace IDE
 			this.tabPage5.Location = new System.Drawing.Point(4, 22);
 			this.tabPage5.Name = "tabPage5";
 			this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage5.Size = new System.Drawing.Size(294, 303);
+			this.tabPage5.Size = new System.Drawing.Size(342, 311);
 			this.tabPage5.TabIndex = 2;
 			this.tabPage5.Text = "Semántico";
 			this.tabPage5.UseVisualStyleBackColor = true;
@@ -292,7 +355,7 @@ namespace IDE
 			this.tabPage6.Location = new System.Drawing.Point(4, 22);
 			this.tabPage6.Name = "tabPage6";
 			this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage6.Size = new System.Drawing.Size(361, 303);
+			this.tabPage6.Size = new System.Drawing.Size(342, 311);
 			this.tabPage6.TabIndex = 3;
 			this.tabPage6.Text = "Código intermedio";
 			this.tabPage6.UseVisualStyleBackColor = true;
@@ -315,10 +378,18 @@ namespace IDE
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.tabControl1.ResumeLayout(false);
+			this.tabPage2.ResumeLayout(false);
 			this.tabControl2.ResumeLayout(false);
+			this.tabPage3.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.ColumnHeader columnHeader4;
+		private System.Windows.Forms.ColumnHeader columnHeader3;
+		private System.Windows.Forms.ListView ErrorList;
+		private System.Windows.Forms.ColumnHeader columnHeader2;
+		private System.Windows.Forms.ColumnHeader columnHeader1;
+		private System.Windows.Forms.ListView TokenList;
 		private System.Windows.Forms.TabPage tabPage6;
 		private System.Windows.Forms.TabPage tabPage5;
 		private System.Windows.Forms.TabPage tabPage4;
@@ -345,5 +416,6 @@ namespace IDE
 		{
 			
 		}
+		
 	}
 }

@@ -27,3 +27,6 @@ C:\Users\Jose Luis\Desktop\IDE\obj\Debug\IDE.MainForm.resources
 C:\Users\Jose Luis\Desktop\IDE\obj\Debug\IDE.csproj.GenerateResource.Cache
 C:\Users\Jose Luis\Desktop\IDE\obj\Debug\IDE.exe
 C:\Users\Jose Luis\Desktop\IDE\obj\Debug\IDE.pdb
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\bin\Debug\FastColoredTextBox.dll
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\bin\Debug\FastColoredTextBox.pdb
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\bin\Debug\FastColoredTextBox.xml

@@ -1,6 +1,6 @@
 ﻿/*
  * Created by SharpDevelop.
- * User:María Dolores Delgado Lara 
+ * User:María Dolores Delgado Lara
  * 		Jose Luis Díaz Montellano
  * Date: 19/02/2013
  * Time: 04:29 p.m.
@@ -74,7 +74,7 @@ namespace IDE
 				ColorearSintaxis(true);
 				sysColoreando=false;
 				//Establecer atributos del archivo actual
-				Archivo_Actual.Nombre_de_Archivo=selected_file.FileName;
+				Archivo_Actual.Nombre_de_Archivo=selected_file.SafeFileName;
 				Archivo_Actual.Ubicacion_de_Archivo=Path.GetFullPath(selected_file.FileName);
 				//Nombre del archivo en cabecera
 				Form.ActiveForm.Text="IDE--"+Archivo_Actual.Ubicacion_de_Archivo;
@@ -98,7 +98,8 @@ namespace IDE
 				StreamWriter writer=new StreamWriter(file);
 				writer.Close();
 				//Establecer atributos del archivo actual
-				Archivo_Actual.Nombre_de_Archivo=output_file.FileName;
+				string [] filePath=output_file.FileName.Split('\\');
+				Archivo_Actual.Nombre_de_Archivo=filePath[filePath.Length-1];
 				Archivo_Actual.Ubicacion_de_Archivo=Path.GetFullPath(output_file.FileName);
 				//Nombre del archivo en cabecera
 				Form.ActiveForm.Text="IDE--"+Archivo_Actual.Ubicacion_de_Archivo;
@@ -128,7 +129,8 @@ namespace IDE
 				writer.Write(Code_Area.Text);
 				writer.Close();
 				//Establecer atributos del archivo actual
-				Archivo_Actual.Nombre_de_Archivo=output_file.FileName;
+				string [] filePath=output_file.FileName.Split('\\');
+				Archivo_Actual.Nombre_de_Archivo=filePath[filePath.Length-1];
 				Archivo_Actual.Ubicacion_de_Archivo=Path.GetFullPath(output_file.FileName);
 				//Nombre del archivo en cabecera
 				Form.ActiveForm.Text="IDE--"+Archivo_Actual.Ubicacion_de_Archivo;
@@ -159,6 +161,8 @@ namespace IDE
 			Habilitar_Opciones_Archivo(false);
 			//Escribe el título original
 			Form.ActiveForm.Text="IDE";
+			TokenList.Items.Clear();
+			ErrorList.Items.Clear();
 		}
 		
 		public void Guardar()
@@ -190,10 +194,10 @@ namespace IDE
 				                       "Seguro de que quiere salir de la aplicación?","Advertencia",
 				                       MessageBoxButtons.YesNo,
 				                       MessageBoxIcon.Warning,MessageBoxDefaultButton.Button2);
-					if(result==DialogResult.No)
-						return;
+				if(result==DialogResult.No)
+					return;
 			}
-					this.Close();
+			this.Close();
 		}
 		void FuenteClick(object sender, EventArgs e)
 		{
@@ -211,14 +215,14 @@ namespace IDE
 			MessageBox.Show(" Universidad Autónoma de Aguascalientes\n   Ingenieria en Sistemas Computacionales" +
 			                "\nMateria:\n    Compiladores I\nAlumnos:\n    María Dolores Delgado Lara\n" +
 			                "    José Luis Díaz Montellano\nProfesor:\n    Dr. Eduardo Serna Pérez","Información",
-			               MessageBoxButtons.OK,MessageBoxIcon.Information);
+			                MessageBoxButtons.OK,MessageBoxIcon.Information);
 		}
 		
 		//Control de colores para palabras reservadas
-			
+		
 		void Code_AreaTextChanged(object sender, EventArgs e)
 		{
-			/*Mientras el sistema colorea se generan eventos que indican cambios en 
+			/*Mientras el sistema colorea se generan eventos que indican cambios en
 			 * el área de texto por lo que para estos eventos no debe haber respuesta
 			 * entonces solo se sale del método
 			 */
@@ -232,7 +236,7 @@ namespace IDE
 		}
 		
 		//Retorna el color de acuerdo al tipo de palabra reservada
-	    Color AsignarColor(string palabra)
+		Color AsignarColor(string palabra)
 		{
 			Color color = Color.Black;
 			if (Sintaxis.esFuncion(palabra))
@@ -245,26 +249,16 @@ namespace IDE
 			}
 			return color;
 		}
-//	    private bool esComentario(string s)
-//		{
-//			string testString = s.Trim();
-//			if ( (testString.Length >= 2) &&
-//				 (testString[0] == '/')	  &&
-//				 (testString[1] == '/')	  
-//				)
-//				return true;
-//
-//			return false;
-//		}
-	    
-	    private int AnalizarPalabras(string s)
+
+		
+		private int AnalizarPalabras(string s)
 		{
 			buffer.Initialize();
 			int contador = 0;
 			Regex r = new Regex(@"\w+|[^A-Za-z0-9_ \f\t\v]", RegexOptions.IgnoreCase|RegexOptions.Compiled);
 			Match m;
 
-			for (m = r.Match(s); m.Success ; m = m.NextMatch()) 
+			for (m = r.Match(s); m.Success ; m = m.NextMatch())
 			{
 				buffer[contador].Palabra = m.Value;
 				buffer[contador].Posicion = m.Index;
@@ -273,88 +267,88 @@ namespace IDE
 			}
 			return contador++;
 		}
-	    
-	    private void ColorearSintaxis(bool todo)
-	    {
-	    	IDE.LiberadorDeParpadeoCodeArea.paint=false;
-	    	string Texto=null;
-	    	if(todo)
-	    	{
-	    		Code_Area.SelectAll();
-	    		Texto=Code_Area.Text;
-	    	}
-	    		
-	    	//Como no hay nada seleccionado devuelven la ubicación del cursor
-	    	int InicioSeleccionActual=Code_Area.SelectionStart;
-	    	int TamañoSeleccionActual=Code_Area.SelectionLength;
-	    	
-	    	//Encontrar inicio de linea
-	    	int posicionInicial=InicioSeleccionActual;
-	    	
-	    	
-	    	while((posicionInicial>0) && 
-	    	      (Code_Area.Text[posicionInicial-1]!='\n')&&!todo)
-	    	{
-	    		posicionInicial--;
-	    	}
-	    	
-	    	//Fin de Linea
-	    	int posicionfinal=InicioSeleccionActual;
-	    	while(posicionfinal<Code_Area.Text.Length &&
-	    	      Code_Area.Text[posicionfinal]!='\n' && !todo)
-	    	{
-	    		posicionfinal++;
-	    	}
-	    	if(!todo)
-	    	//Se extrae la linea final
-	    	Texto=Code_Area.Text.Substring(posicionInicial,posicionfinal-posicionInicial);
-	    	
-	    		string palabraAnterior = "";
-				int contador = AnalizarPalabras(Texto);
-				
-				for  (int i = 0; i < contador; i++)
+		
+		private void ColorearSintaxis(bool todo)
+		{
+			IDE.LiberadorDeParpadeoCodeArea.paint=false;
+			string Texto=null;
+			if(todo)
+			{
+				Code_Area.SelectAll();
+				Texto=Code_Area.Text;
+			}
+			
+			//Como no hay nada seleccionado devuelven la ubicación del cursor
+			int InicioSeleccionActual=Code_Area.SelectionStart;
+			int TamañoSeleccionActual=Code_Area.SelectionLength;
+			
+			//Encontrar inicio de linea
+			int posicionInicial=InicioSeleccionActual;
+			
+			
+			while((posicionInicial>0) &&
+			      (Code_Area.Text[posicionInicial-1]!='\n')&&!todo)
+			{
+				posicionInicial--;
+			}
+			
+			//Fin de Linea
+			int posicionfinal=InicioSeleccionActual;
+			while(posicionfinal<Code_Area.Text.Length &&
+			      Code_Area.Text[posicionfinal]!='\n' && !todo)
+			{
+				posicionfinal++;
+			}
+			if(!todo)
+				//Se extrae la linea final
+				Texto=Code_Area.Text.Substring(posicionInicial,posicionfinal-posicionInicial);
+			
+			string palabraAnterior = "";
+			int contador = AnalizarPalabras(Texto);
+			
+			for  (int i = 0; i < contador; i++)
+			{
+				Palabra_y_Posicion pp=buffer[i];
+
+				if (pp.Palabra == "/" && palabraAnterior == "/")
 				{
-					Palabra_y_Posicion pp=buffer[i];
-
-					if (pp.Palabra == "/" && palabraAnterior == "/")
+					// color until end of line
+					int inicioComentario = pp.Posicion - 1;
+					int finComentario = todo?i:posicionfinal;
+					while (pp.Palabra != "\n" && i < contador)
 					{
-						// color until end of line
-						int inicioComentario = pp.Posicion - 1;
-						int finComentario = todo?i:posicionfinal;
-						while (pp.Palabra != "\n" && i < contador)
-						{
-							pp=buffer[i];
-							i++;
-						}
-
-						i--;
-
-						inicioComentario=posicionfinal;
-						if(todo)
-							Code_Area.Select(inicioComentario, finComentario - inicioComentario);
-						else
-							Code_Area.Select(inicioComentario + posicionInicial, finComentario - (inicioComentario + posicionInicial));
-						
-						Code_Area.SelectionColor = ColorComentario;
-
+						pp=buffer[i];
+						i++;
 					}
+
+					i--;
+
+					inicioComentario=posicionfinal;
+					if(todo)
+						Code_Area.Select(inicioComentario, finComentario - inicioComentario);
 					else
-					{
-							
-							
-						Color color = AsignarColor(pp.Palabra);
-						Code_Area.Select(pp.Posicion + posicionInicial, pp.Tamaño);
-						 Code_Area.SelectionColor = color;
-					}
-
-					palabraAnterior = pp.Palabra;
+						Code_Area.Select(inicioComentario + posicionInicial, finComentario - (inicioComentario + posicionInicial));
 					
-	    	}
+					Code_Area.SelectionColor = ColorComentario;
+
+				}
+				else
+				{
+					
+					
+					Color color = AsignarColor(pp.Palabra);
+					Code_Area.Select(pp.Posicion + posicionInicial, pp.Tamaño);
+					Code_Area.SelectionColor = color;
+				}
+
+				palabraAnterior = pp.Palabra;
 				
-	    	Code_Area.Select(InicioSeleccionActual, TamañoSeleccionActual);
-	    	
-	    	IDE.LiberadorDeParpadeoCodeArea.paint=true;
-	    }
+			}
+			
+			Code_Area.Select(InicioSeleccionActual, TamañoSeleccionActual);
+			
+			IDE.LiberadorDeParpadeoCodeArea.paint=true;
+		}
 		
 		void codeArea_vScroll(object sender, EventArgs e)
 		{
@@ -363,7 +357,7 @@ namespace IDE
 		
 		void codeArea_resize(object sender, EventArgs e)
 		{
-			 codeArea_vScroll(null, null);
+			codeArea_vScroll(null, null);
 		}
 		
 		void codeArea_fontChanged(object sender, EventArgs e)
@@ -401,5 +395,50 @@ namespace IDE
 
 		}
 
+		
+		void CompilarToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			Guardar();
+			guardado=true;
+			System.IO.File.Copy(Archivo_Actual.Ubicacion_de_Archivo,"temp"+Archivo_Actual.Nombre_de_Archivo,true);
+			string command="";
+			ExecuteCMD cmd=new ExecuteCMD();
+			command+="Analizador_Lexico.exe temp"+Archivo_Actual.Nombre_de_Archivo;
+			cmd.ExecuteCommandSync(command);
+			System.IO.File.Delete("temp"+Archivo_Actual.Nombre_de_Archivo);
+			FillTokenList();
+			FillErrorList();
+		}
+		void FillTokenList(){
+			FileStream file = new FileStream("LexiconAnalisysTokens.txt",FileMode.Open,FileAccess.Read);
+			StreamReader reader = new StreamReader(file);
+			string [] token;
+			string line=reader.ReadLine();
+			while(line!=null){
+				token=line.Split('\t');
+				TokenList.Items.Add(new ListViewItem(token));
+				line=reader.ReadLine();
+			}
+			reader.Close();
+		}
+		void FillErrorList(){
+			FileStream file = new FileStream("infoLexiconAnalisysTokens.txt",FileMode.Open,FileAccess.Read);
+			StreamReader reader = new StreamReader(file);
+			int i=1;
+			string [] error=new string[2];
+			string line=reader.ReadLine();
+			while(line!=null){
+				error[0]=i.ToString();
+				if(line.StartsWith("$")){
+					error[0]="";
+					line=line.Substring(1);
+				}
+				error[1]=line;
+				ErrorList.Items.Add(new ListViewItem(error));
+				line=reader.ReadLine();
+				i++;
+			}
+			reader.Close();
+		}
 	}
 }

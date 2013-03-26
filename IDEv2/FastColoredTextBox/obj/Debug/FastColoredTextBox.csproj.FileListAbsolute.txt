@@ -1,0 +1,33 @@
+C:\Users\Jose Luis\Desktop\FastColoredTextBox-master\FastColoredTextBox\bin\Debug\FastColoredTextBox.XML
+C:\Users\Jose Luis\Desktop\FastColoredTextBox-master\FastColoredTextBox\bin\Debug\FastColoredTextBox.dll
+C:\Users\Jose Luis\Desktop\FastColoredTextBox-master\FastColoredTextBox\bin\Debug\FastColoredTextBox.pdb
+C:\Users\Jose Luis\Desktop\FastColoredTextBox-master\FastColoredTextBox\obj\Debug\FastColoredTextBox.csprojResolveAssemblyReference.cache
+C:\Users\Jose Luis\Desktop\FastColoredTextBox-master\FastColoredTextBox\obj\Debug\FastColoredTextBoxNS.FastColoredTextBox.resources
+C:\Users\Jose Luis\Desktop\FastColoredTextBox-master\FastColoredTextBox\obj\Debug\FastColoredTextBoxNS.FindForm.resources
+C:\Users\Jose Luis\Desktop\FastColoredTextBox-master\FastColoredTextBox\obj\Debug\FastColoredTextBoxNS.GoToForm.resources
+C:\Users\Jose Luis\Desktop\FastColoredTextBox-master\FastColoredTextBox\obj\Debug\FastColoredTextBoxNS.ReplaceForm.resources
+C:\Users\Jose Luis\Desktop\FastColoredTextBox-master\FastColoredTextBox\obj\Debug\FastColoredTextBox.csproj.GenerateResource.Cache
+C:\Users\Jose Luis\Desktop\FastColoredTextBox-master\FastColoredTextBox\obj\Debug\FastColoredTextBox.dll
+C:\Users\Jose Luis\Desktop\FastColoredTextBox-master\FastColoredTextBox\obj\Debug\FastColoredTextBox.pdb
+C:\Users\Jose Luis\Documents\Ing.Sistemas Computacionales\c#\FastColoredTextBox-master\FastColoredTextBox\bin\Debug\FastColoredTextBox.XML
+C:\Users\Jose Luis\Documents\Ing.Sistemas Computacionales\c#\FastColoredTextBox-master\FastColoredTextBox\bin\Debug\FastColoredTextBox.dll
+C:\Users\Jose Luis\Documents\Ing.Sistemas Computacionales\c#\FastColoredTextBox-master\FastColoredTextBox\bin\Debug\FastColoredTextBox.pdb
+C:\Users\Jose Luis\Documents\Ing.Sistemas Computacionales\c#\FastColoredTextBox-master\FastColoredTextBox\obj\Debug\FastColoredTextBox.csprojResolveAssemblyReference.cache
+C:\Users\Jose Luis\Documents\Ing.Sistemas Computacionales\c#\FastColoredTextBox-master\FastColoredTextBox\obj\Debug\FastColoredTextBoxNS.FastColoredTextBox.resources
+C:\Users\Jose Luis\Documents\Ing.Sistemas Computacionales\c#\FastColoredTextBox-master\FastColoredTextBox\obj\Debug\FastColoredTextBoxNS.FindForm.resources
+C:\Users\Jose Luis\Documents\Ing.Sistemas Computacionales\c#\FastColoredTextBox-master\FastColoredTextBox\obj\Debug\FastColoredTextBoxNS.GoToForm.resources
+C:\Users\Jose Luis\Documents\Ing.Sistemas Computacionales\c#\FastColoredTextBox-master\FastColoredTextBox\obj\Debug\FastColoredTextBoxNS.ReplaceForm.resources
+C:\Users\Jose Luis\Documents\Ing.Sistemas Computacionales\c#\FastColoredTextBox-master\FastColoredTextBox\obj\Debug\FastColoredTextBox.csproj.GenerateResource.Cache
+C:\Users\Jose Luis\Documents\Ing.Sistemas Computacionales\c#\FastColoredTextBox-master\FastColoredTextBox\obj\Debug\FastColoredTextBox.dll
+C:\Users\Jose Luis\Documents\Ing.Sistemas Computacionales\c#\FastColoredTextBox-master\FastColoredTextBox\obj\Debug\FastColoredTextBox.pdb
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\FastColoredTextBox\bin\Debug\FastColoredTextBox.XML
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\FastColoredTextBox\bin\Debug\FastColoredTextBox.dll
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\FastColoredTextBox\bin\Debug\FastColoredTextBox.pdb
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBox.csprojResolveAssemblyReference.cache
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBoxNS.FastColoredTextBox.resources
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBoxNS.FindForm.resources
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBoxNS.GoToForm.resources
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBoxNS.ReplaceForm.resources
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBox.csproj.GenerateResource.Cache
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBox.dll
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBox.pdb

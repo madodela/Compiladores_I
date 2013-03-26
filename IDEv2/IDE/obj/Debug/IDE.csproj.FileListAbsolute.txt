@@ -1,0 +1,42 @@
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\bin\Debug\IDE.exe
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\bin\Debug\IDE.pdb
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\obj\Debug\IDE.csprojResolveAssemblyReference.cache
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\obj\Debug\IDE.MainForm.resources
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\obj\Debug\IDE.csproj.GenerateResource.Cache
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\obj\Debug\IDE.exe
+C:\Users\Jose Luis\Documents\SharpDevelop Projects\IDE\IDE\obj\Debug\IDE.pdb
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\bin\Debug\IDE.exe
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\bin\Debug\IDE.pdb
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\obj\Debug\IDE.MainForm.resources
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\obj\Debug\IDE.exe
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDE\obj\Debug\IDE.pdb
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\bin\Debug\IDE.exe
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\bin\Debug\IDE.pdb
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\obj\Debug\IDE.csprojResolveAssemblyReference.cache
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\obj\Debug\IDE.MainForm.resources
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\obj\Debug\IDE.csproj.GenerateResource.Cache
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\obj\Debug\IDE.exe
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\obj\Debug\IDE.pdb
+C:\Users\Jose Luis\Desktop\IDE\bin\Debug\IDE.exe
+C:\Users\Jose Luis\Desktop\IDE\bin\Debug\IDE.pdb
+C:\Users\Jose Luis\Desktop\IDE\obj\Debug\IDE.csprojResolveAssemblyReference.cache
+C:\Users\Jose Luis\Desktop\IDE\obj\Debug\IDE.MainForm.resources
+C:\Users\Jose Luis\Desktop\IDE\obj\Debug\IDE.csproj.GenerateResource.Cache
+C:\Users\Jose Luis\Desktop\IDE\obj\Debug\IDE.exe
+C:\Users\Jose Luis\Desktop\IDE\obj\Debug\IDE.pdb
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\bin\Debug\FastColoredTextBox.dll
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\bin\Debug\FastColoredTextBox.pdb
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDE\bin\Debug\FastColoredTextBox.xml
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\IDE\obj\Debug\IDE.csprojResolveAssemblyReference.cache
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\IDE\obj\Debug\IDE.MainForm.resources
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\IDE\obj\Debug\IDE.csproj.GenerateResource.Cache
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\IDE\obj\Debug\IDE.exe
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\IDE\bin\Debug\IDE.exe
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\IDE\bin\Debug\IDE.pdb
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\IDE\bin\Debug\FastColoredTextBox.dll
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\IDE\bin\Debug\FastColoredTextBox.pdb
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\IDE\bin\Debug\FastColoredTextBox.xml
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\IDE\obj\Debug\IDE.pdb

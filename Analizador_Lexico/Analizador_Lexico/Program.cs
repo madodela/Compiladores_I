@@ -4,7 +4,13 @@
  * Date: 19/03/2013
  * Time: 05:06 p.m.
  * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
+ * Output file structure
+ * |--------------------|
+ * |Token Type\tLexema\n|
+ * |.		  \t.	  \n|
+ * |.		  \t.	  \n|
+ * |.		  \t.	  \n|	
+ * |--------------------|
  */
 using System;
 using System.IO;
@@ -30,10 +36,32 @@ namespace Analizador_Lexico
 			TKN_EOF
 		};
 		
-		public enum States{
-			IN_START, IN_ID, IN_NUM, IN_LPAREN, IN_RPAREN, IN_SEMICOLON,
-			IN_COMMA, IN_ASSING, IN_ADD, IN_MINUS, IN_EOF, IN_ERROR, IN_DONE
-		};
+		public enum States
+		{
+			IN_START,
+			IN_ID,
+			IN_NUM,
+			IN_LPAREN,
+			IN_RPAREN,
+			IN_SEMICOLON,
+			IN_COMMA,
+			IN_EQU,
+			IN_NEQU,
+			IN_ADD,
+			IN_MINUS,
+			IN_EOF,
+			IN_ERROR,
+			IN_DONE,
+			IN_LESS,
+			IN_GR,
+			IN_COMMENT_OR_DIVISION,
+			IN_COMMENT,
+			IN_MLCOMMENT,
+			IN_END_OF_MLCOMMENT,
+			IN_NUM_OR_OPERATOR,
+			IN_DEC_POINT
+		}
+		;
 		public class Token{
 			token_types tokenval;
 			string lexema;
@@ -81,7 +109,7 @@ namespace Analizador_Lexico
 		int ncol=0;
 		int n=0;//Caracteres en buffer
 		char [] buffer=new char[MAXLENBUF];
-		
+		bool decimal_point_flag=false;
 		void LookUpReservedWords( Token tok,string s){
 			int i;
 			for(i=0;i<ReserveWords.Length;i++){
@@ -96,19 +124,21 @@ namespace Analizador_Lexico
 			tok.TokenType=token_types.TKN_ID;
 			EndFunction:;
 		}
-		char GetChar(StreamReader readerFile){
-			if(ncol==0 || ncol==n){
-				String linea=readerFile.ReadLine();
-				if(linea!=null){
-					buffer=linea.ToCharArray();
-					n=buffer.Length;
-					ncol=0;
+		char GetChar (StreamReader readerFile)
+		{
+			if (!(ncol < n)) {
+				String linea = readerFile.ReadLine ();
+				if (linea != null) {
+					
+					buffer = linea.ToCharArray ();
+					n = buffer.Length;
+					ncol = 0;
 					nline++;
-				}
-				else
+				} else {
 					return '$';//End of file
+				}
 			}
-			return(buffer[ncol++]);
+			return (buffer [ncol++]);
 		}
 		void unGetChar(){
 			ncol--;
@@ -119,123 +149,238 @@ namespace Analizador_Lexico
 			return false;
 			
 		}
-		Token GetToken(StreamReader readerFile){
-			char c=' ';
-			States state= States.IN_START;
-			Token token=new Token();
-			while(state!=States.IN_DONE){
-				switch(state){//Selection of state
-						case States.IN_START:{
-							c=GetChar(readerFile);
-							while(isDelim(c)){//While the character is a delimiter
-								c=GetChar(readerFile);
-							}
-							if(Char.IsLetterOrDigit(c)){
-								state=States.IN_ID;
-								token.Lexema+=c.ToString();
-							}
-							else if(Char.IsDigit(c)){
-								state= States.IN_NUM;
-								token.Lexema+=c.ToString();
-							}
-							else if(c=='('){
-								token.TokenType=token_types.TKN_LPARENT;
-								state=States.IN_DONE;
-								token.Lexema+=c.ToString();
-							}
-							else if(c==')'){
-								token.TokenType=token_types.TKN_RPARENT;
-								state=States.IN_DONE;
-								token.Lexema+=c.ToString();
-							}
-							else if(c=='}'){
-								token.TokenType=token_types.TKN_RBRACE;
-								state=States.IN_DONE;
-								token.Lexema+=c.ToString();
-							}
-							else if(c=='{'){
-								token.TokenType=token_types.TKN_LBRACE;
-								state=States.IN_DONE;
-								token.Lexema+=c.ToString();
-							}
-							else if(c==';'){
-								token.TokenType=token_types.TKN_SEMICOLON;
-								state=States.IN_DONE;
-								token.Lexema+=c.ToString();
-							}
-							else if(c==','){
-								token.TokenType=token_types.TKN_COMMA;
-								state= States.IN_DONE;
-								token.Lexema+=c.ToString();
-							}
-							else if(c==':'){
-								state=States.IN_ASSING;
-								token.Lexema+=c.ToString();
-							}
-							else if(c=='+'){
-								token.TokenType=token_types.TKN_ADD;
-								state=States.IN_DONE;
-								token.Lexema+=c.ToString();
-							}
-							else if(c=='-'){
-								token.TokenType=token_types.TKN_MINUS;
-								state=States.IN_DONE;
-								token.Lexema+=c.ToString();
-							}
-							else if(c=='*'){
-								token.TokenType=token_types.TKN_PRODUCT;
-								state=States.IN_DONE;
-								token.Lexema+=c.ToString();
-							}
-							else if(c=='/'){
-								token.TokenType=token_types.TKN_DIVISION;
-								state=States.IN_DONE;
-								token.Lexema+=c.ToString();
-							}
-							else if(c=='$'){
-								token.TokenType=token_types.TKN_EOF;
-								state=States.IN_DONE;
-								token.Lexema+=c.ToString();
-							}
-							else{
-								token.TokenType=token_types.TKN_ERROR;
-								state=States.IN_ERROR;
-							}
+		Token GetToken (StreamReader readerFile,StreamWriter writer2)
+		{
+			char c = ' ';
+			States state = States.IN_START;
+			Token token = new Token ();
+			while (state != States.IN_DONE) {
+				switch (state) {//Selection of state
+				case States.IN_START:
+				{
+					c = GetChar (readerFile);
+					while (isDelim(c)) {//While the character is a delimiter
+						c = GetChar (readerFile);
+					}
+					if (Char.IsLetter(c)) {
+						state = States.IN_ID;
+						token.Lexema += c.ToString ();
+					} else if (Char.IsDigit (c)) {
+						state = States.IN_NUM;
+						token.Lexema += c.ToString ();
+					} else if (c == '(') {
+						token.TokenType = token_types.TKN_LPARENT;
+						state = States.IN_DONE;
+						token.Lexema += c.ToString ();
+					} else if (c == ')') {
+						token.TokenType = token_types.TKN_RPARENT;
+						state = States.IN_DONE;
+						token.Lexema += c.ToString ();
+					} else if (c == '}') {
+						token.TokenType = token_types.TKN_RBRACE;
+						state = States.IN_DONE;
+						token.Lexema += c.ToString ();
+					} else if (c == '{') {
+						token.TokenType = token_types.TKN_LBRACE;
+						state = States.IN_DONE;
+						token.Lexema += c.ToString ();
+					} else if (c == ';') {
+						token.TokenType = token_types.TKN_SEMICOLON;
+						state = States.IN_DONE;
+						token.Lexema += c.ToString ();
+					} else if (c == ',') {
+						token.TokenType = token_types.TKN_COMMA;
+						state = States.IN_DONE;
+						token.Lexema += c.ToString ();
+					} else if (c == '=') {
+						state = States.IN_EQU;
+						token.TokenType = token_types.TKN_ASSIGN;
+						token.Lexema += c.ToString ();
+					} else if (c == '!') {
+						state = States.IN_NEQU;
+						token.Lexema += c.ToString ();
+					} else if (c == '+') {
+						token.TokenType = token_types.TKN_ADD;
+						state = States.IN_NUM_OR_OPERATOR;
+						token.Lexema += c.ToString ();
+					} else if (c == '-') {
+						token.TokenType = token_types.TKN_MINUS;
+						state = States.IN_NUM_OR_OPERATOR;
+						token.Lexema += c.ToString ();
+					} else if (c == '*') {
+						token.TokenType = token_types.TKN_PRODUCT;
+						state = States.IN_DONE;
+						token.Lexema += c.ToString ();
+					} else if (c == '/') {
+						token.TokenType = token_types.TKN_DIVISION;
+						state = States.IN_COMMENT_OR_DIVISION;
+						token.Lexema += c.ToString ();
+					} else if (c == '<') {
+						token.TokenType = token_types.TKN_LTHAN;
+						state = States.IN_LESS;
+						token.Lexema += c.ToString ();
+					} else if (c == '>') {
+						token.TokenType = token_types.TKN_GTHAN;
+						state = States.IN_GR;
+						token.Lexema += c.ToString ();
+					} else if (c == '$') {
+						token.TokenType = token_types.TKN_EOF;
+						state = States.IN_DONE;
+						token.Lexema += c.ToString ();
+					} else {
+						token.TokenType = token_types.TKN_ERROR;
+						state = States.IN_ERROR;
+					}
+					break;
+				}
+				case States.IN_COMMENT_OR_DIVISION:
+				{
+					c = GetChar (readerFile);
+					if (c == '/') {
+						token.TokenType = token_types.TKN_COMMENT;
+						state = States.IN_COMMENT;
+						
+					} else if (c == '*') {
+						token.TokenType = token_types.TKN_MLCOMMENT;
+						state = States.IN_MLCOMMENT;
+						
+					} else {
+						state = States.IN_DONE;
+					}
+					token.Lexema += c.ToString ();
+					break;
+				}
+				case States.IN_COMMENT:
+				{
+					c = GetChar (readerFile);
+					if (n == ncol) {
+						state = States.IN_DONE;
+						break;
+					}
+					token.Lexema += c.ToString ();
+					break;
+				}
+				case States.IN_MLCOMMENT:
+				{
+					c = GetChar (readerFile);
+					if (c == '*')
+						state = States.IN_END_OF_MLCOMMENT;
+					token.Lexema += c.ToString ();
+					break;
+				}
+				case States.IN_END_OF_MLCOMMENT:
+				{
+					c = GetChar (readerFile);
+					if (c == '/') {
+						state = States.IN_DONE;
+					} else {
+						state = States.IN_MLCOMMENT;
+					}
+					token.Lexema += c.ToString ();
+					break;
+				}
+				case States.IN_NUM_OR_OPERATOR:{
+					c=GetChar(readerFile);
+					char previous_char_to_symbol=buffer[ncol-3];
+					if(Char.IsLetterOrDigit(previous_char_to_symbol)){
+						unGetChar();
+						state=States.IN_DONE;
+					}
+					else{
+						token.Lexema+=c.ToString();
+						state=States.IN_NUM;
+					}
+					break;
+				}
+				case States.IN_NUM:
+				{
+					c = GetChar (readerFile);
+					token.Lexema += c.ToString ();
+					if (!Char.IsDigit (c)) {
+						if(c=='.' && !decimal_point_flag){
+							decimal_point_flag=true;
 							break;
 						}
-						case States.IN_NUM:{
-							c=GetChar(readerFile);
-							token.Lexema+=c.ToString();
-							if(!Char.IsDigit(c)){
-								token.TokenType=token_types.TKN_NUM;
-								state=States.IN_DONE;
-								unGetChar();
-							}
-							break;
-						}
-						case States.IN_ID:{
-							c=GetChar(readerFile);
-							token.Lexema+=c.ToString();
-							if(!((Char.IsLetterOrDigit(c))||(c=='_'))){
-								token.TokenType=token_types.TKN_ID;
-								state=States.IN_DONE;
-								unGetChar();
-								token.Lexema=token.Lexema.Substring(0,token.Lexema.Length-1);
-								LookUpReservedWords(token,token.Lexema);
-							}
-							break;
-						}
-						default:{
-							token.TokenType= token_types.TKN_ERROR;
-							state=States.IN_DONE;
-							token.Lexema+=c.ToString();
-							break;
-						}
+						decimal_point_flag=false;
+						token.TokenType = token_types.TKN_NUM;
+						state = States.IN_DONE;
+						unGetChar ();
+					}
+					
+					break;
+				}
+				case States.IN_LESS:
+				{
+					c = GetChar (readerFile);
+					if (c == '=') {//pudiera ser el operador <=
+						token.Lexema += c.ToString ();
+						token.TokenType = token_types.TKN_LETHAN;
+					} else {//o solo ser <
+						unGetChar ();
+					}
+					state = States.IN_DONE;
+					break;
+				}
+				case States.IN_GR:
+				{
+					c = GetChar (readerFile);
+					if (c == '=') {//pudiera ser el operador >=
+						token.Lexema += c.ToString ();
+						token.TokenType = token_types.TKN_GETHAN;
+					} else {//o solo ser >
+						unGetChar ();
+					}
+					state = States.IN_DONE;
+					break;
+				}
+				case States.IN_NEQU:
+				{
+					c = GetChar (readerFile);
+					if (c == '=') {
+						token.Lexema += c.ToString ();
+						token.TokenType = token_types.TKN_NEQUAL;
+					}
+					state = States.IN_DONE;
+					//unGetChar();
+					break;
+				}
+				case States.IN_EQU:
+				{
+					c = GetChar (readerFile);
+					if (c == '=') {
+						token.Lexema += c.ToString ();
+						token.TokenType = token_types.TKN_EQUAL;
+					} else {
+						unGetChar ();
+					}
+					state = States.IN_DONE;
+					break;
+				}
+				case States.IN_ID:
+				{
+					c = GetChar (readerFile);
+					token.Lexema += c.ToString ();
+					if (!((Char.IsLetterOrDigit (c)) || (c == '_'))) {
+						token.TokenType = token_types.TKN_ID;
+						state = States.IN_DONE;
+						unGetChar ();
+						token.Lexema = token.Lexema.Substring (0, token.Lexema.Length - 1);
+						LookUpReservedWords (token, token.Lexema);
+					}
+					break;
+				}
+				default:
+				{
+					token.TokenType = token_types.TKN_ERROR;
+					state = States.IN_DONE;
+					token.Lexema += c.ToString ();
+					break;
+				}
 				}//end switch
 			}//end while
-			if(token.TokenType== token_types.TKN_ERROR){
-				Console.WriteLine("Line {0}:{1}, Error:Character {2} does not"+
-				                  "match any token.",nline,ncol,c);
+			if (token.TokenType == token_types.TKN_ERROR) {
+				writer2.WriteLine("Line:"+ nline + " Error:Character "+c+" does not"+
+				                  " match any token.");
 			}
 			return token;
 		}
@@ -246,12 +391,22 @@ namespace Analizador_Lexico
 			try{
 				FileStream file = new FileStream(fileName,FileMode.Open,FileAccess.Read);
 				StreamReader reader = new StreamReader(file);
-				token=GetToken(reader);
+				//FileStream outputFile=new FileStream(@"..\..\Files\LexiconAnalisysTokens.txt",FileMode.Create,FileAccess.Write);
+				FileStream outputFile=new FileStream("LexiconAnalisysTokens.txt",FileMode.Create,FileAccess.Write);
+				StreamWriter writer=new StreamWriter(outputFile);
+                FileStream infoOutputFile = new FileStream("infoLexiconAnalisysTokens.txt", FileMode.Create, FileAccess.Write);
+                StreamWriter writer2 = new StreamWriter(infoOutputFile);
+				token=GetToken(reader,writer2);
 				while(token_types.TKN_EOF!=token.TokenType){
-					Console.WriteLine("({0},{1})",token.TokenType,token.Lexema);
-					token=GetToken(reader);
+					//Console.WriteLine("({0}\t{1})",token.TokenType,token.Lexema);
+					writer.WriteLine("{0}\t{1}",token.TokenType,token.Lexema);
+					token=GetToken(reader,writer2);
 				}
-				Console.WriteLine("Analized Lines {0}",nline);
+				reader.Close();
+				writer.Close();
+                //Console.WriteLine("Analized Lines {0}", nline);
+                writer2.WriteLine("$Analized Lines:"+ nline);
+                writer2.Close();
 			}
 			catch(FileNotFoundException e){Console.WriteLine("File Not Found");}
 			catch(ArgumentException e){Console.WriteLine("Cannot read file");}
@@ -264,8 +419,6 @@ namespace Analizador_Lexico
 				AL.ExecuteAnalisys(args[0]);
 			else
 				Console.WriteLine("Usage:programa_name file_name");
-			//AL.ExecuteAnalisys("prueba.txt");
-			Console.ReadKey();
 		}
 	}
 }
