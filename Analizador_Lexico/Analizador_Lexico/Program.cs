@@ -254,6 +254,7 @@ namespace Analizador_Lexico
 				{
 					c = GetChar (readerFile);
 					if (n == ncol) {
+						token.Lexema += c.ToString ();
 						state = States.IN_DONE;
 						break;
 					}
@@ -304,6 +305,7 @@ namespace Analizador_Lexico
 						decimal_point_flag=false;
 						token.TokenType = token_types.TKN_NUM;
 						state = States.IN_DONE;
+						token.Lexema=token.Lexema.Substring(0,token.Lexema.Length-1);
 						unGetChar ();
 					}
 					
