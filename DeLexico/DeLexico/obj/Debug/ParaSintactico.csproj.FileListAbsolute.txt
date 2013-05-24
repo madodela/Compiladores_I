@@ -1,0 +1,5 @@
+C:\Users\Loli\Documents\SharpDevelop Projects\DeLexico\DeLexico\bin\Debug\ParaSintactico.exe
+C:\Users\Loli\Documents\SharpDevelop Projects\DeLexico\DeLexico\bin\Debug\ParaSintactico.pdb
+C:\Users\Loli\Documents\SharpDevelop Projects\DeLexico\DeLexico\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Loli\Documents\SharpDevelop Projects\DeLexico\DeLexico\obj\Debug\ParaSintactico.exe
+C:\Users\Loli\Documents\SharpDevelop Projects\DeLexico\DeLexico\obj\Debug\ParaSintactico.pdb
