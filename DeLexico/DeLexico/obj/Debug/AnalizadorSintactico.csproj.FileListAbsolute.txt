@@ -1,1 +1,6 @@
 C:\Users\Loli\Documents\SharpDevelop Projects\DeLexico\DeLexico\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Loli\Documents\GitHub\Compiladores_I\DeLexico\DeLexico\bin\Debug\AnalizadorSintactico.exe
+C:\Users\Loli\Documents\GitHub\Compiladores_I\DeLexico\DeLexico\bin\Debug\AnalizadorSintactico.pdb
+C:\Users\Loli\Documents\GitHub\Compiladores_I\DeLexico\DeLexico\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Loli\Documents\GitHub\Compiladores_I\DeLexico\DeLexico\obj\Debug\AnalizadorSintactico.exe
+C:\Users\Loli\Documents\GitHub\Compiladores_I\DeLexico\DeLexico\obj\Debug\AnalizadorSintactico.pdb

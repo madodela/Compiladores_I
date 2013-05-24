@@ -207,9 +207,10 @@ namespace DeLexico
 				case Token_types.TKN_LBRACE:
 					t = block_stmt();
 					break;
-				default:// ERROR 1
+				default:
 					syntaxError("Unexpected token:");
 					printToken(currentToken);
+					break;
 			}
 			return t;
 		}
