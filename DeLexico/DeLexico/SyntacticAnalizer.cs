@@ -201,7 +201,11 @@ namespace NSSyntacticAnalizer
 				case Token_types.TKN_LBRACE:
 					t = block_stmt();
 					break;
+<<<<<<< HEAD
 					default :// ERROR 1
+=======
+				default :// ERROR 1
+>>>>>>> 60d5f5c6e1b13fc95127d9e30dc9c9d76659027b
 					syntaxError("Unexpected token:");
 					printToken(currentToken);
 					break;
