@@ -201,8 +201,13 @@ namespace NSSyntacticAnalizer
 				case Token_types.TKN_LBRACE:
 					t = block_stmt();
 					break;
+<<<<<<< HEAD:DeLexico/DeLexico/SyntacticAnalizer.cs
 					default :// ERROR 1
 						syntaxError("Unexpected token:");
+=======
+				default:
+					syntaxError("Unexpected token:");
+>>>>>>> ad2d241587c0113710c1367fe10ade7cd11b3fce:DeLexico/DeLexico/AnalizadorSintactico.cs
 					printToken(currentToken);
 					break;
 			}

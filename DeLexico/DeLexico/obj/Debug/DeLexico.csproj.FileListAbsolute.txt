@@ -1,5 +1,0 @@
-C:\Users\Loli\Documents\SharpDevelop Projects\DeLexico\DeLexico\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\Loli\Documents\SharpDevelop Projects\DeLexico\DeLexico\bin\Debug\DeLexico.exe
-C:\Users\Loli\Documents\SharpDevelop Projects\DeLexico\DeLexico\bin\Debug\DeLexico.pdb
-C:\Users\Loli\Documents\SharpDevelop Projects\DeLexico\DeLexico\obj\Debug\DeLexico.exe
-C:\Users\Loli\Documents\SharpDevelop Projects\DeLexico\DeLexico\obj\Debug\DeLexico.pdb
