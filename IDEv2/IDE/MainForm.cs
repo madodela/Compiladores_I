@@ -212,7 +212,7 @@ namespace IDE
 			command="SyntacticAnalizer.exe";//Execute the command to run the Syntactic Analisys
 			cmd.ExecuteCommandSync(command);
 			FillTreeView();
-			FillErrorList("infoSyntacticAnalisys.txt");
+			//FillErrorList("infoSyntacticAnalisys.txt");
 		}
 		//Fill the token list in the GUI
 		void FillTokenList(){
@@ -230,7 +230,36 @@ namespace IDE
 		}
 		//Fill the TreeView in the GUI
 		void FillTreeView(){
-			
+			FileStream file = new FileStream("SyntacticTree.txt",FileMode.Open,FileAccess.Read);
+			StreamReader reader = new StreamReader(file);
+			string line=reader.ReadLine();
+			int currentSpaces=0;
+			int previousSpaces=10;
+			string nodeName;
+			while(line!=null){
+				currentSpaces=countSpaces(line);
+				if(currentSpaces<=2){
+					nodeName=line.Substring(currentSpaces);
+					TreeNode treeNode = new TreeNode(nodeName);
+	   				TreeView.Nodes.Add(treeNode);
+				}
+				else{
+					if(currentSpaces>previousSpaces){
+						
+					}
+				}
+				line=reader.ReadLine();
+				
+			}
+		}
+		int countSpaces(string line){
+			int spaces=0;
+			char [] lineChar=line.ToCharArray();
+			for(int i=0;i<lineChar.Length;i++){
+				if(lineChar[i]==' ')
+					spaces++;
+			}
+			return spaces;
 		}
 		//Fill the error list in the GUI
 		void FillErrorList(string fileName){

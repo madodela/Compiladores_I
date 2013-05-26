@@ -201,13 +201,8 @@ namespace NSSyntacticAnalizer
 				case Token_types.TKN_LBRACE:
 					t = block_stmt();
 					break;
-<<<<<<< HEAD:DeLexico/DeLexico/SyntacticAnalizer.cs
 					default :// ERROR 1
-						syntaxError("Unexpected token:");
-=======
-				default:
 					syntaxError("Unexpected token:");
->>>>>>> ad2d241587c0113710c1367fe10ade7cd11b3fce:DeLexico/DeLexico/AnalizadorSintactico.cs
 					printToken(currentToken);
 					break;
 			}
@@ -439,39 +434,39 @@ namespace NSSyntacticAnalizer
 					switch (tree.stmtK) {
 						case StmtKind.IfK:
 							Console.Write("If\n");
-							writerTree.Write("If\n");
+							writerTree.WriteLine("If");
 							break;
 						case StmtKind.IterationK:
 							Console.Write("Iteration\n");
-							writerTree.Write("Iteration\n");
+							writerTree.WriteLine("Iteration");
 							break;
 						case StmtKind.ProgramK:
 							Console.Write("Program\n");
-							writerTree.Write("Program\n");
+							writerTree.WriteLine("Program");
 							break;
 						case StmtKind.BlockK:
 							Console.Write("Block\n");
-							writerTree.Write("Block\n");
+							writerTree.WriteLine("Block");
 							break;
 						case StmtKind.RepeatK:
 							Console.Write("Repeat\n");
-							writerTree.Write("Repeat\n");
+							writerTree.WriteLine("Repeat");
 							break;
 						case StmtKind.AssignK:
 							Console.Write("Assign to: {0}\n",tree.name);
-							writerTree.Write("Assign to: {0}\n",tree.name);
+							writerTree.WriteLine("Assign to: {0}",tree.name);
 							break;
 						case StmtKind.ReadK:
 							Console.Write("Read: {0}\n",tree.name);
-							writerTree.Write("Read: {0}\n",tree.name);
+							writerTree.WriteLine("Read: {0}",tree.name);
 							break;
 						case StmtKind.WriteK:
 							Console.Write("Write\n");
-							writerTree.Write("Write\n");
+							writerTree.WriteLine("Write");
 							break;
 						default:
 							Console.Write("Unknown ExpNode kind\n");
-							writerInfo.Write("Unknown ExpNode kind\n");
+							writerInfo.WriteLine("Unknown ExpNode kind");
 							break;
 					}
 				}
@@ -495,19 +490,19 @@ namespace NSSyntacticAnalizer
 										default: op="Unknown operator";break;//assumed this error never occur
 								}
 								Console.Write("Op:{0}\n",op);
-								writerTree.Write("Op:{0}\n",op);
+								writerTree.WriteLine("Op:{0}",op);
 								break;
 							case ExpKind.ConstK:
 								Console.Write("Const: {0}\n",tree.val);
-								writerTree.Write("Const: {0}\n",tree.val);
+								writerTree.WriteLine("Const: {0}",tree.val);
 								break;
 							case ExpKind.IdK:
 								Console.Write("Id: {0}\n",tree.name);
-								writerTree.Write("Id: {0}\n",tree.name);
+								writerTree.WriteLine("Id: {0}",tree.name);
 								break;
 							default:
 								Console.Write("Unknown ExpNode kind\n");
-								writerInfo.Write("Unknown ExpNode kind\n");//assumed this error never occur
+								writerInfo.WriteLine("Unknown ExpNode kind");//assumed this error never occur
 								break;
 						}
 					}
@@ -521,8 +516,8 @@ namespace NSSyntacticAnalizer
 									default: valTypeString="Unknown type";break;
 							}
 							Console.Write("{0}:{1}\n",valTypeString,tree.name);
-							writerTree.Write("{0}:{1}\n",valTypeString,tree.name);
-						}else { Console.Write("Unknown node kind\n");}
+							writerTree.WriteLine("{0}:{1}",valTypeString,tree.name);
+						}else { Console.WriteLine("Unknown node kind");}
 					}
 				}
 				for (i=0;i<5;i++)
@@ -537,14 +532,13 @@ namespace NSSyntacticAnalizer
 			tokenList = lexResults.AnalizadorLexico();
 			try{
 				TreeNode SyntacticTree=Parse();//Parse function creates the Syntactic Tree
-				syntacticTree=new FileStream("SyntcticTree.txt",FileMode.Create,FileAccess.Write);
+				syntacticTree=new FileStream("SyntacticTree.txt",FileMode.Create,FileAccess.Write);
 				writerTree=new StreamWriter(syntacticTree);
 				infoSyntacticAnalisys=new FileStream("infoSyntacticAnalisys.txt",FileMode.Create,FileAccess.Write);
 				writerInfo=new StreamWriter(infoSyntacticAnalisys);
 				printTree(SyntacticTree);
 				writerTree.Close();
 				writerInfo.Close();
-				Console.ReadKey();
 			}
 			catch(FileNotFoundException e){Console.WriteLine("File Not Found");}
 			catch(ArgumentException e){Console.WriteLine("Cannot read file");}
@@ -552,7 +546,6 @@ namespace NSSyntacticAnalizer
 		
 		public static void Main(string[] args) {
 			SyntacticAnalizer analizador = new SyntacticAnalizer();
-			Console.ReadKey(true);
 		}
 	}
 }
