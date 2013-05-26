@@ -10,20 +10,9 @@ using System;
 using System.Collections;
 using System.IO;
 
-namespace DeLexico
+namespace NSSyntacticAnalizer
 {
-	class Lexico
-	{
-		private FileStream inputFile;
-		private StreamReader reader;
-		private ArrayList listaTokens;
-		private string archivo;
-		
-		//contructor
-		public Lexico(string nombreArchivo) {
-			archivo = nombreArchivo;
-		}
-		
+	//All classes inside this namespace can use that struct and enum
 		public struct Token {
 			public Token_types token_type;
 			public String lexema;
@@ -45,7 +34,18 @@ namespace DeLexico
 			//END OF FILE
 			TKN_EOF
 		};
+	
+	class Lexico
+	{
+		private FileStream inputFile;
+		private StreamReader reader;
+		private ArrayList listaTokens;
+		private string archivo;
 		
+		//contructor
+		public Lexico(string nombreArchivo) {
+			archivo = nombreArchivo;
+		}
 		public ArrayList AnalizadorLexico() {
 			listaTokens = new ArrayList();
 			LlenarListaTokens();
@@ -62,7 +62,6 @@ namespace DeLexico
 				while(line != null){
 					String [] tokenParts = line.Split('\t');
 					Token token = new Token();
-					//token.token_type=tokenParts[0];
 					switch(tokenParts[0]) {
 						case "TKN_IF":
 							token.token_type=Token_types.TKN_IF;
@@ -168,6 +167,7 @@ namespace DeLexico
 							break;
 					}
 					token.lexema = tokenParts[1];
+					if(token.token_type!=Token_types.TKN_MLCOMMENT && token.token_type!=Token_types.TKN_COMMENT)//Don´t save the comment tokens
 					listaTokens.Add(token);
 					line = reader.ReadLine();
 				}
@@ -181,11 +181,5 @@ namespace DeLexico
 				Console.WriteLine( "{0},{1}", estructura.token_type, estructura.lexema);
 			Console.WriteLine();
 		}
-//		public static void Main(string[] args) {
-//			Lexico lexic = new Lexico("LexiconAnalisysTokens.txt");
-//			lexic.imprimirTokensDeLista(lexic.AnalizadorLexico());
-//			Console.ReadKey(true);
-//		}
-		
 	}
 }

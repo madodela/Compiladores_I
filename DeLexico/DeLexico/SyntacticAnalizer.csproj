@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <OutputType>Exe</OutputType>
     <RootNamespace>DeLexico</RootNamespace>
-    <AssemblyName>AnalizadorSintactico</AssemblyName>
+    <AssemblyName>SyntacticAnalizer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -45,9 +45,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnalizadorLexico.cs" />
+    <Compile Include="LexyconResults.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AnalizadorSintactico.cs" />
+    <Compile Include="SyntacticAnalizer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

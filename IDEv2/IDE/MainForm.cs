@@ -196,21 +196,27 @@ namespace IDE
 			                "    José Luis Díaz Montellano\nProfesor:\n    Dr. Eduardo Serna Pérez","Información",
 			                MessageBoxButtons.OK,MessageBoxIcon.Information);
 		}
-		
+		//Compiling process
 		void CompilarToolStripMenuItemClick(object sender, EventArgs e)
 		{
-			Guardar();
-			guardado=true;
+			Guardar();//Save the code in the slected file
+			guardado=true;//Make a copy of the file in the IDE bin directory
 			System.IO.File.Copy(Archivo_Actual.Ubicacion_de_Archivo,"temp"+Archivo_Actual.Nombre_de_Archivo,true);
 			string command="";
 			ExecuteCMD cmd=new ExecuteCMD();
 			command+="Analizador_Lexico.exe temp"+Archivo_Actual.Nombre_de_Archivo;
-			cmd.ExecuteCommandSync(command);
-			System.IO.File.Delete("temp"+Archivo_Actual.Nombre_de_Archivo);
+			cmd.ExecuteCommandSync(command);//Excecute the command to run the Lexicon Analisys
+			System.IO.File.Delete("temp"+Archivo_Actual.Nombre_de_Archivo);//Delete the file copy
 			FillTokenList();
-			FillErrorList();
+			FillErrorList("infoLexiconAnalisysTokens.txt");
+			command="SyntacticAnalizer.exe";//Execute the command to run the Syntactic Analisys
+			cmd.ExecuteCommandSync(command);
+			FillTreeView();
+			FillErrorList("infoSyntacticAnalisys.txt");
 		}
+		//Fill the token list in the GUI
 		void FillTokenList(){
+			TokenList.Items.Clear();//Clear the list avoiding to append the new tokens.
 			FileStream file = new FileStream("LexiconAnalisysTokens.txt",FileMode.Open,FileAccess.Read);
 			StreamReader reader = new StreamReader(file);
 			string [] token;
@@ -222,8 +228,13 @@ namespace IDE
 			}
 			reader.Close();
 		}
-		void FillErrorList(){
-			FileStream file = new FileStream("infoLexiconAnalisysTokens.txt",FileMode.Open,FileAccess.Read);
+		//Fill the TreeView in the GUI
+		void FillTreeView(){
+			
+		}
+		//Fill the error list in the GUI
+		void FillErrorList(string fileName){
+			FileStream file = new FileStream(fileName,FileMode.Open,FileAccess.Read);
 			StreamReader reader = new StreamReader(file);
 			int i=1;
 			string [] error=new string[2];

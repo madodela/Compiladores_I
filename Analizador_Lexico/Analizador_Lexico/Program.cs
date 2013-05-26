@@ -239,15 +239,16 @@ namespace Analizador_Lexico
 					if (c == '/') {
 						token.TokenType = token_types.TKN_COMMENT;
 						state = States.IN_COMMENT;
-						
+						token.Lexema += c.ToString ();
 					} else if (c == '*') {
 						token.TokenType = token_types.TKN_MLCOMMENT;
 						state = States.IN_MLCOMMENT;
-						
+						token.Lexema += c.ToString ();
 					} else {
 						state = States.IN_DONE;
 					}
-					token.Lexema += c.ToString ();
+				//	token.Lexema += c.ToString ();
+					unGetChar();
 					break;
 				}
 				case States.IN_COMMENT:
@@ -404,6 +405,7 @@ namespace Analizador_Lexico
 					writer.WriteLine("{0}\t{1}",token.TokenType,token.Lexema);
 					token=GetToken(reader,writer2);
 				}
+				writer.WriteLine("{0}\t{1}",token.TokenType,token.Lexema);
 				reader.Close();
 				writer.Close();
                 //Console.WriteLine("Analized Lines {0}", nline);

@@ -64,11 +64,13 @@ namespace IDE
 			this.tabPage5 = new System.Windows.Forms.TabPage();
 			this.tabPage6 = new System.Windows.Forms.TabPage();
 			this.fastColoredTextBox1 = new FastColoredTextBoxNS.FastColoredTextBox();
+			this.TreeView = new System.Windows.Forms.TreeView();
 			this.menuStrip1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
 			this.tabControl2.SuspendLayout();
 			this.tabPage3.SuspendLayout();
+			this.tabPage4.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.fastColoredTextBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -307,6 +309,7 @@ namespace IDE
 			// 
 			// tabPage4
 			// 
+			this.tabPage4.Controls.Add(this.TreeView);
 			this.tabPage4.Location = new System.Drawing.Point(4, 22);
 			this.tabPage4.Name = "tabPage4";
 			this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
@@ -356,6 +359,13 @@ namespace IDE
 			this.fastColoredTextBox1.Size = new System.Drawing.Size(370, 337);
 			this.fastColoredTextBox1.TabIndex = 9;
 			// 
+			// TreeView
+			// 
+			this.TreeView.Location = new System.Drawing.Point(0, 0);
+			this.TreeView.Name = "TreeView";
+			this.TreeView.Size = new System.Drawing.Size(342, 311);
+			this.TreeView.TabIndex = 0;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -376,10 +386,12 @@ namespace IDE
 			this.tabPage2.ResumeLayout(false);
 			this.tabControl2.ResumeLayout(false);
 			this.tabPage3.ResumeLayout(false);
+			this.tabPage4.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.fastColoredTextBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.TreeView TreeView;
 		private FastColoredTextBoxNS.FastColoredTextBox fastColoredTextBox1;
 		private System.Windows.Forms.ColumnHeader columnHeader4;
 		private System.Windows.Forms.ColumnHeader columnHeader3;
