@@ -13,6 +13,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Xml;
+
 namespace IDE
 {
 	/// <summary>
@@ -200,7 +202,8 @@ namespace IDE
 		void CompilarToolStripMenuItemClick(object sender, EventArgs e)
 		{
 			Guardar();//Save the code in the slected file
-			guardado=true;//Make a copy of the file in the IDE bin directory
+			guardado=true;
+			//Make a copy of the file in the \IDE\bin directory
 			System.IO.File.Copy(Archivo_Actual.Ubicacion_de_Archivo,"temp"+Archivo_Actual.Nombre_de_Archivo,true);
 			string command="";
 			ExecuteCMD cmd=new ExecuteCMD();
@@ -212,7 +215,7 @@ namespace IDE
 			command="SyntacticAnalizer.exe";//Execute the command to run the Syntactic Analisys
 			cmd.ExecuteCommandSync(command);
 			FillTreeView();
-			//FillErrorList("infoSyntacticAnalisys.txt");
+			FillErrorList("infoSyntacticAnalisys.txt");
 		}
 		//Fill the token list in the GUI
 		void FillTokenList(){
@@ -230,39 +233,74 @@ namespace IDE
 		}
 		//Fill the TreeView in the GUI
 		void FillTreeView(){
-			FileStream file = new FileStream("SyntacticTree.txt",FileMode.Open,FileAccess.Read);
-			StreamReader reader = new StreamReader(file);
-			string line=reader.ReadLine();
-			int currentSpaces=0;
-			int previousSpaces=10;
-			string nodeName;
-			while(line!=null){
-				currentSpaces=countSpaces(line);
-				if(currentSpaces<=2){
-					nodeName=line.Substring(currentSpaces);
-					TreeNode treeNode = new TreeNode(nodeName);
-	   				TreeView.Nodes.Add(treeNode);
-				}
-				else{
-					if(currentSpaces>previousSpaces){
-						
-					}
-				}
-				line=reader.ReadLine();
+			try
+			{
+				// SECTION 1. Create a DOM Document and load the XML data into it.
+				XmlDocument dom = new XmlDocument();
+				dom.Load("SyntacticTree.xml");
+				string name="";
+				int x,x2;
+				name=dom.DocumentElement.InnerText.Substring(1);
+				x=name.IndexOf('"');
+				x2=name.Length;
+				name=name.Remove(x,x2-x);
 				
+				// SECTION 2. Initialize the TreeView control.
+				TreeView.Nodes.Clear();
+				TreeView.Nodes.Add(name);
+				TreeNode tNode = new TreeNode();
+			
+				tNode = TreeView.Nodes[0];
+				// SECTION 3. Populate the TreeView with the DOM nodes.
+				addNode(dom.DocumentElement, tNode);
+				TreeView.ExpandAll();
+			}
+			catch(XmlException xmlEx)
+			{
+				MessageBox.Show(xmlEx.Message);
+			}
+			catch(Exception ex)
+			{
+				MessageBox.Show(ex.Message);
 			}
 		}
-		int countSpaces(string line){
-			int spaces=0;
-			char [] lineChar=line.ToCharArray();
-			for(int i=0;i<lineChar.Length;i++){
-				if(lineChar[i]==' ')
-					spaces++;
+		void addNode(XmlNode inXmlNode, TreeNode inTreeNode){
+			XmlNode xNode;
+			TreeNode tNode;
+			XmlNodeList nodeList;
+			string name="";
+			int i,x,x2;
+
+			// Loop through the XML nodes until the leaf is reached.
+			// Add the nodes to the TreeView during the looping process.
+			if (inXmlNode.HasChildNodes)
+			{
+				nodeList = inXmlNode.ChildNodes;
+				
+				for(i = 1; i<=nodeList.Count - 1; i++)
+				{
+					xNode = inXmlNode.ChildNodes[i];
+					name=xNode.InnerText.Substring(1);
+					x=name.IndexOf('"');
+					x2=name.Length;
+					name=name.Remove(x,x2-x);
+					
+					inTreeNode.Nodes.Add(name);
+					tNode = inTreeNode.Nodes[i-1];
+					addNode(xNode, tNode);
+				}
 			}
-			return spaces;
+			else
+			{
+				// Here you need to pull the data from the XmlNode based on the
+				// type of node, whether attribute values are required, and so forth.
+				//inTreeNode.Text = (inXmlNode.OuterXml).Trim();
+				//inTreeNode.Text=null;
+			}
 		}
 		//Fill the error list in the GUI
 		void FillErrorList(string fileName){
+			ErrorList.Items.Clear();
 			FileStream file = new FileStream(fileName,FileMode.Open,FileAccess.Read);
 			StreamReader reader = new StreamReader(file);
 			int i=1;

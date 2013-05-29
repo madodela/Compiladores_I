@@ -246,9 +246,10 @@ namespace Analizador_Lexico
 						token.Lexema += c.ToString ();
 					} else {
 						state = States.IN_DONE;
+						unGetChar();
 					}
 				//	token.Lexema += c.ToString ();
-					unGetChar();
+					
 					break;
 				}
 				case States.IN_COMMENT:
@@ -344,7 +345,6 @@ namespace Analizador_Lexico
 						token.TokenType = token_types.TKN_NEQUAL;
 					}
 					state = States.IN_DONE;
-					//unGetChar();
 					break;
 				}
 				case States.IN_EQU:

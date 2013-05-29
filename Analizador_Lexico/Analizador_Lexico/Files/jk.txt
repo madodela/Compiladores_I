@@ -1,7 +1,7 @@
 program {
     int x, y;
-    bool d;
-    float a,b,c,d,e;
+    bool d,p;
+    float a,b,c,d,e,q,r;
     x=0; // comentario 1
     y=4; /* comentario 2 */
     do {
@@ -11,7 +11,7 @@ program {
             x=x*10-5+2/1*2; 
         }   
         a=a*(x+(1*2));
-        if(x<y){
+        if(x>y){
         y=y-1+2+3-5*2/3;
             if(5!=3){
                 d=true;

@@ -201,12 +201,8 @@ namespace NSSyntacticAnalizer
 				case Token_types.TKN_LBRACE:
 					t = block_stmt();
 					break;
-<<<<<<< HEAD
 					default :// ERROR 1
-=======
-				default :// ERROR 1
->>>>>>> 60d5f5c6e1b13fc95127d9e30dc9c9d76659027b
-					syntaxError("Unexpected token:");
+						syntaxError("Unexpected token:");
 					printToken(currentToken);
 					break;
 			}
@@ -308,7 +304,7 @@ namespace NSSyntacticAnalizer
 			//relacion → <= | < | > | >= | == | !=
 			if ((currentToken.token_type == Token_types.TKN_LETHAN)
 			    || (currentToken.token_type == Token_types.TKN_LTHAN)
-			    || (currentToken.token_type == Token_types.TKN_GETHAN)
+			    || (currentToken.token_type == Token_types.TKN_GTHAN)
 			    || (currentToken.token_type == Token_types.TKN_GETHAN)
 			    || (currentToken.token_type == Token_types.TKN_EQUAL)
 			    || (currentToken.token_type == Token_types.TKN_NEQUAL)) {
@@ -430,6 +426,7 @@ namespace NSSyntacticAnalizer
 		void printTree(TreeNode tree)
 		{
 			int i;
+			string finalLabel="";
 			identno+=2;
 			while (tree != null) {
 				printSpaces();
@@ -438,35 +435,35 @@ namespace NSSyntacticAnalizer
 					switch (tree.stmtK) {
 						case StmtKind.IfK:
 							Console.Write("If\n");
-							writerTree.WriteLine("If");
+							writerTree.WriteLine("<node>\"if\"");
 							break;
 						case StmtKind.IterationK:
 							Console.Write("Iteration\n");
-							writerTree.WriteLine("Iteration");
+							writerTree.WriteLine("<node>\"Iteration\"");
 							break;
 						case StmtKind.ProgramK:
 							Console.Write("Program\n");
-							writerTree.WriteLine("Program");
+							writerTree.WriteLine("<node>\"Program\"");
 							break;
 						case StmtKind.BlockK:
 							Console.Write("Block\n");
-							writerTree.WriteLine("Block");
+							writerTree.WriteLine("<node>\"Block\"");
 							break;
 						case StmtKind.RepeatK:
 							Console.Write("Repeat\n");
-							writerTree.WriteLine("Repeat");
+							writerTree.WriteLine("<node>\"Repeat\"");
 							break;
 						case StmtKind.AssignK:
 							Console.Write("Assign to: {0}\n",tree.name);
-							writerTree.WriteLine("Assign to: {0}",tree.name);
+							writerTree.WriteLine("<node>\"AssignTo: {0}\"",tree.name);
 							break;
 						case StmtKind.ReadK:
 							Console.Write("Read: {0}\n",tree.name);
-							writerTree.WriteLine("Read: {0}",tree.name);
+							writerTree.WriteLine("<node>\"Read: {0}\"",tree.name);
 							break;
 						case StmtKind.WriteK:
 							Console.Write("Write\n");
-							writerTree.WriteLine("Write");
+							writerTree.WriteLine("<node>\"Write\"");
 							break;
 						default:
 							Console.Write("Unknown ExpNode kind\n");
@@ -481,10 +478,10 @@ namespace NSSyntacticAnalizer
 							case ExpKind.OpK:
 								string op;
 								switch(tree.op){
-										case Token_types.TKN_LTHAN:op="<";break;
-										case Token_types.TKN_LETHAN:op="<=";break;
-										case Token_types.TKN_GETHAN:op=">=";break;
-										case Token_types.TKN_GTHAN:op=">";break;
+										case Token_types.TKN_LTHAN:op="&lt;";break;//&lt; is the character '<' in xml
+										case Token_types.TKN_LETHAN:op="&lt;=";break;
+										case Token_types.TKN_GETHAN:op="&gt;=";break;//&gt; is the character '>' in xml
+										case Token_types.TKN_GTHAN:op="&gt;";break;
 										case Token_types.TKN_EQUAL:op="==";break;
 										case Token_types.TKN_NEQUAL:op="!=";break;
 										case Token_types.TKN_ADD:op="+";break;
@@ -493,16 +490,16 @@ namespace NSSyntacticAnalizer
 										case Token_types.TKN_DIVISION:op="/";break;
 										default: op="Unknown operator";break;//assumed this error never occur
 								}
-								Console.Write("Op:{0}\n",op);
-								writerTree.WriteLine("Op:{0}",op);
+								Console.Write("Op: {0}\n",op);
+								writerTree.WriteLine("<node>\"Op: {0}\"",op);
 								break;
 							case ExpKind.ConstK:
 								Console.Write("Const: {0}\n",tree.val);
-								writerTree.WriteLine("Const: {0}",tree.val);
+								writerTree.WriteLine("<node>\"Const: {0}\"",tree.val);
 								break;
 							case ExpKind.IdK:
 								Console.Write("Id: {0}\n",tree.name);
-								writerTree.WriteLine("Id: {0}",tree.name);
+								writerTree.WriteLine("<node>\"Id: {0}\"",tree.name);
 								break;
 							default:
 								Console.Write("Unknown ExpNode kind\n");
@@ -513,19 +510,24 @@ namespace NSSyntacticAnalizer
 					else{
 						if(tree.nodekind==NodeKind.DecK){
 							string valTypeString;
+							
 							switch(tree.varType){
 									case Token_types.TKN_INT:valTypeString="INT";break;
 									case Token_types.TKN_FLOAT:valTypeString="FLOAT";break;
 									case Token_types.TKN_BOOL:valTypeString="BOOL";break;
 									default: valTypeString="Unknown type";break;
 							}
-							Console.Write("{0}:{1}\n",valTypeString,tree.name);
-							writerTree.WriteLine("{0}:{1}",valTypeString,tree.name);
+							Console.Write("{0}:{1}\n",valTypeString,tree.name);	
+							writerTree.WriteLine("<node>\"{0}:{1}\"",valTypeString,tree.name);
 						}else { Console.WriteLine("Unknown node kind");}
 					}
 				}
-				for (i=0;i<5;i++)
+				for (i=0;i<5;i++){
 					printTree(tree.child[i]);
+					//if(tree.child[i]!=null)
+					//writerTree.WriteLine("</parent>");
+				}
+				writerTree.WriteLine("</node>");
 				tree = tree.sibling;
 			}
 			identno-=2;
@@ -536,11 +538,14 @@ namespace NSSyntacticAnalizer
 			tokenList = lexResults.AnalizadorLexico();
 			try{
 				TreeNode SyntacticTree=Parse();//Parse function creates the Syntactic Tree
-				syntacticTree=new FileStream("SyntacticTree.txt",FileMode.Create,FileAccess.Write);
+				syntacticTree=new FileStream("SyntacticTree.xml",FileMode.Create,FileAccess.Write);
 				writerTree=new StreamWriter(syntacticTree);
 				infoSyntacticAnalisys=new FileStream("infoSyntacticAnalisys.txt",FileMode.Create,FileAccess.Write);
 				writerInfo=new StreamWriter(infoSyntacticAnalisys);
+				writerTree.WriteLine("<?xml version=\"1.0\"?>");
+				
 				printTree(SyntacticTree);
+				
 				writerTree.Close();
 				writerInfo.Close();
 			}
