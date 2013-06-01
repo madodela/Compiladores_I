@@ -37,7 +37,9 @@ namespace NSSyntacticAnalizer
 			
 			public Token_types op;
 			public Token_types varType;
-			public int val;
+			public int valInt;
+			public double valDouble;
+			public bool intType=true;
 			public string name;
 			public TreeNode [] child = new TreeNode[5];
 			public TreeNode sibling;
@@ -163,13 +165,18 @@ namespace NSSyntacticAnalizer
 		//lista-sentencias → sentencia lista-sentencias | sentencia | vació
 		TreeNode stmt_list() {
 			TreeNode t = null;
-			while(currentToken.token_type!= Token_types.TKN_RBRACE) {
+			while(currentToken.token_type!= Token_types.TKN_RBRACE && currentToken.token_type!= Token_types.TKN_EOF
+			      && currentToken.token_type!= Token_types.TKN_UNTIL && currentToken.token_type!= Token_types.TKN_ELSE
+			      && currentToken.token_type!= Token_types.TKN_FI) {
 				t=statement();
 				if(currentToken.token_type == Token_types.TKN_IF || currentToken.token_type == Token_types.TKN_WRITE
 				   || currentToken.token_type == Token_types.TKN_LBRACE || currentToken.token_type == Token_types.TKN_DO
 				   || currentToken.token_type == Token_types.TKN_ID || currentToken.token_type == Token_types.TKN_READ
 				   || currentToken.token_type == Token_types.TKN_WHILE) {
-					t.sibling=stmt_list();
+					//Console.WriteLine(currentToken.token_type);
+					//Console.ReadKey();
+					if(t!=null)
+						t.sibling=stmt_list();
 				}
 			}
 			return t;
@@ -204,6 +211,7 @@ namespace NSSyntacticAnalizer
 					default :// ERROR 1
 						syntaxError("Unexpected token:");
 					printToken(currentToken);
+					currentToken=getToken();
 					break;
 			}
 			return t;
@@ -368,8 +376,16 @@ namespace NSSyntacticAnalizer
 					//num option
 				case Token_types.TKN_NUM:
 					t = new TreeNode(StmtCreation.newExpNode, ExpKind.ConstK);
-					if ((t != null) && (currentToken.token_type == Token_types.TKN_NUM))
-						t.val = (Convert.ToInt32(currentToken.lexema));
+					if ((t != null) && (currentToken.token_type == Token_types.TKN_NUM)){
+						if(currentToken.lexema.Contains(".")){
+							t.valDouble = (Convert.ToDouble(currentToken.lexema));
+							t.intType=false;
+						}else{
+							t.valInt = (Convert.ToInt32(currentToken.lexema));
+							t.intType=true;
+						}
+						
+					}
 					match(Token_types.TKN_NUM);
 					break;
 					//id option
@@ -401,6 +417,7 @@ namespace NSSyntacticAnalizer
 			else {
 				syntaxError("Unexpected token:");
 				Console.WriteLine("Expected token:{0}",expected);
+				writerInfo.WriteLine("Expected token:{0}",expected);
 				printToken(currentToken);
 			}
 		}
@@ -494,8 +511,13 @@ namespace NSSyntacticAnalizer
 								writerTree.WriteLine("<node>\"Op: {0}\"",op);
 								break;
 							case ExpKind.ConstK:
-								Console.Write("Const: {0}\n",tree.val);
-								writerTree.WriteLine("<node>\"Const: {0}\"",tree.val);
+								if(tree.intType){
+									Console.Write("Const: {0}\n",tree.valInt);
+									writerTree.WriteLine("<node>\"Const: {0}\"",tree.valInt);
+								}else{
+									Console.Write("Const: {0}\n",tree.valDouble);
+									writerTree.WriteLine("<node>\"Const: {0}\"",tree.valDouble);
+								}
 								break;
 							case ExpKind.IdK:
 								Console.Write("Id: {0}\n",tree.name);
@@ -517,7 +539,7 @@ namespace NSSyntacticAnalizer
 									case Token_types.TKN_BOOL:valTypeString="BOOL";break;
 									default: valTypeString="Unknown type";break;
 							}
-							Console.Write("{0}:{1}\n",valTypeString,tree.name);	
+							Console.Write("{0}:{1}\n",valTypeString,tree.name);
 							writerTree.WriteLine("<node>\"{0}:{1}\"",valTypeString,tree.name);
 						}else { Console.WriteLine("Unknown node kind");}
 					}
@@ -537,13 +559,13 @@ namespace NSSyntacticAnalizer
 			Lexico lexResults = new Lexico("LexiconAnalisysTokens.txt");
 			tokenList = lexResults.AnalizadorLexico();
 			try{
-				TreeNode SyntacticTree=Parse();//Parse function creates the Syntactic Tree
+				
 				syntacticTree=new FileStream("SyntacticTree.xml",FileMode.Create,FileAccess.Write);
 				writerTree=new StreamWriter(syntacticTree);
 				infoSyntacticAnalisys=new FileStream("infoSyntacticAnalisys.txt",FileMode.Create,FileAccess.Write);
 				writerInfo=new StreamWriter(infoSyntacticAnalisys);
 				writerTree.WriteLine("<?xml version=\"1.0\"?>");
-				
+				TreeNode SyntacticTree=Parse();//Parse function creates the Syntactic Tree
 				printTree(SyntacticTree);
 				
 				writerTree.Close();

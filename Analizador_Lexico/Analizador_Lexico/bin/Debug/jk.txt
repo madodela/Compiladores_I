@@ -3,7 +3,7 @@ program {
     bool d,p;
     float a,b,c,d,e,q,r;
     x=0; // comentario 1
-    y=4; /* comentario 2 */
+    y=4; /* comentario 2 
      do {
         while(x<=(5+4)){
             read y;

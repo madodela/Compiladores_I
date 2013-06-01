@@ -7,7 +7,7 @@ program {
     if(x!=y){
             y=y-1;
             
-            }
+            
             fi
             } until(y>=0);
 }

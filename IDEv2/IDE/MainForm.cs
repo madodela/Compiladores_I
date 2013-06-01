@@ -145,6 +145,7 @@ namespace IDE
 			Form.ActiveForm.Text="IDE";
 			TokenList.Items.Clear();
 			ErrorList.Items.Clear();
+			TreeView.Nodes.Clear();
 		}
 		
 		public void Guardar()
@@ -300,7 +301,6 @@ namespace IDE
 		}
 		//Fill the error list in the GUI
 		void FillErrorList(string fileName){
-			ErrorList.Items.Clear();
 			FileStream file = new FileStream(fileName,FileMode.Open,FileAccess.Read);
 			StreamReader reader = new StreamReader(file);
 			int i=1;

@@ -1,0 +1,3 @@
+Error Unexpected token:
+Expected token:TKN_RBRACE
+TKN_EOF,$
