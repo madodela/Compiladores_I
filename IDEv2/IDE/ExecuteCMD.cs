@@ -3,13 +3,12 @@ using System.Threading;
 using System.Drawing;
 namespace IDE
 {
-	public class ExecuteCMD
-	{
+	public class ExecuteCMD {
 		string CommandOutput;
-		public ExecuteCMD ()
-		{
+		public ExecuteCMD () {
 			CommandOutput="vacio";
 		}
+		
 		public string CmdOutput{
 			get{
 				return CommandOutput;
@@ -19,14 +18,13 @@ namespace IDE
 			}
 		}
 		//Execute the command Synchronously
-		public void ExecuteCommandSync(Object command)
-		{
-			try
-			{
+		public void ExecuteCommandSync(Object command) {
+			try {
 				// create the ProcessStartInfo using "cmd" as the program to be run, and "/c " as the parameters.
 				// Incidentally, /c tells cmd that we want it to execute the command that follows, and then exit.
-				System.Diagnostics.ProcessStartInfo procStartInfo = new System.Diagnostics.ProcessStartInfo("cmd", "/c " + command);
-				// The following commands are needed to redirect the standard output. 
+				System.Diagnostics.ProcessStartInfo procStartInfo =
+					new System.Diagnostics.ProcessStartInfo("cmd", "/c " + command);
+				// The following commands are needed to redirect the standard output.
 				//This means that it will be redirected to the Process.StandardOutput StreamReader.
 				procStartInfo.RedirectStandardOutput = true;
 				procStartInfo.UseShellExecute = false;
@@ -36,24 +34,18 @@ namespace IDE
 				System.Diagnostics.Process proc = new System.Diagnostics.Process();
 				proc.StartInfo = procStartInfo;
 				proc.Start();
-				
+
 				// Get the output into a string
 				string result = proc.StandardOutput.ReadToEnd();
-				CmdOutput=result;
-				
-			}
-			catch (Exception e)
-			{
-				// Log the exception
+				CmdOutput = result;
+			} catch (Exception e) {
+				// Log the exception 
 			}
 		}
 
 		/// Execute the command Asynchronously.
-		public void ExecuteCommandAsync(string command)
-		{
-			
-			try
-			{
+		public void ExecuteCommandAsync(string command) {
+			try {
 				//Asynchronously start the Thread to process the Execute command request.
 				Thread objThread = new Thread(new ParameterizedThreadStart(ExecuteCommandSync));
 				//Make the thread as background thread.
@@ -62,20 +54,13 @@ namespace IDE
 				objThread.Priority = ThreadPriority.AboveNormal;
 				//Start the thread.
 				objThread.Start(command);
-			}
-			catch (ThreadStartException objException)
-			{
+			} catch (ThreadStartException objException) {
 				// Log the exception
-			}
-			catch (ThreadAbortException objException)
-			{
+			} catch (ThreadAbortException objException) {
 				// Log the exception
-			}
-			catch (Exception objException)
-			{
+			} catch (Exception objException) {
 				// Log the exception
 			}
 		}
 	}
 }
-
