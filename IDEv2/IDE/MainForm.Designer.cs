@@ -61,10 +61,11 @@ namespace IDE
 			this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
 			this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
 			this.tabPage4 = new System.Windows.Forms.TabPage();
+			this.TreeView = new System.Windows.Forms.TreeView();
 			this.tabPage5 = new System.Windows.Forms.TabPage();
 			this.tabPage6 = new System.Windows.Forms.TabPage();
 			this.fastColoredTextBox1 = new FastColoredTextBoxNS.FastColoredTextBox();
-			this.TreeView = new System.Windows.Forms.TreeView();
+			this.panel1 = new System.Windows.Forms.Panel();
 			this.menuStrip1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
@@ -72,11 +73,13 @@ namespace IDE
 			this.tabPage3.SuspendLayout();
 			this.tabPage4.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.fastColoredTextBox1)).BeginInit();
+			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
 			// 
-			this.menuStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.menuStrip1.BackColor = System.Drawing.Color.Tan;
+			this.menuStrip1.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
 									this.archivoToolStripMenuItem,
 									this.compilarToolStripMenuItem,
@@ -85,7 +88,7 @@ namespace IDE
 									this.acercaDeToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(764, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(764, 29);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -99,7 +102,7 @@ namespace IDE
 									this.Cerrar_Archivo});
 			this.archivoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("archivoToolStripMenuItem.Image")));
 			this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-			this.archivoToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+			this.archivoToolStripMenuItem.Size = new System.Drawing.Size(84, 25);
 			this.archivoToolStripMenuItem.Text = "Archivo";
 			// 
 			// Abrir_Archivo
@@ -107,7 +110,7 @@ namespace IDE
 			this.Abrir_Archivo.Image = ((System.Drawing.Image)(resources.GetObject("Abrir_Archivo.Image")));
 			this.Abrir_Archivo.Name = "Abrir_Archivo";
 			this.Abrir_Archivo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-			this.Abrir_Archivo.Size = new System.Drawing.Size(226, 22);
+			this.Abrir_Archivo.Size = new System.Drawing.Size(254, 26);
 			this.Abrir_Archivo.Text = "Abrir";
 			this.Abrir_Archivo.ToolTipText = "Abrir un archivo";
 			this.Abrir_Archivo.Click += new System.EventHandler(this.Abrir_ArchivoClick);
@@ -117,7 +120,7 @@ namespace IDE
 			this.Nuevo_Archivo.Image = ((System.Drawing.Image)(resources.GetObject("Nuevo_Archivo.Image")));
 			this.Nuevo_Archivo.Name = "Nuevo_Archivo";
 			this.Nuevo_Archivo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-			this.Nuevo_Archivo.Size = new System.Drawing.Size(226, 22);
+			this.Nuevo_Archivo.Size = new System.Drawing.Size(254, 26);
 			this.Nuevo_Archivo.Text = "Nuevo";
 			this.Nuevo_Archivo.ToolTipText = "Crear nuevo archivo";
 			this.Nuevo_Archivo.Click += new System.EventHandler(this.Nuevo_ArchivoClick);
@@ -128,7 +131,7 @@ namespace IDE
 			this.Guardar_Archivo.Image = ((System.Drawing.Image)(resources.GetObject("Guardar_Archivo.Image")));
 			this.Guardar_Archivo.Name = "Guardar_Archivo";
 			this.Guardar_Archivo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-			this.Guardar_Archivo.Size = new System.Drawing.Size(226, 22);
+			this.Guardar_Archivo.Size = new System.Drawing.Size(254, 26);
 			this.Guardar_Archivo.Text = "Guardar";
 			this.Guardar_Archivo.ToolTipText = "Guardar archivo";
 			this.Guardar_Archivo.Click += new System.EventHandler(this.Guardar_ArchivoClick);
@@ -140,7 +143,7 @@ namespace IDE
 			this.Guardar_Como_Archivo.Name = "Guardar_Como_Archivo";
 			this.Guardar_Como_Archivo.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
 									| System.Windows.Forms.Keys.G)));
-			this.Guardar_Como_Archivo.Size = new System.Drawing.Size(226, 22);
+			this.Guardar_Como_Archivo.Size = new System.Drawing.Size(254, 26);
 			this.Guardar_Como_Archivo.Text = "Guardar Como";
 			this.Guardar_Como_Archivo.ToolTipText = "Guardar archivo en directorio específico";
 			this.Guardar_Como_Archivo.Click += new System.EventHandler(this.Guardar_Como_ArchivoClick);
@@ -151,7 +154,7 @@ namespace IDE
 			this.Cerrar_Archivo.Image = ((System.Drawing.Image)(resources.GetObject("Cerrar_Archivo.Image")));
 			this.Cerrar_Archivo.Name = "Cerrar_Archivo";
 			this.Cerrar_Archivo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-			this.Cerrar_Archivo.Size = new System.Drawing.Size(226, 22);
+			this.Cerrar_Archivo.Size = new System.Drawing.Size(254, 26);
 			this.Cerrar_Archivo.Text = "Cerrar";
 			this.Cerrar_Archivo.ToolTipText = "Cerrar archivo actual";
 			this.Cerrar_Archivo.Click += new System.EventHandler(this.Cerrar_ArchivoClick);
@@ -163,17 +166,18 @@ namespace IDE
 			this.compilarToolStripMenuItem.ShortcutKeyDisplayString = "";
 			this.compilarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
 									| System.Windows.Forms.Keys.Space)));
-			this.compilarToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+			this.compilarToolStripMenuItem.Size = new System.Drawing.Size(76, 25);
 			this.compilarToolStripMenuItem.Text = "Compilar";
 			this.compilarToolStripMenuItem.ToolTipText = "Compilar el código actual";
 			this.compilarToolStripMenuItem.Click += new System.EventHandler(this.CompilarToolStripMenuItemClick);
 			// 
 			// fuenteToolStripMenuItem
 			// 
+			this.fuenteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("fuenteToolStripMenuItem.Image")));
 			this.fuenteToolStripMenuItem.Name = "fuenteToolStripMenuItem";
 			this.fuenteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Shift) 
 									| System.Windows.Forms.Keys.F)));
-			this.fuenteToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+			this.fuenteToolStripMenuItem.Size = new System.Drawing.Size(78, 25);
 			this.fuenteToolStripMenuItem.Text = "Fuente";
 			this.fuenteToolStripMenuItem.Click += new System.EventHandler(this.FuenteClick);
 			// 
@@ -182,7 +186,7 @@ namespace IDE
 			this.salirToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("salirToolStripMenuItem.Image")));
 			this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
 			this.salirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-			this.salirToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+			this.salirToolStripMenuItem.Size = new System.Drawing.Size(65, 25);
 			this.salirToolStripMenuItem.Text = "Salir";
 			this.salirToolStripMenuItem.ToolTipText = "Salir del programa";
 			this.salirToolStripMenuItem.Click += new System.EventHandler(this.SalirClick);
@@ -192,7 +196,7 @@ namespace IDE
 			this.acercaDeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("acercaDeToolStripMenuItem.Image")));
 			this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
 			this.acercaDeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-			this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(97, 20);
+			this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(108, 25);
 			this.acercaDeToolStripMenuItem.Text = "Acerca De...";
 			this.acercaDeToolStripMenuItem.ToolTipText = "Info. sobre el programa y los desarrolladores.";
 			this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.AcercaDeClick);
@@ -203,6 +207,7 @@ namespace IDE
 									| System.Windows.Forms.AnchorStyles.Right)));
 			this.tabControl1.Controls.Add(this.tabPage1);
 			this.tabControl1.Controls.Add(this.tabPage2);
+			this.tabControl1.Font = new System.Drawing.Font("Segoe Print", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.tabControl1.Location = new System.Drawing.Point(12, 401);
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
@@ -211,10 +216,10 @@ namespace IDE
 			// 
 			// tabPage1
 			// 
-			this.tabPage1.Location = new System.Drawing.Point(4, 22);
+			this.tabPage1.Location = new System.Drawing.Point(4, 28);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage1.Size = new System.Drawing.Size(728, 83);
+			this.tabPage1.Size = new System.Drawing.Size(728, 77);
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "Resultados";
 			this.tabPage1.UseVisualStyleBackColor = true;
@@ -222,10 +227,10 @@ namespace IDE
 			// tabPage2
 			// 
 			this.tabPage2.Controls.Add(this.ErrorList);
-			this.tabPage2.Location = new System.Drawing.Point(4, 22);
+			this.tabPage2.Location = new System.Drawing.Point(4, 28);
 			this.tabPage2.Name = "tabPage2";
 			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage2.Size = new System.Drawing.Size(728, 83);
+			this.tabPage2.Size = new System.Drawing.Size(728, 77);
 			this.tabPage2.TabIndex = 1;
 			this.tabPage2.Text = "Errores";
 			this.tabPage2.UseVisualStyleBackColor = true;
@@ -263,6 +268,7 @@ namespace IDE
 			this.tabControl2.Controls.Add(this.tabPage4);
 			this.tabControl2.Controls.Add(this.tabPage5);
 			this.tabControl2.Controls.Add(this.tabPage6);
+			this.tabControl2.Font = new System.Drawing.Font("Segoe Print", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.tabControl2.Location = new System.Drawing.Point(402, 51);
 			this.tabControl2.Name = "tabControl2";
 			this.tabControl2.SelectedIndex = 0;
@@ -272,10 +278,10 @@ namespace IDE
 			// tabPage3
 			// 
 			this.tabPage3.Controls.Add(this.TokenList);
-			this.tabPage3.Location = new System.Drawing.Point(4, 22);
+			this.tabPage3.Location = new System.Drawing.Point(4, 28);
 			this.tabPage3.Name = "tabPage3";
 			this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage3.Size = new System.Drawing.Size(342, 311);
+			this.tabPage3.Size = new System.Drawing.Size(342, 305);
 			this.tabPage3.TabIndex = 0;
 			this.tabPage3.Text = "Léxico";
 			this.tabPage3.UseVisualStyleBackColor = true;
@@ -310,36 +316,46 @@ namespace IDE
 			// tabPage4
 			// 
 			this.tabPage4.Controls.Add(this.TreeView);
-			this.tabPage4.Location = new System.Drawing.Point(4, 22);
+			this.tabPage4.Location = new System.Drawing.Point(4, 28);
 			this.tabPage4.Name = "tabPage4";
 			this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage4.Size = new System.Drawing.Size(342, 311);
+			this.tabPage4.Size = new System.Drawing.Size(342, 305);
 			this.tabPage4.TabIndex = 1;
 			this.tabPage4.Text = "Sintáctico";
 			this.tabPage4.UseVisualStyleBackColor = true;
 			// 
+			// TreeView
+			// 
+			this.TreeView.Location = new System.Drawing.Point(0, 0);
+			this.TreeView.Name = "TreeView";
+			this.TreeView.Size = new System.Drawing.Size(342, 311);
+			this.TreeView.TabIndex = 0;
+			// 
 			// tabPage5
 			// 
-			this.tabPage5.Location = new System.Drawing.Point(4, 22);
+			this.tabPage5.Location = new System.Drawing.Point(4, 28);
 			this.tabPage5.Name = "tabPage5";
 			this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage5.Size = new System.Drawing.Size(342, 311);
+			this.tabPage5.Size = new System.Drawing.Size(342, 305);
 			this.tabPage5.TabIndex = 2;
 			this.tabPage5.Text = "Semántico";
 			this.tabPage5.UseVisualStyleBackColor = true;
 			// 
 			// tabPage6
 			// 
-			this.tabPage6.Location = new System.Drawing.Point(4, 22);
+			this.tabPage6.Location = new System.Drawing.Point(4, 28);
 			this.tabPage6.Name = "tabPage6";
 			this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage6.Size = new System.Drawing.Size(342, 311);
+			this.tabPage6.Size = new System.Drawing.Size(342, 305);
 			this.tabPage6.TabIndex = 3;
 			this.tabPage6.Text = "Código intermedio";
 			this.tabPage6.UseVisualStyleBackColor = true;
 			// 
 			// fastColoredTextBox1
 			// 
+			this.fastColoredTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+									| System.Windows.Forms.AnchorStyles.Left) 
+									| System.Windows.Forms.AnchorStyles.Right)));
 			this.fastColoredTextBox1.AutoScrollMinSize = new System.Drawing.Size(27, 14);
 			this.fastColoredTextBox1.BackBrush = null;
 			this.fastColoredTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -351,27 +367,32 @@ namespace IDE
 			this.fastColoredTextBox1.Language = FastColoredTextBoxNS.Language.Mycode;
 			this.fastColoredTextBox1.LeftBracket = '(';
 			this.fastColoredTextBox1.LineNumberColor = System.Drawing.Color.Indigo;
-			this.fastColoredTextBox1.Location = new System.Drawing.Point(16, 51);
+			this.fastColoredTextBox1.Location = new System.Drawing.Point(0, 0);
 			this.fastColoredTextBox1.Name = "fastColoredTextBox1";
 			this.fastColoredTextBox1.Paddings = new System.Windows.Forms.Padding(0);
 			this.fastColoredTextBox1.RightBracket = ')';
 			this.fastColoredTextBox1.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-			this.fastColoredTextBox1.Size = new System.Drawing.Size(370, 337);
+			this.fastColoredTextBox1.Size = new System.Drawing.Size(380, 330);
 			this.fastColoredTextBox1.TabIndex = 9;
 			// 
-			// TreeView
+			// panel1
 			// 
-			this.TreeView.Location = new System.Drawing.Point(0, 0);
-			this.TreeView.Name = "TreeView";
-			this.TreeView.Size = new System.Drawing.Size(342, 311);
-			this.TreeView.TabIndex = 0;
+			this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+									| System.Windows.Forms.AnchorStyles.Left) 
+									| System.Windows.Forms.AnchorStyles.Right)));
+			this.panel1.Controls.Add(this.fastColoredTextBox1);
+			this.panel1.Location = new System.Drawing.Point(16, 51);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(380, 333);
+			this.panel1.TabIndex = 10;
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackColor = System.Drawing.Color.BurlyWood;
 			this.ClientSize = new System.Drawing.Size(764, 522);
-			this.Controls.Add(this.fastColoredTextBox1);
+			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.tabControl2);
 			this.Controls.Add(this.tabControl1);
 			this.Controls.Add(this.menuStrip1);
@@ -388,9 +409,11 @@ namespace IDE
 			this.tabPage3.ResumeLayout(false);
 			this.tabPage4.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.fastColoredTextBox1)).EndInit();
+			this.panel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.TreeView TreeView;
 		private FastColoredTextBoxNS.FastColoredTextBox fastColoredTextBox1;
 		private System.Windows.Forms.ColumnHeader columnHeader4;
