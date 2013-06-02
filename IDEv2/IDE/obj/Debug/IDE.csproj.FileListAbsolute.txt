@@ -40,3 +40,14 @@ C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\IDE\bin\Debug\FastColor
 C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\IDE\bin\Debug\FastColoredTextBox.pdb
 C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\IDE\bin\Debug\FastColoredTextBox.xml
 C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\IDEv2\IDE\obj\Debug\IDE.pdb
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\IDE\bin\Debug\IDE.exe
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\IDE\bin\Debug\IDE.pdb
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\IDE\bin\Debug\FastColoredTextBox.dll
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\IDE\bin\Debug\FastColoredTextBox.pdb
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\IDE\bin\Debug\FastColoredTextBox.xml
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\IDE.MainForm.resources
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\IDE.exe
+C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\IDE.pdb

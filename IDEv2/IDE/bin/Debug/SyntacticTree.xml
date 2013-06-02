@@ -4,30 +4,16 @@
       <node>"INT:y"
 </node>
 </node>
-    <node>"BOOL:d"
-      <node>"BOOL:p"
-</node>
-</node>
-    <node>"FLOAT:a"
-      <node>"FLOAT:b"
-        <node>"FLOAT:c"
-          <node>"FLOAT:d"
-            <node>"FLOAT:e"
-              <node>"FLOAT:q"
-                <node>"FLOAT:r"
-</node>
-</node>
-</node>
-</node>
-</node>
-</node>
-</node>
     <node>"AssignTo: x"
       <node>"Const: 0"
 </node>
 </node>
     <node>"AssignTo: y"
-      <node>"Const: 4"
+      <node>"Const: 4.45"
+</node>
+</node>
+    <node>"AssignTo: e"
+      <node>"Const: 2"
 </node>
 </node>
 </node>
