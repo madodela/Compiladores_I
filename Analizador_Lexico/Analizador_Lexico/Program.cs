@@ -16,10 +16,9 @@ using System;
 using System.IO;
 namespace Analizador_Lexico
 {
-	class AnalizadorLexico
-	{
-		const int MAXLENBUF=3000;
-		public enum token_types{
+	class AnalizadorLexico {
+		const int MAXLENBUF = 3000;
+		public enum token_types {
 			//KEYWORDS
 			TKN_IF, TKN_THEN, TKN_ELSE, TKN_FI, TKN_DO, TKN_UNTIL, TKN_WHILE,
 			TKN_READ, TKN_WRITE, TKN_FLOAT, TKN_INT, TKN_BOOL, TKN_PROGRAM,
@@ -36,102 +35,89 @@ namespace Analizador_Lexico
 			TKN_EOF
 		};
 		
-		public enum States
-		{
-			IN_START,
-			IN_ID,
-			IN_NUM,
-			IN_LPAREN,
-			IN_RPAREN,
-			IN_SEMICOLON,
-			IN_COMMA,
-			IN_EQU,
-			IN_NEQU,
-			IN_ADD,
-			IN_MINUS,
-			IN_EOF,
-			IN_ERROR,
-			IN_DONE,
-			IN_LESS,
-			IN_GR,
-			IN_COMMENT_OR_DIVISION,
-			IN_COMMENT,
-			IN_MLCOMMENT,
-			IN_MLCOMMENTERROR,
-			IN_END_OF_MLCOMMENT,
-			IN_NUM_OR_OPERATOR,
-			IN_DEC_POINT
-		}
-		;
-		public class Token{
+		public enum States {
+			IN_START, IN_ID, IN_NUM, IN_LPAREN,
+			IN_RPAREN, IN_SEMICOLON, IN_COMMA,
+			IN_EQU, IN_NEQU, IN_ADD, IN_MINUS,
+			IN_EOF, IN_ERROR, IN_DONE, IN_LESS,
+			IN_GR, IN_COMMENT_OR_DIVISION,
+			IN_COMMENT, IN_MLCOMMENT,
+			IN_MLCOMMENTERROR, IN_END_OF_MLCOMMENT,
+			IN_NUM_OR_OPERATOR, IN_DEC_POINT
+		};
+		
+		public class Token {
 			token_types tokenval;
 			string lexema;
-			public Token(){
-				this.Lexema="";
+			
+			public Token() {
+				this.Lexema = "";
 			}
-			public Token(token_types tokenval ,string lexema){
-				this.tokenval=tokenval;
-				this.lexema=lexema;
+			
+			public Token(token_types tokenval, string lexema) {
+				this.tokenval = tokenval;
+				this.lexema = lexema;
 			}
-			public token_types TokenType{
-				get{
+			public token_types TokenType {
+				get {
 					return tokenval;
 				}
-				set{
-					this.tokenval=value;
+				set {
+					this.tokenval = value;
 				}
 			}
-			public string Lexema{
-				get{
+			public string Lexema {
+				get {
 					return lexema;
 				}
-				set{
-					lexema=value;
+				set {
+					lexema = value;
 				}
 			}
 		};
 		
-		Token[] ReserveWords={
-			new Token(token_types.TKN_IF,"if"),
-			new Token(token_types.TKN_THEN,"then"),
-			new Token(token_types.TKN_ELSE,"else"),
-			new Token(token_types.TKN_FI,"fi"),
-			new Token(token_types.TKN_DO,"do"),
-			new Token(token_types.TKN_UNTIL,"until"),
-			new Token(token_types.TKN_WHILE,"while"),
-			new Token(token_types.TKN_READ,"read"),
-			new Token(token_types.TKN_WRITE,"write"),
-			new Token(token_types.TKN_FLOAT,"float"),
-			new Token(token_types.TKN_INT,"int"),
-			new Token(token_types.TKN_BOOL,"bool"),
-			new Token(token_types.TKN_PROGRAM,"program")
+		Token[] ReserveWords = {
+			new Token(token_types.TKN_IF, "if"),
+			new Token(token_types.TKN_THEN, "then"),
+			new Token(token_types.TKN_ELSE, "else"),
+			new Token(token_types.TKN_FI, "fi"),
+			new Token(token_types.TKN_DO, "do"),
+			new Token(token_types.TKN_UNTIL, "until"),
+			new Token(token_types.TKN_WHILE, "while"),
+			new Token(token_types.TKN_READ, "read"),
+			new Token(token_types.TKN_WRITE, "write"),
+			new Token(token_types.TKN_FLOAT, "float"),
+			new Token(token_types.TKN_INT, "int"),
+			new Token(token_types.TKN_BOOL, "bool"),
+			new Token(token_types.TKN_PROGRAM, "program")
 		};
-		int nline=0;
-		int ncol=0;
-		int n=0;//Caracteres en buffer
-		char [] buffer=new char[MAXLENBUF];
-		bool decimal_point_flag=false;
-		void LookUpReservedWords( Token tok,string s){
+		
+		int nline = 0;
+		int ncol = 0;
+		int n = 0;//Caracteres en buffer
+		char[] buffer = new char[MAXLENBUF];
+		bool decimal_point_flag = false;
+		
+		void LookUpReservedWords(Token tok, string s) {
 			int i;
-			for(i=0;i<ReserveWords.Length;i++){
-				
-				if(ReserveWords[i].Lexema.Equals(s)){
-					tok.TokenType=ReserveWords[i].TokenType;
-					tok.Lexema=ReserveWords[i].Lexema;
+			for(i = 0; i<ReserveWords.Length; i++) {
+				if(ReserveWords[i].Lexema.Equals(s)) {
+					tok.TokenType = ReserveWords[i].TokenType;
+					tok.Lexema = ReserveWords[i].Lexema;
 					goto EndFunction;
 				}
 			}
-			tok.Lexema=s;
-			tok.TokenType=token_types.TKN_ID;
+			tok.Lexema = s;
+			tok.TokenType = token_types.TKN_ID;
 			EndFunction:;
 		}
-		char GetChar (StreamReader readerFile)
-		{
+		
+		char GetChar(StreamReader readerFile) {
 			if (!(ncol < n)) {
-				String linea = readerFile.ReadLine ();
+				String linea = readerFile.ReadLine();
 				if (linea != null) {
-					
-					buffer = linea.ToCharArray ();
+
+					buffer = linea.ToCharArray();
 					n = buffer.Length;
 					ncol = 0;
 					nline++;
@@ -139,26 +125,26 @@ namespace Analizador_Lexico
 					return '$';//End of file
 				}
 			}
-			return (buffer [ncol++]);
+			return (buffer[ncol++]);
 		}
-		void unGetChar(){
+		
+		void unGetChar() {
 			ncol--;
 		}
-		bool isDelim(char c){
-			if(c==' ' || c=='\t' || c=='\n')
+		
+		bool isDelim(char c) {
+			if(c == ' ' || c == '\t' || c == '\n')
 				return true;
 			return false;
-			
 		}
-		Token GetToken (StreamReader readerFile,StreamWriter writer2)
-		{
+		
+		Token GetToken (StreamReader readerFile,StreamWriter writer2) {
 			char c = ' ';
 			States state = States.IN_START;
 			Token token = new Token ();
 			while (state != States.IN_DONE) {
 				switch (state) {//Selection of state
-					case States.IN_START:
-						{
+						case States.IN_START:{
 							c = GetChar (readerFile);
 							while (isDelim(c)) {//While the character is a delimiter
 								c = GetChar (readerFile);
@@ -234,8 +220,7 @@ namespace Analizador_Lexico
 							}
 							break;
 						}
-					case States.IN_COMMENT_OR_DIVISION:
-						{
+						case States.IN_COMMENT_OR_DIVISION: {
 							c = GetChar (readerFile);
 							if (c == '/') {
 								token.TokenType = token_types.TKN_COMMENT;
@@ -249,12 +234,9 @@ namespace Analizador_Lexico
 								state = States.IN_DONE;
 								unGetChar();
 							}
-							//	token.Lexema += c.ToString ();
-							
 							break;
 						}
-					case States.IN_COMMENT:
-						{
+						case States.IN_COMMENT: {
 							c = GetChar (readerFile);
 							if (n == ncol) {
 								token.Lexema += c.ToString ();
@@ -264,21 +246,19 @@ namespace Analizador_Lexico
 							token.Lexema += c.ToString ();
 							break;
 						}
-					case States.IN_MLCOMMENT:
-						{
+						case States.IN_MLCOMMENT: {
 							c = GetChar (readerFile);
-							if(c=='$')
-								state=States.IN_MLCOMMENTERROR;
+							if(c == '$')
+								state = States.IN_MLCOMMENTERROR;
 							if (c == '*')
 								state = States.IN_END_OF_MLCOMMENT;
 							token.Lexema += c.ToString ();
 							break;
 						}
-					case States.IN_END_OF_MLCOMMENT:
-						{
+						case States.IN_END_OF_MLCOMMENT: {
 							c = GetChar (readerFile);
-							if(c=='$')
-								state=States.IN_MLCOMMENTERROR;
+							if(c == '$')
+								state = States.IN_MLCOMMENTERROR;
 							if (c == '/') {
 								state = States.IN_DONE;
 							} else {
@@ -287,69 +267,62 @@ namespace Analizador_Lexico
 							token.Lexema += c.ToString ();
 							break;
 						}
-						case States.IN_MLCOMMENTERROR:
-						{
+						case States.IN_MLCOMMENTERROR: {
 							writer2.WriteLine("The multiline comment has not been closed");
-							state=States.IN_DONE;
+							state = States.IN_DONE;
 							break;
 						}
 						case States.IN_NUM_OR_OPERATOR:{
-							c=GetChar(readerFile);
-							char previous_char_to_symbol=buffer[ncol-3];
+							c = GetChar(readerFile);
+							char previous_char_to_symbol = buffer[ncol - 3];
 							if(Char.IsLetterOrDigit(previous_char_to_symbol)){
 								unGetChar();
-								state=States.IN_DONE;
-							}
-							else{
-								token.Lexema+=c.ToString();
-								state=States.IN_NUM;
+								state = States.IN_DONE;
+							} else {
+								token.Lexema += c.ToString();
+								state = States.IN_NUM;
 							}
 							break;
 						}
-					case States.IN_NUM:
-						{
+						case States.IN_NUM: {
 							c = GetChar (readerFile);
 							token.Lexema += c.ToString ();
-							if (!Char.IsDigit (c)) {
-								if(c=='.' && !decimal_point_flag){
-									decimal_point_flag=true;
+							if (! Char.IsDigit (c)) {
+								if(c == '.' && !decimal_point_flag){
+									decimal_point_flag = true;
 									break;
 								}
-								decimal_point_flag=false;
+								decimal_point_flag = false;
 								token.TokenType = token_types.TKN_NUM;
 								state = States.IN_DONE;
-								token.Lexema=token.Lexema.Substring(0,token.Lexema.Length-1);
-								unGetChar ();
+								token.Lexema = token.Lexema.Substring(0, token.Lexema.Length - 1);
+								unGetChar();
 							}
-							
 							break;
 						}
-					case States.IN_LESS:
-						{
+						case States.IN_LESS:{
 							c = GetChar (readerFile);
-							if (c == '=') {//pudiera ser el operador <=
+							if (c == '=') { //pudiera ser el operador <=
 								token.Lexema += c.ToString ();
 								token.TokenType = token_types.TKN_LETHAN;
-							} else {//o solo ser <
+							} else { //o solo ser <
 								unGetChar ();
 							}
 							state = States.IN_DONE;
 							break;
 						}
-					case States.IN_GR:
-						{
+						case States.IN_GR: {
 							c = GetChar (readerFile);
-							if (c == '=') {//pudiera ser el operador >=
+							if (c == '=') { //pudiera ser el operador >=
 								token.Lexema += c.ToString ();
 								token.TokenType = token_types.TKN_GETHAN;
-							} else {//o solo ser >
+							} else { //o solo ser >
 								unGetChar ();
 							}
 							state = States.IN_DONE;
 							break;
 						}
-					case States.IN_NEQU:
-						{
+						case States.IN_NEQU: {
 							c = GetChar (readerFile);
 							if (c == '=') {
 								token.Lexema += c.ToString ();
@@ -358,8 +331,7 @@ namespace Analizador_Lexico
 							state = States.IN_DONE;
 							break;
 						}
-					case States.IN_EQU:
-						{
+						case States.IN_EQU: {
 							c = GetChar (readerFile);
 							if (c == '=') {
 								token.Lexema += c.ToString ();
@@ -370,8 +342,7 @@ namespace Analizador_Lexico
 							state = States.IN_DONE;
 							break;
 						}
-					case States.IN_ID:
-						{
+						case States.IN_ID: {
 							c = GetChar (readerFile);
 							token.Lexema += c.ToString ();
 							if (!((Char.IsLetterOrDigit (c)) || (c == '_'))) {
@@ -383,8 +354,7 @@ namespace Analizador_Lexico
 							}
 							break;
 						}
-					default:
-						{
+						default: {
 							token.TokenType = token_types.TKN_ERROR;
 							state = States.IN_DONE;
 							token.Lexema += c.ToString ();
@@ -393,44 +363,46 @@ namespace Analizador_Lexico
 				}//end switch
 			}//end while
 			if (token.TokenType == token_types.TKN_ERROR) {
-				writer2.WriteLine("Line:"+ nline + " Error:Character "+c+" does not"+
-				                  " match any token.");
+				writer2.WriteLine("Line:" + nline + " Error:Character " + c + " does not"
+				                  + " match any token.");
 			}
 			return token;
 		}
-		void ExecuteAnalisys(string fileName){
+		void ExecuteAnalisys(string fileName) {
 			//Open File
 			Token token;
 			//Catch exception
-			try{
-				FileStream file = new FileStream(fileName,FileMode.Open,FileAccess.Read);
+			try {
+				FileStream file = new FileStream(fileName, FileMode.Open, FileAccess.Read);
 				StreamReader reader = new StreamReader(file);
 				//FileStream outputFile=new FileStream(@"..\..\Files\LexiconAnalisysTokens.txt",FileMode.Create,FileAccess.Write);
-				FileStream outputFile=new FileStream("LexiconAnalisysTokens.txt",FileMode.Create,FileAccess.Write);
-				StreamWriter writer=new StreamWriter(outputFile);
+				FileStream outputFile = new FileStream("LexiconAnalisysTokens.txt", FileMode.Create, FileAccess.Write);
+				StreamWriter writer = new StreamWriter(outputFile);
 				FileStream infoOutputFile = new FileStream("infoLexiconAnalisysTokens.txt", FileMode.Create, FileAccess.Write);
 				StreamWriter writer2 = new StreamWriter(infoOutputFile);
-				token=GetToken(reader,writer2);
-				while(token_types.TKN_EOF!=token.TokenType){
-					//Console.WriteLine("({0}\t{1})",token.TokenType,token.Lexema);
-					writer.WriteLine("{0}\t{1}",token.TokenType,token.Lexema);
-					token=GetToken(reader,writer2);
+				token = GetToken(reader,writer2);
+				while(token_types.TKN_EOF != token.TokenType) {
+					writer.WriteLine("{0}\t{1}", token.TokenType, token.Lexema);
+					token = GetToken(reader,writer2);
 				}
-				writer.WriteLine("{0}\t{1}",token.TokenType,token.Lexema);
+				writer.WriteLine("{0}\t{1}", token.TokenType, token.Lexema);
 				reader.Close();
 				writer.Close();
-				//Console.WriteLine("Analized Lines {0}", nline);
 				writer2.WriteLine("$Analized Lines:"+ nline);
 				writer2.Close();
+			} catch(FileNotFoundException e) {
+				Console.WriteLine("File Not Found\n" + e.Message);
+				Console.ReadKey(true);
+			} catch(ArgumentException e) {
+				Console.WriteLine("Cannot read file\n" + e.Message);
+				Console.ReadKey(true);
 			}
-			catch(FileNotFoundException e){Console.WriteLine("File Not Found");}
-			catch(ArgumentException e){Console.WriteLine("Cannot read file");}
 		}
-		public static void Main(string[] args)
-		{
+		
+		public static void Main(string[] args) {
 			//Instance of AnalizadorLexico
-			AnalizadorLexico AL=new AnalizadorLexico();
-			if(args.Length==1)
+			AnalizadorLexico AL = new AnalizadorLexico();
+			if(args.Length == 1)
 				AL.ExecuteAnalisys(args[0]);
 			else
 				Console.WriteLine("Usage:programa_name file_name");

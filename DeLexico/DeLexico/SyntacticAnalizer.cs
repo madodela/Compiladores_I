@@ -4,8 +4,6 @@
  * 		 José Luis Diáz Montellano
  * Date: 21/05/2013
  * Time: 05:00 p.m.
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 using System;
 using System.IO;
@@ -30,16 +28,17 @@ namespace NSSyntacticAnalizer
 		public int indexCurrentToken = 0;
 		public ArrayList tokenList;
 		public Token currentToken;
-		private bool error;
-		private int identno=0;
+		//private bool error;
+		private int identno = 0;
 		private Token_types current_valType;
+		
 		public class TreeNode {
 			
 			public Token_types op;
 			public Token_types varType;
 			public int valInt;
 			public double valDouble;
-			public bool intType=true;
+			public bool isIntType = true;
 			public string name;
 			public TreeNode [] child = new TreeNode[5];
 			public TreeNode sibling;
@@ -50,7 +49,7 @@ namespace NSSyntacticAnalizer
 			
 			//newStmtNode
 			public TreeNode(StmtCreation kind, StmtKind kindy) {
-				this.name=null;
+				this.name = null;
 				for(int i = 0; i<child.Length; i++){
 					this.child[i] = null;
 				}
@@ -61,7 +60,7 @@ namespace NSSyntacticAnalizer
 			}
 			//newExpNode
 			public TreeNode(StmtCreation kind, ExpKind kindy) {
-				this.name=null;
+				this.name = null;
 				for(int i = 0; i<child.Length; i++){
 					this.child[i] = null;
 				}
@@ -73,7 +72,7 @@ namespace NSSyntacticAnalizer
 			}
 			//newDecNode
 			public TreeNode(StmtCreation kind) {
-				this.name=null;
+				this.name = null;
 				for(int i = 0; i<child.Length; i++){
 					this.child[i] = null;
 				}
@@ -81,14 +80,14 @@ namespace NSSyntacticAnalizer
 				this.nodekind = NodeKind.DecK;
 				this.expK = ExpKind.None;
 			}
-			
 		}
-		//Output file of the analisys, it contains the syntactic tree
+		//Output file of the analysis, it contains the syntactic tree
 		FileStream syntacticTree;
 		StreamWriter writerTree;
-		//Other output file tah contains the errors founded
+		//Other output file containing the errors found
 		FileStream infoSyntacticAnalisys;
 		StreamWriter writerInfo;
+		
 		public Token getToken() {
 			Token aux = (Token) tokenList[indexCurrentToken];
 			indexCurrentToken++;
@@ -121,14 +120,14 @@ namespace NSSyntacticAnalizer
 		
 		//lista-declaración → declaración ; lista-declaración | vació
 		TreeNode declaration_list() {
-			TreeNode t=null;
+			TreeNode t = null;
 			while(currentToken.token_type != Token_types.TKN_IF && currentToken.token_type != Token_types.TKN_WRITE
 			      && currentToken.token_type != Token_types.TKN_LBRACE && currentToken.token_type != Token_types.TKN_DO
 			      && currentToken.token_type != Token_types.TKN_ID && currentToken.token_type != Token_types.TKN_READ
-			      && currentToken.token_type != Token_types.TKN_WHILE && currentToken.token_type != Token_types.TKN_RBRACE){
+			      && currentToken.token_type != Token_types.TKN_WHILE && currentToken.token_type != Token_types.TKN_RBRACE) {
 				t = declaration();
 				match(Token_types.TKN_SEMICOLON);
-				t.sibling=declaration_list();
+				t.sibling = declaration_list();
 			}
 			return t;
 		}
@@ -136,11 +135,11 @@ namespace NSSyntacticAnalizer
 		//declaración → tipo lista-variables
 		TreeNode declaration() {
 			TreeNode t = null;
-			Token_types aux=currentToken.token_type;
-			current_valType=aux;
+			Token_types aux = currentToken.token_type;
+			current_valType = aux;
 			//tipo → int | float | bool
-			if(currentToken.token_type== Token_types.TKN_INT || currentToken.token_type== Token_types.TKN_BOOL
-			   || currentToken.token_type== Token_types.TKN_FLOAT)
+			if(currentToken.token_type == Token_types.TKN_INT || currentToken.token_type == Token_types.TKN_BOOL
+			   || currentToken.token_type == Token_types.TKN_FLOAT)
 				match(currentToken.token_type);
 			
 			t = variable_list();
@@ -148,9 +147,9 @@ namespace NSSyntacticAnalizer
 		}
 		
 		//lista-variables → identificador, lista-variables | identificador
-		TreeNode variable_list(){
+		TreeNode variable_list() {
 			TreeNode t = new TreeNode(StmtCreation.newDecNode);
-			t.varType=current_valType;
+			t.varType = current_valType;
 			if ((t != null) && (currentToken.token_type==Token_types.TKN_ID)){
 				t.name = currentToken.lexema;
 				match(Token_types.TKN_ID);
@@ -165,18 +164,16 @@ namespace NSSyntacticAnalizer
 		//lista-sentencias → sentencia lista-sentencias | sentencia | vació
 		TreeNode stmt_list() {
 			TreeNode t = null;
-			while(currentToken.token_type!= Token_types.TKN_RBRACE && currentToken.token_type!= Token_types.TKN_EOF
-			      && currentToken.token_type!= Token_types.TKN_UNTIL && currentToken.token_type!= Token_types.TKN_ELSE
-			      && currentToken.token_type!= Token_types.TKN_FI) {
-				t=statement();
+			while(currentToken.token_type != Token_types.TKN_RBRACE && currentToken.token_type != Token_types.TKN_EOF
+			      && currentToken.token_type != Token_types.TKN_UNTIL && currentToken.token_type != Token_types.TKN_ELSE
+			      && currentToken.token_type != Token_types.TKN_FI) {
+				t = statement();
 				if(currentToken.token_type == Token_types.TKN_IF || currentToken.token_type == Token_types.TKN_WRITE
 				   || currentToken.token_type == Token_types.TKN_LBRACE || currentToken.token_type == Token_types.TKN_DO
 				   || currentToken.token_type == Token_types.TKN_ID || currentToken.token_type == Token_types.TKN_READ
 				   || currentToken.token_type == Token_types.TKN_WHILE) {
-					//Console.WriteLine(currentToken.token_type);
-					//Console.ReadKey();
-					if(t!=null)
-						t.sibling=stmt_list();
+					if(t != null)
+						t.sibling = stmt_list();
 				}
 			}
 			return t;
@@ -208,10 +205,10 @@ namespace NSSyntacticAnalizer
 				case Token_types.TKN_LBRACE:
 					t = block_stmt();
 					break;
-					default :// ERROR 1
-						syntaxError("Unexpected token:");
+				default:
+					syntaxError("Unexpected token:");
 					printToken(currentToken);
-					currentToken=getToken();
+					currentToken = getToken();
 					break;
 			}
 			return t;
@@ -268,7 +265,7 @@ namespace NSSyntacticAnalizer
 		TreeNode read_stmt() {
 			TreeNode t = new TreeNode(StmtCreation.newStmtNode, StmtKind.ReadK);
 			match(Token_types.TKN_READ);
-			if ((t != null) && (currentToken.token_type==Token_types.TKN_ID))
+			if ((t != null) && (currentToken.token_type == Token_types.TKN_ID))
 				t.name = currentToken.lexema;
 			match(Token_types.TKN_ID);
 			match(Token_types.TKN_SEMICOLON);
@@ -296,7 +293,7 @@ namespace NSSyntacticAnalizer
 		//asignación → identificador = expresión ;
 		TreeNode assign_stmt() {
 			TreeNode t = new TreeNode(StmtCreation.newStmtNode, StmtKind.AssignK);
-			if ((t != null) && (currentToken.token_type==Token_types.TKN_ID))
+			if ((t != null) && (currentToken.token_type == Token_types.TKN_ID))
 				t.name = currentToken.lexema;
 			match(Token_types.TKN_ID);
 			match(Token_types.TKN_ASSIGN);
@@ -331,7 +328,7 @@ namespace NSSyntacticAnalizer
 		
 		//expresión-simple → expresión-simple suma-op termino | termino
 		TreeNode simple_exp() {
-			TreeNode t=term();
+			TreeNode t = term();
 			//suma-op → + | -
 			while ((currentToken.token_type == Token_types.TKN_MINUS)
 			       || (currentToken.token_type == Token_types.TKN_ADD)) {
@@ -350,10 +347,11 @@ namespace NSSyntacticAnalizer
 		//termino → termino mult-op factor | factor
 		TreeNode term() {
 			TreeNode t;
-			if(currentToken.token_type== Token_types.TKN_LPARENT || currentToken.token_type== Token_types.TKN_ID || currentToken.token_type== Token_types.TKN_NUM)
+			if(currentToken.token_type== Token_types.TKN_LPARENT || currentToken.token_type== Token_types.TKN_ID
+			   || currentToken.token_type== Token_types.TKN_NUM)
 				t = factor();
 			else
-				t=term();
+				t = term();
 			//mult-op → * | /
 			while ((currentToken.token_type == Token_types.TKN_PRODUCT)
 			       || (currentToken.token_type == Token_types.TKN_DIVISION)) {
@@ -376,15 +374,14 @@ namespace NSSyntacticAnalizer
 					//num option
 				case Token_types.TKN_NUM:
 					t = new TreeNode(StmtCreation.newExpNode, ExpKind.ConstK);
-					if ((t != null) && (currentToken.token_type == Token_types.TKN_NUM)){
-						if(currentToken.lexema.Contains(".")){
+					if ((t != null) && (currentToken.token_type == Token_types.TKN_NUM)) {
+						if(currentToken.lexema.Contains(".")) {
 							t.valDouble = (Convert.ToDouble(currentToken.lexema));
-							t.intType=false;
-						}else{
+							t.isIntType = false;
+						} else {
 							t.valInt = (Convert.ToInt32(currentToken.lexema));
-							t.intType=true;
+							t.isIntType = true;
 						}
-						
 					}
 					match(Token_types.TKN_NUM);
 					break;
@@ -396,7 +393,7 @@ namespace NSSyntacticAnalizer
 					match(Token_types.TKN_ID);
 					break;
 					//(exp) option
-				case Token_types.TKN_LPARENT :
+				case Token_types.TKN_LPARENT:
 					match(Token_types.TKN_LPARENT);
 					t = exp();
 					match(Token_types.TKN_RPARENT);
@@ -413,42 +410,41 @@ namespace NSSyntacticAnalizer
 		void match(Token_types expected) {
 			if(currentToken.token_type == expected) {
 				currentToken = getToken();
-			}
-			else {
+			} else {
 				syntaxError("Unexpected token:");
-				Console.WriteLine("Expected token:{0}",expected);
-				writerInfo.WriteLine("Expected token:{0}",expected);
+				Console.WriteLine("Expected token:{0}", expected);
+				writerInfo.WriteLine("Expected token:{0}", expected);
 				printToken(currentToken);
 			}
 		}
 		
 		//Functions to print the Tree and errors, in a file
 		void printToken(Token t) {
-			Console.WriteLine("{0},{1}",t.token_type,t.lexema);
-			writerInfo.WriteLine("{0},{1}",t.token_type,t.lexema);
+			Console.WriteLine("{0},{1}", t.token_type, t.lexema);
+			writerInfo.WriteLine("{0},{1}", t.token_type, t.lexema);
 		}
 		
 		void syntaxError(string msj){
-			Console.WriteLine("Error {0}",msj);
-			writerInfo.WriteLine("Error {0}",msj);
-			error = true;
+			Console.WriteLine("Error {0}", msj);
+			writerInfo.WriteLine("Error {0}", msj);
+			//error = true;
 		}
-		void printSpaces()
-		{ int i;
-			for (i=0;i<this.identno;i++){
+		
+		void printSpaces() {
+			int i;
+			for (i = 0; i<this.identno ; i++){
 				Console.Write(" ");
 				writerTree.Write(" ");
 			}
 		}
-		void printTree(TreeNode tree)
-		{
+		
+		void printTree(TreeNode tree) {
 			int i;
-			string finalLabel="";
-			identno+=2;
+			//string finalLabel = "";
+			identno += 2;
 			while (tree != null) {
 				printSpaces();
-				if (tree.nodekind==NodeKind.StmtK)
-				{
+				if (tree.nodekind == NodeKind.StmtK) {
 					switch (tree.stmtK) {
 						case StmtKind.IfK:
 							Console.Write("If\n");
@@ -471,12 +467,12 @@ namespace NSSyntacticAnalizer
 							writerTree.WriteLine("<node>\"Repeat\"");
 							break;
 						case StmtKind.AssignK:
-							Console.Write("Assign to: {0}\n",tree.name);
-							writerTree.WriteLine("<node>\"AssignTo: {0}\"",tree.name);
+							Console.Write("Assign to: {0}\n", tree.name);
+							writerTree.WriteLine("<node>\"AssignTo: {0}\"", tree.name);
 							break;
 						case StmtKind.ReadK:
-							Console.Write("Read: {0}\n",tree.name);
-							writerTree.WriteLine("<node>\"Read: {0}\"",tree.name);
+							Console.Write("Read: {0}\n", tree.name);
+							writerTree.WriteLine("<node>\"Read: {0}\"", tree.name);
 							break;
 						case StmtKind.WriteK:
 							Console.Write("Write\n");
@@ -487,64 +483,61 @@ namespace NSSyntacticAnalizer
 							writerInfo.WriteLine("Unknown ExpNode kind");
 							break;
 					}
-				}
-				else{
-					if (tree.nodekind==NodeKind.ExpK)
-					{
+				} else {
+					if (tree.nodekind==NodeKind.ExpK) {
 						switch (tree.expK) {
 							case ExpKind.OpK:
 								string op;
 								switch(tree.op){
-										case Token_types.TKN_LTHAN:op="&lt;";break;//&lt; is the character '<' in xml
-										case Token_types.TKN_LETHAN:op="&lt;=";break;
-										case Token_types.TKN_GETHAN:op="&gt;=";break;//&gt; is the character '>' in xml
-										case Token_types.TKN_GTHAN:op="&gt;";break;
-										case Token_types.TKN_EQUAL:op="==";break;
-										case Token_types.TKN_NEQUAL:op="!=";break;
-										case Token_types.TKN_ADD:op="+";break;
-										case Token_types.TKN_MINUS:op="-";break;
-										case Token_types.TKN_PRODUCT:op="*";break;
-										case Token_types.TKN_DIVISION:op="/";break;
-										default: op="Unknown operator";break;//assumed this error never occur
+										case Token_types.TKN_LTHAN: op = "&lt;"; break; //&lt; is the character '<' in xml
+										case Token_types.TKN_LETHAN: op = "&lt;="; break;
+										case Token_types.TKN_GETHAN: op = "&gt;="; break; //&gt; is the character '>' in xml
+										case Token_types.TKN_GTHAN: op = "&gt;"; break;
+										case Token_types.TKN_EQUAL: op = "=="; break;
+										case Token_types.TKN_NEQUAL: op = "!="; break;
+										case Token_types.TKN_ADD: op = "+"; break;
+										case Token_types.TKN_MINUS: op = "-"; break;
+										case Token_types.TKN_PRODUCT: op = "*"; break;
+										case Token_types.TKN_DIVISION: op = "/"; break;
+										default: op = "Unknown operator"; break; //assumed this error never occur
 								}
-								Console.Write("Op: {0}\n",op);
-								writerTree.WriteLine("<node>\"Op: {0}\"",op);
+								Console.Write("Op: {0}\n" ,op);
+								writerTree.WriteLine("<node>\"Op: {0}\"", op);
 								break;
 							case ExpKind.ConstK:
-								if(tree.intType){
-									Console.Write("Const: {0}\n",tree.valInt);
-									writerTree.WriteLine("<node>\"Const: {0}\"",tree.valInt);
-								}else{
-									Console.Write("Const: {0}\n",tree.valDouble);
-									writerTree.WriteLine("<node>\"Const: {0}\"",tree.valDouble);
+								if(tree.isIntType) {
+									Console.Write("Const: {0}\n", tree.valInt);
+									writerTree.WriteLine("<node>\"Const: {0}\"", tree.valInt);
+								} else {
+									Console.Write("Const: {0}\n", tree.valDouble);
+									writerTree.WriteLine("<node>\"Const: {0}\"", tree.valDouble);
 								}
 								break;
 							case ExpKind.IdK:
-								Console.Write("Id: {0}\n",tree.name);
-								writerTree.WriteLine("<node>\"Id: {0}\"",tree.name);
+								Console.Write("Id: {0}\n", tree.name);
+								writerTree.WriteLine("<node>\"Id: {0}\"", tree.name);
 								break;
 							default:
 								Console.Write("Unknown ExpNode kind\n");
-								writerInfo.WriteLine("Unknown ExpNode kind");//assumed this error never occur
+								writerInfo.WriteLine("Unknown ExpNode kind"); //assumed this error never occur
 								break;
 						}
-					}
-					else{
-						if(tree.nodekind==NodeKind.DecK){
-							string valTypeString;
+					} else {
+						if(tree.nodekind == NodeKind.DecK) {
 							
-							switch(tree.varType){
-									case Token_types.TKN_INT:valTypeString="INT";break;
-									case Token_types.TKN_FLOAT:valTypeString="FLOAT";break;
-									case Token_types.TKN_BOOL:valTypeString="BOOL";break;
-									default: valTypeString="Unknown type";break;
+							string valTypeString;
+							switch(tree.varType) {
+									case Token_types.TKN_INT: valTypeString = "INT"; break;
+									case Token_types.TKN_FLOAT: valTypeString = "FLOAT"; break;
+									case Token_types.TKN_BOOL: valTypeString = "BOOL"; break;
+									default: valTypeString = "Unknown type"; break;
 							}
-							Console.Write("{0}:{1}\n",valTypeString,tree.name);
-							writerTree.WriteLine("<node>\"{0}:{1}\"",valTypeString,tree.name);
-						}else { Console.WriteLine("Unknown node kind");}
+							Console.Write("{0}:{1}\n", valTypeString, tree.name);
+							writerTree.WriteLine("<node>\"{0}:{1}\"", valTypeString, tree.name);
+						} else { Console.WriteLine("Unknown node kind");}
 					}
 				}
-				for (i=0;i<5;i++){
+				for (i = 0; i < 5; i++){
 					printTree(tree.child[i]);
 					//if(tree.child[i]!=null)
 					//writerTree.WriteLine("</parent>");
@@ -552,27 +545,26 @@ namespace NSSyntacticAnalizer
 				writerTree.WriteLine("</node>");
 				tree = tree.sibling;
 			}
-			identno-=2;
+			identno -= 2;
 		}
 		
 		public SyntacticAnalizer() {
 			Lexico lexResults = new Lexico("LexiconAnalisysTokens.txt");
 			tokenList = lexResults.AnalizadorLexico();
-			try{
-				
-				syntacticTree=new FileStream("SyntacticTree.xml",FileMode.Create,FileAccess.Write);
-				writerTree=new StreamWriter(syntacticTree);
-				infoSyntacticAnalisys=new FileStream("infoSyntacticAnalisys.txt",FileMode.Create,FileAccess.Write);
-				writerInfo=new StreamWriter(infoSyntacticAnalisys);
+			try {
+				syntacticTree = new FileStream("SyntacticTree.xml", FileMode.Create, FileAccess.Write);
+				writerTree = new StreamWriter(syntacticTree);
+				infoSyntacticAnalisys = new FileStream("infoSyntacticAnalisys.txt", FileMode.Create, FileAccess.Write);
+				writerInfo = new StreamWriter(infoSyntacticAnalisys);
 				writerTree.WriteLine("<?xml version=\"1.0\"?>");
-				TreeNode SyntacticTree=Parse();//Parse function creates the Syntactic Tree
+				TreeNode SyntacticTree = Parse(); //Parse function creates the Syntactic Tree
 				printTree(SyntacticTree);
-				
+			} catch(FileNotFoundException e){Console.WriteLine("File Not Found because " + e.Message);
+			} catch(ArgumentException e){Console.WriteLine("Cannot read file because " + e.Message);
+			} finally {
 				writerTree.Close();
 				writerInfo.Close();
 			}
-			catch(FileNotFoundException e){Console.WriteLine("File Not Found");}
-			catch(ArgumentException e){Console.WriteLine("Cannot read file");}
 		}
 		
 		public static void Main(string[] args) {
