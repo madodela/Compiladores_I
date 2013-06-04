@@ -65,7 +65,7 @@ namespace IDE
 				string[] filePath = output_file.FileName.Split('\\');
 				archivo_actual.Nombre_de_Archivo = filePath[filePath.Length - 1];
 				archivo_actual.Ubicacion_de_Archivo = Path.GetFullPath(output_file.FileName);
-
+				Nombre_y_opciones_de_archivo();
 			}
 		}
 		

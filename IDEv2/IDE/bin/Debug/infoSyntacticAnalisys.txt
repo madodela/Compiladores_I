@@ -1,2 +1,0 @@
-Error Unexpected token:
-TKN_INT,int

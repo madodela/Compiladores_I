@@ -8,12 +8,20 @@
       <node>"Const: 0"
 </node>
 </node>
-    <node>"AssignTo: y"
-      <node>"Const: 4.45"
+    <node>"Iteration"
+      <node>"Block"
+        <node>"Write"
+          <node>"Id: x"
 </node>
 </node>
-    <node>"AssignTo: e"
-      <node>"Const: 2"
+        <node>"AssignTo: x"
+          <node>"Op: +"
+            <node>"Id: x"
+</node>
+            <node>"Const: 1"
+</node>
+</node>
+</node>
 </node>
 </node>
 </node>
