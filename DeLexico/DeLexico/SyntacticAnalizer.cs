@@ -441,6 +441,7 @@ namespace NSSyntacticAnalizer
 		void printTree(TreeNode tree) {
 			int i;
 			//string finalLabel = "";
+            bool flag = false;
 			identno += 2;
 			while (tree != null) {
 				printSpaces();
@@ -460,7 +461,8 @@ namespace NSSyntacticAnalizer
 							break;
 						case StmtKind.BlockK:
 							Console.Write("Block\n");
-							writerTree.WriteLine("<node>\"Block\"");
+							//writerTree.WriteLine("<node>\"Block\"");
+                            flag = true;
 							break;
 						case StmtKind.RepeatK:
 							Console.Write("Repeat\n");
@@ -468,7 +470,9 @@ namespace NSSyntacticAnalizer
 							break;
 						case StmtKind.AssignK:
 							Console.Write("Assign to: {0}\n", tree.name);
-							writerTree.WriteLine("<node>\"AssignTo: {0}\"", tree.name);
+							//writerTree.WriteLine("<node>\"AssignTo: {0}\"", tree.name);
+                            writerTree.WriteLine("<node>\"=\"");
+                            writerTree.WriteLine("<node>\"{0}\"</node>",tree.name);
 							break;
 						case StmtKind.ReadK:
 							Console.Write("Read: {0}\n", tree.name);
@@ -542,7 +546,9 @@ namespace NSSyntacticAnalizer
 					//if(tree.child[i]!=null)
 					//writerTree.WriteLine("</parent>");
 				}
+                if(!flag)
 				writerTree.WriteLine("</node>");
+                flag = false;
 				tree = tree.sibling;
 			}
 			identno -= 2;

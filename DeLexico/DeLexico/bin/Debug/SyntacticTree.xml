@@ -22,11 +22,13 @@
 </node>
 </node>
 </node>
-    <node>"AssignTo: x"
+    <node>"="
+<node>"x"</node>
       <node>"Const: 0"
 </node>
 </node>
-    <node>"AssignTo: y"
+    <node>"="
+<node>"y"</node>
       <node>"Const: 4"
 </node>
 </node>

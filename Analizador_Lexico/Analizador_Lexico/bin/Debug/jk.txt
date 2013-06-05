@@ -3,9 +3,9 @@ program {
     bool d,p;
     float a,b,c,d,e,q,r;
     x=0; // comentario 1
-    y=4; /* comentario 2 
+    y=4; /* comentario 2 */
      do {
-        while(x<=(5+4)){
+     while(x<=(5+4)){
             read y;
             write x+5;
             x=x*10-5+2/1*2; 
