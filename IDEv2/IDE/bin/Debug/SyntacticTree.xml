@@ -27,6 +27,7 @@
       <node>"Const: 0"
 </node>
 </node>
+<<<<<<< HEAD
     <node>"="
 <node>"y"</node>
       <node>"Const: 4"
@@ -165,6 +166,20 @@
 </node>
       <node>"Op: &gt;="
         <node>"Id: y"
+=======
+    <node>"Iteration"
+      <node>"Block"
+        <node>"Write"
+          <node>"Id: x"
+</node>
+</node>
+        <node>"AssignTo: x"
+          <node>"Op: +"
+            <node>"Id: x"
+</node>
+            <node>"Const: 1"
+</node>
+>>>>>>> 0035ac550d1ce8aa2bf2ac36757749883b856bae
 </node>
         <node>"Const: 0"
 </node>
