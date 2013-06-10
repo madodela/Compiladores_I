@@ -150,6 +150,13 @@ namespace NSSyntacticAnalizer
 		TreeNode variable_list() {
 			TreeNode t = new TreeNode(StmtCreation.newDecNode);
 			t.varType = current_valType;
+			if ((t != null) && (currentToken.token_type != Token_types.TKN_ID)){
+				syntaxError("Wrong declaration");
+				//tiene que llegar hasta donde este la , o el ;
+				while((currentToken.token_type != Token_types.TKN_COMMA) && (currentToken.token_type != Token_types.TKN_SEMICOLON)){
+					currentToken = getToken();
+				}
+			}
 			if ((t != null) && (currentToken.token_type==Token_types.TKN_ID)){
 				t.name = currentToken.lexema;
 				match(Token_types.TKN_ID);
@@ -441,7 +448,7 @@ namespace NSSyntacticAnalizer
 		void printTree(TreeNode tree) {
 			int i;
 			//string finalLabel = "";
-            bool flag = false;
+			bool flag = false;
 			identno += 2;
 			while (tree != null) {
 				printSpaces();
@@ -462,7 +469,7 @@ namespace NSSyntacticAnalizer
 						case StmtKind.BlockK:
 							Console.Write("Block\n");
 							//writerTree.WriteLine("<node>\"Block\"");
-                            flag = true;
+							flag = true;
 							break;
 						case StmtKind.RepeatK:
 							Console.Write("Repeat\n");
@@ -471,8 +478,8 @@ namespace NSSyntacticAnalizer
 						case StmtKind.AssignK:
 							Console.Write("Assign to: {0}\n", tree.name);
 							//writerTree.WriteLine("<node>\"AssignTo: {0}\"", tree.name);
-                            writerTree.WriteLine("<node>\"=\"");
-                            writerTree.WriteLine("<node>\"{0}\"</node>",tree.name);
+							writerTree.WriteLine("<node>\"=\"");
+							writerTree.WriteLine("<node>\"{0}\"</node>",tree.name);
 							break;
 						case StmtKind.ReadK:
 							Console.Write("Read: {0}\n", tree.name);
@@ -546,9 +553,9 @@ namespace NSSyntacticAnalizer
 					//if(tree.child[i]!=null)
 					//writerTree.WriteLine("</parent>");
 				}
-                if(!flag)
-				writerTree.WriteLine("</node>");
-                flag = false;
+				if(!flag)
+					writerTree.WriteLine("</node>");
+				flag = false;
 				tree = tree.sibling;
 			}
 			identno -= 2;

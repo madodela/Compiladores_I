@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-$Analized Lines:28
-=======
-$Analized Lines:8
->>>>>>> 0035ac550d1ce8aa2bf2ac36757749883b856bae
+$Analized Lines:19
