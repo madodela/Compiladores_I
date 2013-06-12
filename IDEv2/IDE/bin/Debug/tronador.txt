@@ -1,5 +1,5 @@
 program{
-int a,b,2c,d;
+int a,b,c,2d;
 write x+2*3;
 if(x==y){
 do {

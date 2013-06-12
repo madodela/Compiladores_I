@@ -2,8 +2,8 @@
   <node>"Program"
     <node>"INT:a"
       <node>"INT:b"
-        <node>"INT:d"
-</node>
+        <node>"INT:c"
+          </node>
 </node>
 </node>
     <node>"Write"

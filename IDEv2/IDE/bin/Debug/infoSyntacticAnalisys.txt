@@ -1,1 +1,1 @@
-Error wrong declaration
+Error Wrong declaration

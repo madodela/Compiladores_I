@@ -152,7 +152,7 @@ namespace NSSyntacticAnalizer
 			t.varType = current_valType;
 			if ((t != null) && (currentToken.token_type != Token_types.TKN_ID)){
 				syntaxError("Wrong declaration");
-				//tiene que llegar hasta donde este la , o el ;
+				//it has to found the comma or the semmicolon token, 'cause that's the end of the wrong variable declaration
 				while((currentToken.token_type != Token_types.TKN_COMMA) && (currentToken.token_type != Token_types.TKN_SEMICOLON)){
 					currentToken = getToken();
 				}
@@ -447,8 +447,7 @@ namespace NSSyntacticAnalizer
 		
 		void printTree(TreeNode tree) {
 			int i;
-			//string finalLabel = "";
-			bool flag = false;
+			bool flag = false; // when true should not print the end of the node
 			identno += 2;
 			while (tree != null) {
 				printSpaces();
@@ -535,16 +534,19 @@ namespace NSSyntacticAnalizer
 						}
 					} else {
 						if(tree.nodekind == NodeKind.DecK) {
-							
-							string valTypeString;
-							switch(tree.varType) {
-									case Token_types.TKN_INT: valTypeString = "INT"; break;
-									case Token_types.TKN_FLOAT: valTypeString = "FLOAT"; break;
-									case Token_types.TKN_BOOL: valTypeString = "BOOL"; break;
-									default: valTypeString = "Unknown type"; break;
+							if(tree.name != null) { // if the variable was correctly defined should create its node
+								string valTypeString;
+								switch(tree.varType) {
+										case Token_types.TKN_INT: valTypeString = "INT"; break;
+										case Token_types.TKN_FLOAT: valTypeString = "FLOAT"; break;
+										case Token_types.TKN_BOOL: valTypeString = "BOOL"; break;
+										default: valTypeString = "Unknown type"; break;
+								}
+								Console.Write("{0}:{1}\n", valTypeString, tree.name);
+								writerTree.WriteLine("<node>\"{0}:{1}\"", valTypeString, tree.name);
+							} else {
+								flag = true;
 							}
-							Console.Write("{0}:{1}\n", valTypeString, tree.name);
-							writerTree.WriteLine("<node>\"{0}:{1}\"", valTypeString, tree.name);
 						} else { Console.WriteLine("Unknown node kind");}
 					}
 				}

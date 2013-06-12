@@ -1,4 +1,3 @@
-C:\Users\Loli\Documents\GitHub\Compiladores_I\DeLexico\DeLexico\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Loli\Documents\GitHub\Compiladores_I\DeLexico\DeLexico\obj\Debug\SyntacticAnalizer.exe
 C:\Users\Loli\Documents\GitHub\Compiladores_I\DeLexico\DeLexico\bin\Debug\SyntacticAnalizer.exe
 C:\Users\Loli\Documents\GitHub\Compiladores_I\DeLexico\DeLexico\bin\Debug\SyntacticAnalizer.pdb
@@ -8,3 +7,4 @@ C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\DeLexico\DeLexico\obj\Debug\S
 C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\DeLexico\DeLexico\bin\Debug\SyntacticAnalizer.exe
 C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\DeLexico\DeLexico\bin\Debug\SyntacticAnalizer.pdb
 C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\DeLexico\DeLexico\obj\Debug\SyntacticAnalizer.pdb
+C:\Users\Loli\Documents\GitHub\Compiladores_I\DeLexico\DeLexico\obj\Debug\SyntacticAnalizer.csprojResolveAssemblyReference.cache
