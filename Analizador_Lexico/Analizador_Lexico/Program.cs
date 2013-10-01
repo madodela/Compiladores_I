@@ -6,11 +6,11 @@
  * 
  * Output file structure
  * |--------------------|
- * |Token Type\tLexema\n|
- * |.		  \t.	  \n|
- * |.		  \t.	  \n|
- * |.		  \t.	  \n|
- * |--------------------|
+ * |Token Type\tLexema\nLinea\n|
+ * |.		  \t.	  \n	 \n|
+ * |.		  \t.	  \n	 \n|
+ * |.		  \t.	  \n	 \n|
+ * |---------------------------|
  */
 using System;
 using System.IO;
@@ -49,7 +49,7 @@ namespace Analizador_Lexico
 		public class Token {
 			token_types tokenval;
 			string lexema;
-			
+			int nline;
 			public Token() {
 				this.Lexema = "";
 			}
@@ -57,6 +57,7 @@ namespace Analizador_Lexico
 			public Token(token_types tokenval, string lexema) {
 				this.tokenval = tokenval;
 				this.lexema = lexema;
+				this.nline = 0;
 			}
 			public token_types TokenType {
 				get {
@@ -72,6 +73,15 @@ namespace Analizador_Lexico
 				}
 				set {
 					lexema = value;
+				}
+			}
+			
+			public int Nline {
+				get {
+					return nline;
+				}
+				set {
+					nline = value;
 				}
 			}
 		};
@@ -361,7 +371,9 @@ namespace Analizador_Lexico
 							break;
 						}
 				}//end switch
+				token.Nline = nline;
 			}//end while
+			
 			if (token.TokenType == token_types.TKN_ERROR) {
 				writer2.WriteLine("Line:" + nline + " Error:Character " + c + " does not"
 				                  + " match any token.");
@@ -382,10 +394,10 @@ namespace Analizador_Lexico
 				StreamWriter writer2 = new StreamWriter(infoOutputFile);
 				token = GetToken(reader,writer2);
 				while(token_types.TKN_EOF != token.TokenType) {
-					writer.WriteLine("{0}\t{1}", token.TokenType, token.Lexema);
+					writer.WriteLine("{0}\t{1}\t{2}", token.TokenType, token.Lexema, token.Nline);
 					token = GetToken(reader,writer2);
 				}
-				writer.WriteLine("{0}\t{1}", token.TokenType, token.Lexema);
+				writer.WriteLine("{0}\t{1}\t{2}", token.TokenType, token.Lexema, token.Nline);
 				reader.Close();
 				writer.Close();
 				writer2.WriteLine("$Analized Lines:"+ nline);
