@@ -7,6 +7,7 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 using System;
+using System.Collections;
 
 namespace TablaSimbolos
 {
@@ -14,16 +15,25 @@ namespace TablaSimbolos
 		public string name;
 		public LineListRec lines;
 		public int memloc ; /* localidad de memoria para variable */
+        public string tipo;
+        public int valI;
+        public bool isInt;
+        public double valF;
 		public BucketListRec next;
-		public BucketListRec(string nom, int loc, BucketListRec next, LineListRec lines ) {//name, loc, this.hashTable[h],new LineListRec(linenu)
+        public BucketListRec(string nom , int loc , BucketListRec next , LineListRec lines , int valI , double valF , bool isInt, string tipo)
+        {
 			this.name = nom;
 			this.memloc = loc;
 			this.next = next;
 			this.lines = lines;
+                this.valI = valI;
+                this.valF = valF;
+                this.isInt = isInt;
+                this.tipo = tipo;
 		}
 	}
 	
-	public class LineListRec {
+	public class LineListRec {//ok
 		public int lineno;
 		public LineListRec next;
 		public LineListRec(int linenu) {
@@ -54,64 +64,59 @@ namespace TablaSimbolos
 		
 		
 
-		public void st_insert( string name, int linenu, int loc ) {
-			//Console.WriteLine(" LLegan Nombre: {0}, Linea: {1}, Loc: {2}", name, linenu, loc);//lo que se debe guardar llega bien
+		public void st_insert( string name, int linenu, int loc , int valI, double valF, bool isInt, bool isDec, string tipo ) {//ok 
 			int h = hash(name); 
-			//Console.WriteLine("h = {0}",h); // el numero hash esta bien calculado
 			BucketListRec l =  this.hashTable[h];
-			//Console.WriteLine("Hashtable[{0}] = {1}",h,this.hashTable[h]);
-			
-			while ((l != null) && string.Equals(name,l.name)){
+			while ((l != null) && !string.Equals(name,l.name))
 				l = l.next;
 				if (l == null) /* variable que todavía no está en la tabla */
-				{ //bucket list lleva.. nombre, memloc, next, LineListREc
-					//linelistrec lleva... lineno, next = null
-					l = new BucketListRec(name, loc, this.hashTable[h],new LineListRec(linenu));
+				{
+                    LineListRec list = new LineListRec(linenu);
+					l = new BucketListRec(name, loc, this.hashTable[h],list, valI, valF, isInt, tipo);
 					Console.WriteLine("Nombre: {0}, Localidad: {1}",l.name, l.memloc);
-					//l.name = name;
-					//l.lines = new LineListRec();
-					//l.memloc = loc;
-					//l.lines.lineno = lineno;
-					//l.lines.next = null;
-					//l.next = this.hashTable[h];
 					this.hashTable[h] = l;
 				}
 				else /* está en la tabla, de modo que sólo se agrega el número de línea*/
-				{ 
+                {
+                    Console.WriteLine("Variable ya en tabla");
 					Console.WriteLine("Nombre: {0}, Localidad: {1}",l.name, l.memloc);
 					LineListRec t = l.lines;
+                    if (l.isInt)
+                        l.valI = valI;
+                    else
+                        l.valF = valF;
 					while (t.next != null) t = t.next;
 					t.next = new LineListRec(linenu);
-					//t.next = (LineList) malloc(sizeof(struct LineListRec));
-					/*t.next.lineno = lineno;
-					t.next.next = null;*/
-				}
-			}
+				}		
 		} /* de st_insert */
 		
 		public int st_lookup ( string name ) {
 			int h = hash(name);
 			BucketListRec l =  this.hashTable[h];
-			while ((l != null) && string.Equals(name,l.name))
+			while ((l != null) && !string.Equals(name,l.name))
 				l = l.next;
 			if (l == null) return -1;
 			else return l.memloc;
 		}
 
-		public void printSymTab() {
-			
+		public void printSymTab() {		
 			int i;
-			Console.WriteLine("Variable Name  Location   Line Numbers");
-			Console.Write("-------------  --------   ------------\n");
+			Console.WriteLine("Variable Name  Tipo  Valor  Location   Line Numbers");
+			
 			for (i = 0; i < SIZE; ++i) {
 				if (this.hashTable[i] != null) {
 					BucketListRec l = this.hashTable[i];
 					while (l != null) {
 						LineListRec t = l.lines;
 						Console.Write("{0}",l.name);
-						Console.Write("{0}",l.memloc);
+                        Console.Write("".PadLeft(15 - l.name.Length) + "{0}" , l.tipo);
+                        if(l.isInt)
+                            Console.Write("".PadLeft(6 - l.tipo.Length) + "{0}" , l.valI);
+                        else
+                            Console.Write("".PadLeft(6 - l.tipo.Length) + "{0}" , l.valF);
+						Console.Write("".PadLeft(7)+"{0}",l.memloc);
 						while (t != null) {
-							Console.Write("{0}",t.lineno);
+                            Console.Write("".PadLeft(10) + "{0}" , t.lineno);
 							t = t.next;
 						}
 						Console.Write("\n");
@@ -129,15 +134,15 @@ namespace TablaSimbolos
 			SymbolTable tabla = new SymbolTable();
 			Console.Write("         METIENDO VARIABLES \n\n");
 			Console.Write("________________________________________________\n");
-			tabla.st_insert( "Uno",1, 0 );
-			tabla.st_insert( "Dos",2, 1 );
-			tabla.st_insert( "Uno",2, 0 );
-			tabla.st_insert( "Dos",2, 0 );
-			tabla.st_insert( "Dos",2, 7 );
-			tabla.st_insert( "X",5, 2 );
-			tabla.st_insert( "X",6, 0 );
-			tabla.st_insert( "X",6, 0 );
-			Console.Write("           BUSCANDO VARIABLES \n\n");
+			tabla.st_insert( "Uno",1, 0 , 0,4.2,false,true,"float");            
+			tabla.st_insert( "Dos",2, 1, 2, 3.3, true,true, "int" );
+			tabla.st_insert( "Uno",2, 0,2,1.1,false,false,null);
+            tabla.st_insert("Dos" , 2 , 0 , 2 , 3.3 , true , false , null);
+            tabla.st_insert("Dos" , 2 , 7 , 2 , 3.3 , true , false , null);
+            tabla.st_insert("X" , 5 , 2 , 4 , 3.3 , true , true , "int");
+            tabla.st_insert("X" , 6 , 0 , 2 , 3.3 , true , false , null);
+            tabla.st_insert("X" , 6 , 0 , 1000 , 3.3 , true , false , null);
+			Console.Write("\n           BUSCANDO VARIABLES \n\n");
 			Console.Write("________________________________________________\n");
 			//int st_lookup ( char * name );
 			int a = 0;
@@ -150,13 +155,13 @@ namespace TablaSimbolos
 			if (a<0)
 				Console.Write ("variable no encontrada Uno \n");
 			else
-				Console.Write("Variable en TABLA DE SIMBOLOS <<Uno>> en registro %d \n", a);
+				Console.Write("Variable en TABLA DE SIMBOLOS <<Uno>> en registro {0} \n", a);
 			
 			a = tabla.st_lookup ( "Dos" );
 			if (a<0)
 				Console.Write ("variable no encontrada Dos \n");
 			else
-				Console.Write("Variable en TABLA DE SIMBOLOS <<Dos>> en registro %d \n\n\n", a);
+				Console.Write("Variable en TABLA DE SIMBOLOS <<Dos>> en registro {0} \n\n\n", a);
 
 			Console.Write("       TABLA DE SIMBOLOS  \n");
 			Console.Write("________________________________________________\n");

@@ -3,3 +3,8 @@ C:\Users\Loli Delgado\Documents\SharpDevelop Projects\TablaSimbolos\TablaSimbolo
 C:\Users\Loli Delgado\Documents\SharpDevelop Projects\TablaSimbolos\TablaSimbolos\bin\Debug\TablaSimbolos.pdb
 C:\Users\Loli Delgado\Documents\SharpDevelop Projects\TablaSimbolos\TablaSimbolos\obj\Debug\TablaSimbolos.exe
 C:\Users\Loli Delgado\Documents\SharpDevelop Projects\TablaSimbolos\TablaSimbolos\obj\Debug\TablaSimbolos.pdb
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\TablaSimbolos\TablaSimbolos\obj\Debug\TablaSimbolos.exe
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\TablaSimbolos\TablaSimbolos\obj\Debug\TablaSimbolos.pdb
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\TablaSimbolos\TablaSimbolos\bin\Debug\TablaSimbolos.exe
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\TablaSimbolos\TablaSimbolos\bin\Debug\TablaSimbolos.pdb
+C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\TablaSimbolos\TablaSimbolos\obj\Debug\TablaSimbolos.csprojResolveAssemblyReference.cache
