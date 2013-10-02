@@ -36,6 +36,7 @@ namespace NSSyntacticAnalizer
 			
 			public Token_types op;
 			public Token_types varType;
+            public int nline;
 			public int valInt;
 			public double valDouble;
 			public bool isIntType = true;
@@ -395,8 +396,11 @@ namespace NSSyntacticAnalizer
 					//id option
 				case Token_types.TKN_ID:
 					t = new TreeNode(StmtCreation.newExpNode, ExpKind.IdK);
-					if ((t != null) && (currentToken.token_type == Token_types.TKN_ID))
-						t.name = currentToken.lexema;
+                    if ((t != null) && (currentToken.token_type == Token_types.TKN_ID))
+                    {
+                        t.name = currentToken.lexema;
+                        t.nline = currentToken.nline;
+                    }
 					match(Token_types.TKN_ID);
 					break;
 					//(exp) option
@@ -525,7 +529,7 @@ namespace NSSyntacticAnalizer
 								break;
 							case ExpKind.IdK:
 								Console.Write("Id: {0}\n", tree.name);
-								writerTree.WriteLine("<node>\"Id: {0}\"", tree.name);
+								writerTree.WriteLine("<node>\"Id: {0}    N° Linea:{1}\"", tree.name, tree.nline);
 								break;
 							default:
 								Console.Write("Unknown ExpNode kind\n");

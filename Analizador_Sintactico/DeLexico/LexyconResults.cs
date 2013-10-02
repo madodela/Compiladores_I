@@ -14,6 +14,7 @@ namespace NSSyntacticAnalizer
 	public struct Token {
 		public Token_types token_type;
 		public String lexema;
+        public int nline;
 	}
 	
 	public enum Token_types {
@@ -164,6 +165,7 @@ namespace NSSyntacticAnalizer
 							break;
 					}
 					token.lexema = tokenParts[1];
+                    token.nline = int.Parse(tokenParts[2]);
 					if(token.token_type !=Token_types.TKN_MLCOMMENT && token.token_type != Token_types.TKN_COMMENT)//Don´t save the comment tokens
 						listaTokens.Add(token);
 					line = reader.ReadLine();
