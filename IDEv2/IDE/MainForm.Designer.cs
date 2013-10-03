@@ -49,12 +49,6 @@ namespace IDE
 			this.fuenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.tabControl1 = new System.Windows.Forms.TabControl();
-			this.tabPage1 = new System.Windows.Forms.TabPage();
-			this.tabPage2 = new System.Windows.Forms.TabPage();
-			this.ErrorList = new System.Windows.Forms.ListView();
-			this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-			this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
 			this.tabControl2 = new System.Windows.Forms.TabControl();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
 			this.TokenList = new System.Windows.Forms.ListView();
@@ -66,14 +60,27 @@ namespace IDE
 			this.tabPage6 = new System.Windows.Forms.TabPage();
 			this.fastColoredTextBox1 = new FastColoredTextBoxNS.FastColoredTextBox();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.tabPage2 = new System.Windows.Forms.TabPage();
+			this.ErrorList = new System.Windows.Forms.ListView();
+			this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+			this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this.Salidas = new System.Windows.Forms.TabControl();
+			this.tabPage7 = new System.Windows.Forms.TabPage();
+			this.listView1 = new System.Windows.Forms.ListView();
+			this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+			this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
+			this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
+			this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
 			this.menuStrip1.SuspendLayout();
-			this.tabControl1.SuspendLayout();
-			this.tabPage2.SuspendLayout();
 			this.tabControl2.SuspendLayout();
 			this.tabPage3.SuspendLayout();
 			this.tabPage4.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.fastColoredTextBox1)).BeginInit();
 			this.panel1.SuspendLayout();
+			this.tabPage2.SuspendLayout();
+			this.Salidas.SuspendLayout();
+			this.tabPage7.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -201,65 +208,6 @@ namespace IDE
 			this.acercaDeToolStripMenuItem.ToolTipText = "Info. sobre el programa y los desarrolladores.";
 			this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.AcercaDeClick);
 			// 
-			// tabControl1
-			// 
-			this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-									| System.Windows.Forms.AnchorStyles.Right)));
-			this.tabControl1.Controls.Add(this.tabPage1);
-			this.tabControl1.Controls.Add(this.tabPage2);
-			this.tabControl1.Font = new System.Drawing.Font("Segoe Print", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.tabControl1.Location = new System.Drawing.Point(12, 401);
-			this.tabControl1.Name = "tabControl1";
-			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(736, 109);
-			this.tabControl1.TabIndex = 5;
-			// 
-			// tabPage1
-			// 
-			this.tabPage1.Location = new System.Drawing.Point(4, 28);
-			this.tabPage1.Name = "tabPage1";
-			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage1.Size = new System.Drawing.Size(728, 77);
-			this.tabPage1.TabIndex = 0;
-			this.tabPage1.Text = "Resultados";
-			this.tabPage1.UseVisualStyleBackColor = true;
-			// 
-			// tabPage2
-			// 
-			this.tabPage2.Controls.Add(this.ErrorList);
-			this.tabPage2.Location = new System.Drawing.Point(4, 28);
-			this.tabPage2.Name = "tabPage2";
-			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage2.Size = new System.Drawing.Size(728, 77);
-			this.tabPage2.TabIndex = 1;
-			this.tabPage2.Text = "Errores";
-			this.tabPage2.UseVisualStyleBackColor = true;
-			// 
-			// ErrorList
-			// 
-			this.ErrorList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-									this.columnHeader3,
-									this.columnHeader4});
-			this.ErrorList.FullRowSelect = true;
-			this.ErrorList.GridLines = true;
-			this.ErrorList.Location = new System.Drawing.Point(0, 0);
-			this.ErrorList.MultiSelect = false;
-			this.ErrorList.Name = "ErrorList";
-			this.ErrorList.ShowGroups = false;
-			this.ErrorList.Size = new System.Drawing.Size(728, 83);
-			this.ErrorList.TabIndex = 0;
-			this.ErrorList.UseCompatibleStateImageBehavior = false;
-			this.ErrorList.View = System.Windows.Forms.View.Details;
-			// 
-			// columnHeader3
-			// 
-			this.columnHeader3.Text = "Error";
-			// 
-			// columnHeader4
-			// 
-			this.columnHeader4.Text = "Descripción";
-			this.columnHeader4.Width = 663;
-			// 
 			// tabControl2
 			// 
 			this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -272,7 +220,7 @@ namespace IDE
 			this.tabControl2.Location = new System.Drawing.Point(402, 51);
 			this.tabControl2.Name = "tabControl2";
 			this.tabControl2.SelectedIndex = 0;
-			this.tabControl2.Size = new System.Drawing.Size(350, 337);
+			this.tabControl2.Size = new System.Drawing.Size(350, 333);
 			this.tabControl2.TabIndex = 8;
 			// 
 			// tabPage3
@@ -281,7 +229,7 @@ namespace IDE
 			this.tabPage3.Location = new System.Drawing.Point(4, 28);
 			this.tabPage3.Name = "tabPage3";
 			this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage3.Size = new System.Drawing.Size(342, 305);
+			this.tabPage3.Size = new System.Drawing.Size(342, 301);
 			this.tabPage3.TabIndex = 0;
 			this.tabPage3.Text = "Léxico";
 			this.tabPage3.UseVisualStyleBackColor = true;
@@ -298,7 +246,7 @@ namespace IDE
 			this.TokenList.GridLines = true;
 			this.TokenList.Location = new System.Drawing.Point(0, 0);
 			this.TokenList.Name = "TokenList";
-			this.TokenList.Size = new System.Drawing.Size(342, 311);
+			this.TokenList.Size = new System.Drawing.Size(346, 301);
 			this.TokenList.TabIndex = 0;
 			this.TokenList.UseCompatibleStateImageBehavior = false;
 			this.TokenList.View = System.Windows.Forms.View.Details;
@@ -319,7 +267,7 @@ namespace IDE
 			this.tabPage4.Location = new System.Drawing.Point(4, 28);
 			this.tabPage4.Name = "tabPage4";
 			this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage4.Size = new System.Drawing.Size(342, 305);
+			this.tabPage4.Size = new System.Drawing.Size(342, 301);
 			this.tabPage4.TabIndex = 1;
 			this.tabPage4.Text = "Sintáctico";
 			this.tabPage4.UseVisualStyleBackColor = true;
@@ -336,7 +284,7 @@ namespace IDE
 			this.tabPage5.Location = new System.Drawing.Point(4, 28);
 			this.tabPage5.Name = "tabPage5";
 			this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage5.Size = new System.Drawing.Size(342, 305);
+			this.tabPage5.Size = new System.Drawing.Size(342, 301);
 			this.tabPage5.TabIndex = 2;
 			this.tabPage5.Text = "Semántico";
 			this.tabPage5.UseVisualStyleBackColor = true;
@@ -346,7 +294,7 @@ namespace IDE
 			this.tabPage6.Location = new System.Drawing.Point(4, 28);
 			this.tabPage6.Name = "tabPage6";
 			this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage6.Size = new System.Drawing.Size(342, 305);
+			this.tabPage6.Size = new System.Drawing.Size(342, 301);
 			this.tabPage6.TabIndex = 3;
 			this.tabPage6.Text = "Código intermedio";
 			this.tabPage6.UseVisualStyleBackColor = true;
@@ -372,7 +320,7 @@ namespace IDE
 			this.fastColoredTextBox1.Paddings = new System.Windows.Forms.Padding(0);
 			this.fastColoredTextBox1.RightBracket = ')';
 			this.fastColoredTextBox1.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-			this.fastColoredTextBox1.Size = new System.Drawing.Size(380, 330);
+			this.fastColoredTextBox1.Size = new System.Drawing.Size(380, 326);
 			this.fastColoredTextBox1.TabIndex = 9;
 			// 
 			// panel1
@@ -383,8 +331,117 @@ namespace IDE
 			this.panel1.Controls.Add(this.fastColoredTextBox1);
 			this.panel1.Location = new System.Drawing.Point(16, 51);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(380, 333);
+			this.panel1.Size = new System.Drawing.Size(380, 329);
 			this.panel1.TabIndex = 10;
+			// 
+			// tabPage2
+			// 
+			this.tabPage2.Controls.Add(this.ErrorList);
+			this.tabPage2.Location = new System.Drawing.Point(4, 28);
+			this.tabPage2.Name = "tabPage2";
+			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPage2.Size = new System.Drawing.Size(728, 104);
+			this.tabPage2.TabIndex = 1;
+			this.tabPage2.Text = "Errores";
+			this.tabPage2.UseVisualStyleBackColor = true;
+			// 
+			// ErrorList
+			// 
+			this.ErrorList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+									this.columnHeader3,
+									this.columnHeader4});
+			this.ErrorList.FullRowSelect = true;
+			this.ErrorList.GridLines = true;
+			this.ErrorList.Location = new System.Drawing.Point(0, 0);
+			this.ErrorList.MultiSelect = false;
+			this.ErrorList.Name = "ErrorList";
+			this.ErrorList.ShowGroups = false;
+			this.ErrorList.Size = new System.Drawing.Size(728, 104);
+			this.ErrorList.TabIndex = 0;
+			this.ErrorList.UseCompatibleStateImageBehavior = false;
+			this.ErrorList.View = System.Windows.Forms.View.Details;
+			// 
+			// columnHeader3
+			// 
+			this.columnHeader3.Text = "Error";
+			// 
+			// columnHeader4
+			// 
+			this.columnHeader4.Text = "Descripción";
+			this.columnHeader4.Width = 663;
+			// 
+			// tabPage1
+			// 
+			this.tabPage1.Location = new System.Drawing.Point(4, 28);
+			this.tabPage1.Name = "tabPage1";
+			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPage1.Size = new System.Drawing.Size(728, 104);
+			this.tabPage1.TabIndex = 0;
+			this.tabPage1.Text = "Resultados";
+			this.tabPage1.UseVisualStyleBackColor = true;
+			// 
+			// Salidas
+			// 
+			this.Salidas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+									| System.Windows.Forms.AnchorStyles.Right)));
+			this.Salidas.Controls.Add(this.tabPage1);
+			this.Salidas.Controls.Add(this.tabPage2);
+			this.Salidas.Controls.Add(this.tabPage7);
+			this.Salidas.Font = new System.Drawing.Font("Segoe Print", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Salidas.Location = new System.Drawing.Point(12, 383);
+			this.Salidas.Name = "Salidas";
+			this.Salidas.SelectedIndex = 0;
+			this.Salidas.Size = new System.Drawing.Size(736, 136);
+			this.Salidas.TabIndex = 5;
+			// 
+			// tabPage7
+			// 
+			this.tabPage7.Controls.Add(this.listView1);
+			this.tabPage7.Location = new System.Drawing.Point(4, 28);
+			this.tabPage7.Name = "tabPage7";
+			this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPage7.Size = new System.Drawing.Size(728, 104);
+			this.tabPage7.TabIndex = 2;
+			this.tabPage7.Text = "Tabla de simbolos";
+			this.tabPage7.UseVisualStyleBackColor = true;
+			// 
+			// listView1
+			// 
+			this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+									this.columnHeader5,
+									this.columnHeader6,
+									this.columnHeader7,
+									this.columnHeader8});
+			this.listView1.FullRowSelect = true;
+			this.listView1.GridLines = true;
+			this.listView1.Location = new System.Drawing.Point(0, 0);
+			this.listView1.MultiSelect = false;
+			this.listView1.Name = "listView1";
+			this.listView1.ShowGroups = false;
+			this.listView1.Size = new System.Drawing.Size(728, 104);
+			this.listView1.TabIndex = 1;
+			this.listView1.UseCompatibleStateImageBehavior = false;
+			this.listView1.View = System.Windows.Forms.View.Details;
+			// 
+			// columnHeader5
+			// 
+			this.columnHeader5.Text = "Nombre";
+			this.columnHeader5.Width = 150;
+			// 
+			// columnHeader6
+			// 
+			this.columnHeader6.Text = "Tipo";
+			this.columnHeader6.Width = 80;
+			// 
+			// columnHeader7
+			// 
+			this.columnHeader7.Text = "Valor";
+			this.columnHeader7.Width = 80;
+			// 
+			// columnHeader8
+			// 
+			this.columnHeader8.Text = "Números de linea";
+			this.columnHeader8.Width = 404;
 			// 
 			// MainForm
 			// 
@@ -394,7 +451,7 @@ namespace IDE
 			this.ClientSize = new System.Drawing.Size(764, 522);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.tabControl2);
-			this.Controls.Add(this.tabControl1);
+			this.Controls.Add(this.Salidas);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainForm";
@@ -403,16 +460,23 @@ namespace IDE
 			this.Load += new System.EventHandler(this.MainFormLoad);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
-			this.tabControl1.ResumeLayout(false);
-			this.tabPage2.ResumeLayout(false);
 			this.tabControl2.ResumeLayout(false);
 			this.tabPage3.ResumeLayout(false);
 			this.tabPage4.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.fastColoredTextBox1)).EndInit();
 			this.panel1.ResumeLayout(false);
+			this.tabPage2.ResumeLayout(false);
+			this.Salidas.ResumeLayout(false);
+			this.tabPage7.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.ColumnHeader columnHeader8;
+		private System.Windows.Forms.ColumnHeader columnHeader7;
+		private System.Windows.Forms.ColumnHeader columnHeader6;
+		private System.Windows.Forms.ColumnHeader columnHeader5;
+		private System.Windows.Forms.ListView listView1;
+		private System.Windows.Forms.TabPage tabPage7;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.TreeView TreeView;
 		private FastColoredTextBoxNS.FastColoredTextBox fastColoredTextBox1;
@@ -429,7 +493,7 @@ namespace IDE
 		private System.Windows.Forms.TabControl tabControl2;
 		private System.Windows.Forms.TabPage tabPage2;
 		private System.Windows.Forms.TabPage tabPage1;
-		private System.Windows.Forms.TabControl tabControl1;
+		private System.Windows.Forms.TabControl Salidas;
 		private System.Windows.Forms.ToolStripMenuItem fuenteToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
