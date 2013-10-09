@@ -197,6 +197,7 @@ namespace IDE
 			cmd.ExecuteCommandSync(command);
 			FillTreeView();
 			FillErrorList("infoSyntacticAnalisys.txt");
+            FillSymbolList();
 		}
 		
 		//Fill the token list in the GUI
@@ -292,5 +293,22 @@ namespace IDE
 			}
 			reader.Close();
 		}
+
+        //Fill the symbol table list in the GUI
+        void FillSymbolList()
+        {
+            tableSymbolList.Items.Clear();//Clear the list avoiding to append the new tokens.
+            FileStream file = new FileStream("tableSymbolFile.txt" , FileMode.Open , FileAccess.Read);
+            StreamReader reader = new StreamReader(file);
+            string[] variable;
+            string line = reader.ReadLine();
+            while (line != null)
+            {
+                variable = line.Split('\t');
+                tableSymbolList.Items.Add(new ListViewItem(variable));
+                line = reader.ReadLine();
+            }
+            reader.Close();
+        }
 	}
 }
