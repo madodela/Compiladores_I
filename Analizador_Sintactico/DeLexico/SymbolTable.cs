@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -104,6 +105,8 @@ namespace NSSyntacticAnalizer
 
         public void printSymTab()
         {
+            FileStream tableSymbolFile = new FileStream("tableSymbolFile.txt" , FileMode.Create , FileAccess.Write);
+            StreamWriter info = new StreamWriter(tableSymbolFile);
             int i;
             Console.WriteLine("Variable Name  Tipo  Valor  Line Numbers");
 
@@ -116,22 +119,34 @@ namespace NSSyntacticAnalizer
                     {
                         LineListRec t = l.lines;
                         Console.Write("{0}" , l.name);
+                        info.Write("{0}" , l.name);
                         Console.Write("".PadLeft(15 - l.name.Length) + "{0}" , l.tipo);
+                        info.Write("\t{0}",l.tipo);
                         if (l.isInt)
+                        {
                             Console.Write("".PadLeft(6 - l.tipo.Length) + "{0}" , l.valI);
+                            info.Write("\t{0}" , l.valI);
+                        }
                         else
+                        {
                             Console.Write("".PadLeft(6 - l.tipo.Length) + "{0}" , l.valF);
-                       // Console.Write("".PadLeft(7) + "{0}" , l.memloc);
+                            info.Write("\t{0}" , l.valF);
+                            // Console.Write("".PadLeft(7) + "{0}" , l.memloc);
+                        }
                         while (t != null)
                         {
                             Console.Write("".PadLeft(10) + "{0}" , t.lineno);
+                            info.Write("\t{0}" , t.lineno);
                             t = t.next;
                         }
-                        Console.Write("\n");
+                        Console.Write("\n"); 
+                        info.WriteLine("");
+
                         l = l.next;
                     }
                 }
             }
+            info.Close();
         } /* de printSymTab */
 
     }
