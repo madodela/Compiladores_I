@@ -43,3 +43,14 @@ C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\FastColoredTextBox\obj\Debug
 C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\FastColoredTextBox\obj\Debug\GenerateResource-ResGen.write.1.tlog
 C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBox.dll
 C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBox.pdb
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\FastColoredTextBox\bin\Debug\FastColoredTextBox.XML
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\FastColoredTextBox\bin\Debug\FastColoredTextBox.dll
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\FastColoredTextBox\bin\Debug\FastColoredTextBox.pdb
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBox.csprojResolveAssemblyReference.cache
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBoxNS.FastColoredTextBox.resources
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBoxNS.FindForm.resources
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBoxNS.GoToForm.resources
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBoxNS.ReplaceForm.resources
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBox.csproj.GenerateResource.Cache
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBox.dll
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\FastColoredTextBox\obj\Debug\FastColoredTextBox.pdb

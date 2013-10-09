@@ -1,6 +1,6 @@
 ﻿/*
  * Created by SharpDevelop.
- * User: Loli Delgado
+ * User: María Dolores Delgado Lara y Jose Luis Díaz Montellano
  * Date: 01/10/2013
  * Time: 11:48 a.m.
  * 

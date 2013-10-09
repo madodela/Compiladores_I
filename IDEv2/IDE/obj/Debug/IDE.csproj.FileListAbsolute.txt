@@ -51,3 +51,13 @@ C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\GenerateResour
 C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\GenerateResource.write.1.tlog
 C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\IDE.exe
 C:\Users\Loli\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\IDE.pdb
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\IDE\bin\Debug\IDE.exe
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\IDE\bin\Debug\IDE.pdb
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\IDE\bin\Debug\FastColoredTextBox.dll
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\IDE\bin\Debug\FastColoredTextBox.pdb
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\IDE\bin\Debug\FastColoredTextBox.xml
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\IDE.csprojResolveAssemblyReference.cache
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\IDE.MainForm.resources
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\IDE.csproj.GenerateResource.Cache
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\IDE.exe
+C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\IDE.pdb
