@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="LexyconResults.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SymbolTable.cs" />
     <Compile Include="SyntacticAnalizer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

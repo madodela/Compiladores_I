@@ -62,8 +62,12 @@
     <Compile Include="Archivo.cs" />
     <Compile Include="ExecuteCMD.cs" />
     <Compile Include="LectorSintaxis.cs" />
-    <Compile Include="LiberadorDeParpadeoCodeArea.cs" />
-    <Compile Include="MainForm.cs" />
+    <Compile Include="LiberadorDeParpadeoCodeArea.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
@@ -76,7 +80,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Ing.Sistemas Computacionales\c#\FastColoredTextBox-master\FastColoredTextBox\FastColoredTextBox.csproj">
+    <ProjectReference Include="..\FastColoredTextBox\FastColoredTextBox.csproj">
       <Project>{6DD14A85-CCFC-4774-BD26-0F5772512319}</Project>
       <Name>FastColoredTextBox</Name>
     </ProjectReference>

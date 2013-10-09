@@ -6,7 +6,7 @@
 </node>
 </node>
 </node>
-    <node>"FLOAT:a"
+    <node>"BOOL:a"
 </node>
     <node>"="
 <node>"x"</node>
