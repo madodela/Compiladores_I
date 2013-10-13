@@ -598,10 +598,25 @@ namespace NSSyntacticAnalizer
 						} else { Console.WriteLine("Unknown node kind");}
 					}
 				}
+                if (StmtKind.AssignK == tree.stmtK)
+                {
+                    if (tree.child[1]==null &&  tree.child[0].child[0] ==null) 
+                    {
+                        if (tree.child[0].expK == ExpKind.ConstK)
+                        {   
+                            symbolTable.st_insert(tree.name , tree.nline , tree.child[0].valInt , tree.child[0].valDouble , tree.child[0].valBool , null , false); 
+                        }
+                        else
+                        {
+                            BucketListRec l = symbolTable.st_lookup(tree.name);
+                            if(l!=null)
+                                symbolTable.st_insert(tree.name , tree.nline , l.valI , l.valF , l.valB , null , false);   
+                        }
+                    }
+                }
 				for (i = 0; i < 5; i++){
+                   
 					printTree(tree.child[i]);
-					//if(tree.child[i]!=null)
-					//writerTree.WriteLine("</parent>");
 				}
 				if(!flag)
 					writerTree.WriteLine("</node>");
@@ -610,7 +625,23 @@ namespace NSSyntacticAnalizer
 			}
 			identno -= 2;
 		}
-		
+
+        public void PreorderTraversal(TreeNode node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            Console.WriteLine(node.nodekind.ToString()+" " + node.name + " " +node.valInt);
+
+            PreorderTraversal(node.child[0]);
+            PreorderTraversal(node.child[1]);
+            if (node.sibling != null)
+                Console.WriteLine("sibling" + " " + node.nodekind);
+            PreorderTraversal(node.sibling);
+        }
+
 		public SyntacticAnalizer() {
 			Lexico lexResults = new Lexico("LexiconAnalisysTokens.txt");
 			tokenList = lexResults.AnalizadorLexico();
@@ -622,6 +653,7 @@ namespace NSSyntacticAnalizer
 				writerTree.WriteLine("<?xml version=\"1.0\"?>");
 			    SyntacticTree = Parse(); //Parse function creates the Syntactic Tree
 				printTree(SyntacticTree);
+               // PreorderTraversal(SyntacticTree);
 			} catch(FileNotFoundException e){Console.WriteLine("File Not Found because " + e.Message);
 			} catch(ArgumentException e){Console.WriteLine("Cannot read file because " + e.Message);
 			} finally {

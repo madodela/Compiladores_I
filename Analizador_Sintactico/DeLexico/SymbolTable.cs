@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 
@@ -93,16 +93,20 @@ namespace NSSyntacticAnalizer
 			}
 		} /* de st_insert */
 
-		public int st_lookup(string name)
+		public BucketListRec st_lookup(string name)
 		{
 			int h = hash(name);
 			BucketListRec l = this.hashTable[h];
 			while ((l != null) && !string.Equals(name , l.name))
 				l = l.next;
-			if (l == null) return -1;
-			else return 1;
+            if (l == null) return null;
+            else
+            {
+                return l;
+            }
 		}
 
+        
 		public void printSymTab()
 		{
 			FileStream tableSymbolFile = new FileStream("tableSymbolFile.txt" , FileMode.Create , FileAccess.Write);
@@ -122,15 +126,20 @@ namespace NSSyntacticAnalizer
 						info.Write("{0}" , l.name);
 						Console.Write("".PadLeft(10 - l.name.Length) + "{0}" , l.tipo);
 						info.Write("\t{0}",l.tipo);
-						if (l.isInt)
+						if (String.Equals(l.tipo, "Int"))
 						{
 							Console.Write("".PadLeft(10 - l.tipo.Length) + "{0}" , l.valI);
 							info.Write("\t{0}" , l.valI);
 						}
-						else
+                        else if (String.Equals(l.tipo , "Float"))
+                        {
+                            Console.Write("".PadLeft(10 - l.tipo.Length) + "{0}" , l.valF);
+                            info.Write("\t{0}" , l.valF);
+                        }
+                        else
 						{
-							Console.Write("".PadLeft(10 - l.tipo.Length) + "{0}" , l.valF);
-							info.Write("\t{0}" , l.valF);
+							Console.Write("".PadLeft(10 - l.tipo.Length) + "{0}" , l.valB);
+							info.Write("\t{0}" , l.valB);
 							// Console.Write("".PadLeft(7) + "{0}" , l.memloc);
 						}
 						Console.Write("".PadLeft(9 - l.tipo.Length));
