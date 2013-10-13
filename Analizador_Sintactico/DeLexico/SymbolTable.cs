@@ -89,7 +89,8 @@ namespace NSSyntacticAnalizer
 				else
 					l.valB = valB;
 				while (t.next != null) t = t.next;
-				t.next = new LineListRec(linenu);
+				if(linenu != 0)
+					t.next = new LineListRec(linenu);
 			}
 		} /* de st_insert */
 
@@ -99,14 +100,14 @@ namespace NSSyntacticAnalizer
 			BucketListRec l = this.hashTable[h];
 			while ((l != null) && !string.Equals(name , l.name))
 				l = l.next;
-            if (l == null) return null;
-            else
-            {
-                return l;
-            }
+			if (l == null) return null;
+			else
+			{
+				return l;
+			}
 		}
 
-        
+		
 		public void printSymTab()
 		{
 			FileStream tableSymbolFile = new FileStream("tableSymbolFile.txt" , FileMode.Create , FileAccess.Write);
@@ -131,12 +132,12 @@ namespace NSSyntacticAnalizer
 							Console.Write("".PadLeft(10 - l.tipo.Length) + "{0}" , l.valI);
 							info.Write("\t{0}" , l.valI);
 						}
-                        else if (String.Equals(l.tipo , "Float"))
-                        {
-                            Console.Write("".PadLeft(10 - l.tipo.Length) + "{0}" , l.valF);
-                            info.Write("\t{0}" , l.valF);
-                        }
-                        else
+						else if (String.Equals(l.tipo , "Float"))
+						{
+							Console.Write("".PadLeft(10 - l.tipo.Length) + "{0}" , l.valF);
+							info.Write("\t{0}" , l.valF);
+						}
+						else
 						{
 							Console.Write("".PadLeft(10 - l.tipo.Length) + "{0}" , l.valB);
 							info.Write("\t{0}" , l.valB);
