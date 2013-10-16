@@ -15,8 +15,9 @@ namespace NSSyntacticAnalizer
 		public bool isInt;
 		public double valF;
 		public bool valB;
+        public bool haveVal;
 		public BucketListRec next;
-		public BucketListRec(string nom  , BucketListRec next , LineListRec lines , int valI , double valF , bool valB , string tipo)
+		public BucketListRec(string nom  , BucketListRec next , LineListRec lines , int valI , double valF , bool valB , string tipo, bool haveVal)
 		{
 			this.name = nom;
 			this.next = next;
@@ -25,6 +26,7 @@ namespace NSSyntacticAnalizer
 			this.valF = valF;
 			this.valB = valB;
 			this.tipo = tipo;
+            this.haveVal = haveVal;
 		}
 	}
 
@@ -64,7 +66,7 @@ namespace NSSyntacticAnalizer
 
 
 
-		public void st_insert(string name , int linenu , int valI , double valF ,bool valB, string tipo , bool isDec )
+		public void st_insert(string name , int linenu , int valI , double valF ,bool valB, string tipo , bool isDec, bool haveVal )
 		{
 			int h = hash(name);
 			BucketListRec l = this.hashTable[h];
@@ -73,7 +75,7 @@ namespace NSSyntacticAnalizer
 			if (l == null) /* variable que todavía no está en la tabla */
 			{
 				LineListRec list = new LineListRec(linenu);
-				l = new BucketListRec(name , this.hashTable[h] , list , valI , valF , valB, tipo);
+				l = new BucketListRec(name , this.hashTable[h] , list , valI , valF , valB, tipo, haveVal);
 				Console.WriteLine("Nombre: {0}" , l.name );
 				this.hashTable[h] = l;
 			}
@@ -88,6 +90,7 @@ namespace NSSyntacticAnalizer
 					l.valF = valF;
 				else
 					l.valB = valB;
+                l.haveVal = haveVal;
 				while (t.next != null) t = t.next;
 				if(linenu != 0)
 					t.next = new LineListRec(linenu);

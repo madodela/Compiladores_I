@@ -86,6 +86,7 @@ namespace NSSyntacticAnalizer
 
 
 	public class SyntacticAnalizer {
+        bool tieneVal =false;
 
 		TreeNode SyntacticTree;
 		public int indexCurrentToken = 0;
@@ -206,7 +207,7 @@ namespace NSSyntacticAnalizer
 			}
 			return t;
 		}
-		
+        
 		/*sentencia →  selección | iteración | repetición  | sent-read |
 			sent-write | bloque | asignación*/
 		TreeNode statement() {
@@ -409,11 +410,11 @@ namespace NSSyntacticAnalizer
 						if(currentToken.lexema.Contains(".")) {
 							t.valDouble = (Convert.ToDouble(currentToken.lexema));
 							t.isIntType = false;
-							//symbolTable.st_insert(currentId , t.nline , t.valInt , t.valDouble , false, isDec);
+							
 						} else {
 							t.valInt = (Convert.ToInt32(currentToken.lexema));
 							t.isIntType = true;
-							//symbolTable.st_insert(currentId , t.nline , t.valInt , t.valDouble , true , isDec);
+							
 						}
 					}
 					match(Token_types.TKN_NUM);
@@ -457,11 +458,15 @@ namespace NSSyntacticAnalizer
 							tipo = "Float";
 						else
 							tipo = "Bool";
-						symbolTable.st_insert(currentToken.lexema , currentToken.nline , 0 , 0 , true, tipo , true);
+						symbolTable.st_insert(currentToken.lexema , currentToken.nline , 0 , 0 , true, tipo , true, false);
 					}
 					else
 					{
-						symbolTable.st_insert(currentToken.lexema , currentToken.nline , 0 , 0 ,true, null , false);
+                        BucketListRec l = symbolTable.st_lookup(currentToken.lexema);
+                        if (l !=null)
+                            symbolTable.st_insert(currentToken.lexema , currentToken.nline , 0 , 0 , true , null , false , false);
+                        else
+                            Console.WriteLine("Variable non declared");
 					}
 				}
 				currentToken = getToken();
@@ -469,6 +474,7 @@ namespace NSSyntacticAnalizer
 				syntaxError("Unexpected token:");
 				Console.WriteLine("Expected token:{0}", expected);
 				writerInfo.WriteLine("Expected token:{0}", expected);
+                Console.WriteLine("Line:{0}" , currentToken.nline);
 				printToken(currentToken);
 			}
 		}
@@ -598,22 +604,6 @@ namespace NSSyntacticAnalizer
 						} else { Console.WriteLine("Unknown node kind");}
 					}
 				}
-				if (StmtKind.AssignK == tree.stmtK)
-				{
-					if (tree.child[1]==null &&  tree.child[0].child[0] ==null)
-					{
-						if (tree.child[0].expK == ExpKind.ConstK)
-						{
-							symbolTable.st_insert(tree.name , tree.nline , tree.child[0].valInt , tree.child[0].valDouble , tree.child[0].valBool , null , false);
-						}
-						else
-						{
-							BucketListRec l = symbolTable.st_lookup(tree.name);
-							if(l!=null)
-								symbolTable.st_insert(tree.name , tree.nline , l.valI , l.valF , l.valB , null , false);
-						}
-					}
-				}
 				for (i = 0; i < 5; i++){
 					
 					printTree(tree.child[i]);
@@ -626,22 +616,215 @@ namespace NSSyntacticAnalizer
 			identno -= 2;
 		}
 
-		public void PreorderTraversal(TreeNode node)
-		{
-			if (node == null)
-			{
-				return;
-			}
+//***************************************************************************************************
+        void cGen(TreeNode tree)
+        {
+            if (tree != null)
+            {             
+                switch (tree.nodekind)
+                {
+                    case NodeKind.StmtK:
+                        genStmt(tree);
+                        break;
+                    case NodeKind.ExpK:
+                        genExp(tree);                        
+                        break;
+                    default:
+                        break;
+                }
+                cGen(tree.sibling);
+            }
+        }
+        int cvalI;
+        double cvalF;
+        void genStmt(TreeNode tree)
+        {
+            TreeNode p1 , p2 , p3;
+            BucketListRec l;
+            switch (tree.stmtK)
+            {
+                case StmtKind.BlockK:
+                    //cGen(tree.child[0]);
+                    break;
 
-			Console.WriteLine(node.nodekind.ToString()+" " + node.name + " " +node.valInt);
+                case StmtKind.IfK:
+                    /*p1 = tree.child[0];
+                    p2 = tree.child[1];
+                    p3 = tree.child[2];
+                    cGen(p1);
+                    cGen(p2);
+                    cGen(p3);
+                     * */
+                    break; /* if_k */
 
-			PreorderTraversal(node.child[0]);
-			PreorderTraversal(node.child[1]);
-			if (node.sibling != null)
-				Console.WriteLine("sibling" + " " + node.nodekind);
-			PreorderTraversal(node.sibling);
-		}
+                case StmtKind.IterationK:
+                    
+                    /*p1 = tree.child[0];
+                    p2 = tree.child[1];
+                    
+                    cGen(p1);
+                    
+                    cGen(p2);
+                    */
+                    break; /* iteration */
+                case StmtKind.RepeatK:
+                    /*p1 = tree.child[0];
+                    p2 = tree.child[1];
+                    cGen(p1);
+                    cGen(p2);
+                     * */
+                    break; /* repeat */
 
+                case StmtKind.AssignK:
+                    cGen(tree.child[0]);
+                    Console.WriteLine(tree.name + " " + tree.child[0].valInt);
+                    l = symbolTable.st_lookup(tree.name);
+                   
+                    //if ()
+                    //{
+                        symbolTable.st_insert(tree.name , tree.nline , tree.child[0].valInt , tree.child[0].valDouble , tree.child[0].valBool , l.tipo , false , true);
+                    //}
+                    //else
+                    //{
+                        //Console.WriteLine("Error de tipo");
+                    //}
+                    break; /* assign_k */
+
+                case StmtKind.ReadK:
+                    l = symbolTable.st_lookup(tree.name);
+                    if (l != null)
+                    {
+                        l.haveVal = false;
+                        l.valF = 0.0;
+                        l.valI = 0;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Variable non declared:"+ tree.name);
+                    }
+                    break;
+                case StmtKind.WriteK:
+                    //cGen(tree.child[0]);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void genExp(TreeNode tree)
+        {
+            BucketListRec l;
+            TreeNode p1 , p2;
+           
+            switch (tree.expK)
+            {
+                case ExpKind.ConstK:
+                    break; /* ConstK */
+
+                case ExpKind.IdK:
+                   
+                    l = symbolTable.st_lookup(tree.name);
+                    if (l != null)
+                    {
+                        if (l.haveVal)
+                        {
+                            tieneVal = true;
+                            if (tree.isIntType)
+                            {
+                                tree.valInt = l.valI;
+
+                            }
+                            else
+                            {
+                                tree.valDouble = l.valF;
+                            }
+                        }
+                        else
+                        {
+                            tieneVal = false;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Variable non  declared", tree.name);
+                    }
+                    break; /* IdK */
+
+                case ExpKind.OpK:
+                    p1 = tree.child[0];
+                    p2 = tree.child[1];
+                    cGen(p1);
+                    cGen(p2);
+                    
+                    if (tree.varType != tree.child[0].varType && tree.varType != tree.child[1].varType)
+                    {
+                        Console.WriteLine("Error de tipos");
+                    }
+                    else
+                    {
+                        switch (tree.op)
+                        {
+                            case Token_types.TKN_ADD:
+                                switch (p1.isIntType)
+                                {
+                                    case true:
+                                        tree.valInt = tree.child[0].valInt + tree.child[1].valInt;
+                                        break;
+                                    case false:
+                                        tree.valDouble = tree.child[0].valDouble + tree.child[1].valDouble;
+                                        break;
+                                }
+                                break;
+                            case Token_types.TKN_MINUS:
+                                switch (p1.isIntType)
+                                {
+                                    case true:
+                                        tree.valInt = tree.child[0].valInt - tree.child[1].valInt;
+                                        break;
+                                    case false:
+                                        tree.valDouble = tree.child[0].valDouble - tree.child[1].valDouble;
+                                        break;
+                                }
+                                break;
+                            case Token_types.TKN_PRODUCT:
+                                switch (p1.isIntType)
+                                {
+                                    case true:
+                                        tree.valInt = tree.child[0].valInt * tree.child[1].valInt;
+                                        break;
+                                    case false:
+                                        tree.valDouble = tree.child[0].valDouble * tree.child[1].valDouble;
+                                        break;
+                                }
+                                break;
+                            case Token_types.TKN_DIVISION:
+                                switch (p1.isIntType)
+                                {
+                                    case true:
+                                        tree.valInt = tree.child[0].valInt / tree.child[1].valInt;
+                                        break;
+                                    case false:
+                                        tree.valDouble = tree.child[0].valDouble / tree.child[1].valDouble;
+                                        break;
+                                }
+                                break;
+                            case Token_types.TKN_LTHAN:
+                                break;
+                            case Token_types.TKN_EQUAL:                                
+                                break;
+                            default:
+                                break;
+                        } /* case op */
+                    }
+
+                    break; /* OpK */
+
+                default:
+                    break;
+            }
+
+        }
+//***************************************************************************************************
 		public SyntacticAnalizer() {
 			Lexico lexResults = new Lexico("LexiconAnalisysTokens.txt");
 			tokenList = lexResults.AnalizadorLexico();
@@ -653,7 +836,7 @@ namespace NSSyntacticAnalizer
 				writerTree.WriteLine("<?xml version=\"1.0\"?>");
 				SyntacticTree = Parse(); //Parse function creates the Syntactic Tree
 				printTree(SyntacticTree);
-				// PreorderTraversal(SyntacticTree);
+                cGen(SyntacticTree.child[1]);
 			} catch(FileNotFoundException e){Console.WriteLine("File Not Found because " + e.Message);
 			} catch(ArgumentException e){Console.WriteLine("Cannot read file because " + e.Message);
 			} finally {
@@ -664,7 +847,7 @@ namespace NSSyntacticAnalizer
 		
 		public static void Main(string[] args) {
 			SyntacticAnalizer analizer = new SyntacticAnalizer();
-			analizer.symbolTable.printSymTab();
+			analizer.symbolTable.printSymTab();    
 			Console.ReadKey();
 		}
 	}
