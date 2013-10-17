@@ -195,7 +195,8 @@ namespace IDE
 			FillErrorList("infoLexiconAnalisysTokens.txt");
 			command = "SyntacticAnalizer.exe";//Execute the command to run the Syntactic Analisys
 			cmd.ExecuteCommandSync(command);
-			FillTreeView();
+            FillTreeView(TreeView , "SyntacticTree.xml");
+            FillTreeView(treeViewSemantic , "SemanticTree.xml");
 			FillErrorList("infoSyntacticAnalisys.txt");
             FillSymbolList();
 		}
@@ -216,11 +217,11 @@ namespace IDE
 		}
 		
 		//Fill the TreeView in the GUI
-		void FillTreeView() {
+		void FillTreeView(TreeView TreeView, string file) {
 			try {
 				// SECTION 1. Create a DOM Document and load the XML data into it.
 				XmlDocument dom = new XmlDocument();
-				dom.Load("SyntacticTree.xml");
+				dom.Load(file);
 				string name = "";
 				int x, x2;
 				name = dom.DocumentElement.InnerText.Substring(1);

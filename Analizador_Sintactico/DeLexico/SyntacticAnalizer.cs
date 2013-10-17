@@ -96,11 +96,15 @@ namespace NSSyntacticAnalizer
 		private int identno = 0;
 		private Token_types current_valType;
 		private bool isDec;
+        String tipoActual;
 		
 		
 		//Output file of the analysis, it contains the syntactic tree
 		FileStream syntacticTree;
 		StreamWriter writerTree;
+        //Output file of the analysis, it contains the syntactic tree
+        FileStream semanticTree;
+        StreamWriter writerSemanticTree;
 		//Other output file containing the errors found
 		FileStream infoSyntacticAnalisys;
 		StreamWriter writerInfo;
@@ -466,7 +470,7 @@ namespace NSSyntacticAnalizer
                         if (l !=null)
                             symbolTable.st_insert(currentToken.lexema , currentToken.nline , 0 , 0 , true , null , false , false);
                         else
-                            Console.WriteLine("Variable non declared");
+                            Console.WriteLine("Variable not declared");
 					}
 				}
 				currentToken = getToken();
@@ -643,51 +647,22 @@ namespace NSSyntacticAnalizer
             BucketListRec l;
             switch (tree.stmtK)
             {
-                case StmtKind.BlockK:
-                    //cGen(tree.child[0]);
-                    break;
-
-                case StmtKind.IfK:
-                    /*p1 = tree.child[0];
-                    p2 = tree.child[1];
-                    p3 = tree.child[2];
-                    cGen(p1);
-                    cGen(p2);
-                    cGen(p3);
-                     * */
-                    break; /* if_k */
-
-                case StmtKind.IterationK:
-                    
-                    /*p1 = tree.child[0];
-                    p2 = tree.child[1];
-                    
-                    cGen(p1);
-                    
-                    cGen(p2);
-                    */
-                    break; /* iteration */
-                case StmtKind.RepeatK:
-                    /*p1 = tree.child[0];
-                    p2 = tree.child[1];
-                    cGen(p1);
-                    cGen(p2);
-                     * */
-                    break; /* repeat */
-
                 case StmtKind.AssignK:
+                    l = symbolTable.st_lookup(tree.name);
+                    tipoActual = l.tipo;
+
                     cGen(tree.child[0]);
                     Console.WriteLine(tree.name + " " + tree.child[0].valInt);
-                    l = symbolTable.st_lookup(tree.name);
-                   
-                    //if ()
-                    //{
+                    if ((tree.child[0].isIntType && (l.tipo.Equals("Int"))) || (tree.child[0].isIntType == false && l.tipo.Equals("Float")))
+                        //if ()
+                        //{
                         symbolTable.st_insert(tree.name , tree.nline , tree.child[0].valInt , tree.child[0].valDouble , tree.child[0].valBool , l.tipo , false , true);
                     //}
                     //else
                     //{
-                        //Console.WriteLine("Error de tipo");
+                    //Console.WriteLine("Error de tipo");
                     //}
+                    else Console.WriteLine("Error: tipos diferentes. Variables {0} y {1}",tree.child[0].name, l.name);
                     break; /* assign_k */
 
                 case StmtKind.ReadK:
@@ -700,11 +675,8 @@ namespace NSSyntacticAnalizer
                     }
                     else
                     {
-                        Console.WriteLine("Variable non declared:"+ tree.name);
+                        Console.WriteLine("Variable not declared:"+ tree.name);
                     }
-                    break;
-                case StmtKind.WriteK:
-                    //cGen(tree.child[0]);
                     break;
                 default:
                     break;
@@ -746,7 +718,7 @@ namespace NSSyntacticAnalizer
                     }
                     else
                     {
-                        Console.WriteLine("Variable non  declared", tree.name);
+                        Console.WriteLine("Variable not  declared", tree.name);
                     }
                     break; /* IdK */
 
@@ -756,9 +728,9 @@ namespace NSSyntacticAnalizer
                     cGen(p1);
                     cGen(p2);
                     
-                    if (tree.varType != tree.child[0].varType && tree.varType != tree.child[1].varType)
+                    if (!(p1.isIntType && p2.isIntType))
                     {
-                        Console.WriteLine("Error de tipos");
+                        Console.WriteLine("Tipos diferentes");
                     }
                     else
                     {
@@ -808,10 +780,6 @@ namespace NSSyntacticAnalizer
                                         break;
                                 }
                                 break;
-                            case Token_types.TKN_LTHAN:
-                                break;
-                            case Token_types.TKN_EQUAL:                                
-                                break;
                             default:
                                 break;
                         } /* case op */
@@ -824,6 +792,167 @@ namespace NSSyntacticAnalizer
             }
 
         }
+
+        void printSemanticTree(TreeNode tree)
+        {
+            int i;
+            bool flag = false; // when true should not print the end of the node
+            identno += 2;
+            while (tree != null)
+            {
+                printSpaces();
+                if (tree.nodekind == NodeKind.StmtK)
+                {
+                    switch (tree.stmtK)
+                    {
+                        case StmtKind.IfK:
+                            Console.Write("If\n");
+                            writerSemanticTree.WriteLine("<node>\"if\"");
+                            break;
+                        case StmtKind.IterationK:
+                            Console.Write("Iteration\n");
+                            writerSemanticTree.WriteLine("<node>\"Iteration\"");
+                            break;
+                        case StmtKind.ProgramK:
+                            Console.Write("Program\n");
+                            writerSemanticTree.WriteLine("<node>\"Program\"");
+                            break;
+                        case StmtKind.BlockK:
+                            Console.Write("Block\n");
+                            //writerTree.WriteLine("<node>\"Block\"");
+                            flag = true;
+                            break;
+                        case StmtKind.RepeatK:
+                            Console.Write("Repeat\n");
+                            writerSemanticTree.WriteLine("<node>\"Repeat\"");
+                            break;
+                        case StmtKind.AssignK:
+                            Console.Write("Assign to: {0}\n" , tree.name);
+                            //writerTree.WriteLine("<node>\"AssignTo: {0}\"", tree.name);
+                            writerSemanticTree.WriteLine("<node>\"=\"");
+                            writerSemanticTree.WriteLine("<node>\"{0}\"</node>" , tree.name);
+                            break;
+                        case StmtKind.ReadK:
+                            Console.Write("Read: {0}\n" , tree.name);
+                            writerSemanticTree.WriteLine("<node>\"Read: {0}\"" , tree.name);
+                            break;
+                        case StmtKind.WriteK:
+                            Console.Write("Write\n");
+                            writerSemanticTree.WriteLine("<node>\"Write\"");
+                            break;
+                        default:
+                            Console.Write("Unknown ExpNode kind\n");
+                            writerInfo.WriteLine("Unknown ExpNode kind");
+                            break;
+                    }
+                }
+                else
+                {
+                    if (tree.nodekind == NodeKind.ExpK)
+                    {
+                        switch (tree.expK)
+                        {
+                            case ExpKind.OpK:
+                                string op;
+                                switch (tree.op)
+                                {
+                                    case Token_types.TKN_LTHAN: op = "&lt;"; break; //&lt; is the character '<' in xml
+                                    case Token_types.TKN_LETHAN: op = "&lt;="; break;
+                                    case Token_types.TKN_GETHAN: op = "&gt;="; break; //&gt; is the character '>' in xml
+                                    case Token_types.TKN_GTHAN: op = "&gt;"; break;
+                                    case Token_types.TKN_EQUAL: op = "=="; break;
+                                    case Token_types.TKN_NEQUAL: op = "!="; break;
+                                    case Token_types.TKN_ADD: op = "+"; break;
+                                    case Token_types.TKN_MINUS: op = "-"; break;
+                                    case Token_types.TKN_PRODUCT: op = "*"; break;
+                                    case Token_types.TKN_DIVISION: op = "/"; break;
+                                    default: op = "Unknown operator"; break; //assumed this error never occur
+                                }
+                                Console.Write("Op: {0}\n" , op);
+                                writerSemanticTree.WriteLine("<node>\"Op: {0}\"" , op);
+                                break;
+                            case ExpKind.ConstK:
+                                if (tree.isIntType)
+                                {
+                                    Console.Write("Const: {0}\n" , tree.valInt);
+                                    writerSemanticTree.WriteLine("<node>\"Const: {0}\"" , tree.valInt);
+                                }
+                                else
+                                {
+                                    Console.Write("Const: {0}\n" , tree.valDouble);
+                                    writerSemanticTree.WriteLine("<node>\"Const: {0}\"" , tree.valDouble);
+                                }
+                                break;
+                            case ExpKind.IdK:
+                                
+                                BucketListRec l = symbolTable.st_lookup(tree.name);
+                                if (l == null)
+                                {
+                                    writerSemanticTree.WriteLine("<node>\"Id: {0} Error: Variable not declared\"");
+                                    Console.WriteLine("Id: {0} Error:Variable not declared",tree.name);
+                                }
+                                else
+                                {
+                                    switch (l.tipo)
+                                    {
+                                        case "Int":
+                                            writerSemanticTree.WriteLine("<node>\"Id: {0} Type: {1} Value: {2} \"" , tree.name , l.tipo , l.valI);
+                                            Console.WriteLine("Id: {0} Type: {1} Value: {2} " , tree.name , l.tipo , l.valI);
+                                            break;
+                                        case "Float":
+                                            writerSemanticTree.WriteLine("<node>\"Id: {0} Type: {1} Value: {2} \"" , tree.name , l.tipo , l.valF);
+                                            Console.WriteLine("Id: {0} Type: {1} Value: {2} " , tree.name , l.tipo , l.valF);
+                                            break;
+                                        case "Bool":
+                                            writerSemanticTree.WriteLine("<node>\"Id: {0} Type: {1} Value: {2} \"" , tree.name , l.tipo , l.valB);
+                                            Console.WriteLine("Id: {0} Type: {1} Value: {2} " , tree.name , l.tipo , l.valB);
+                                            break;                                       
+                                    }
+                                }
+                                break;
+                            default:
+                                Console.Write("Unknown ExpNode kind\n");
+                                writerInfo.WriteLine("Unknown ExpNode kind"); //assumed this error never occur
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        if (tree.nodekind == NodeKind.DecK)
+                        {
+                            if (tree.name != null)
+                            { // if the variable was correctly defined should create its node
+                                string valTypeString;
+                                switch (tree.varType)
+                                {
+                                    case Token_types.TKN_INT: valTypeString = "INT"; break;
+                                    case Token_types.TKN_FLOAT: valTypeString = "FLOAT"; break;
+                                    case Token_types.TKN_BOOL: valTypeString = "BOOL"; break;
+                                    default: valTypeString = "Unknown type"; break;
+                                }
+                                Console.Write("{0}:{1}\n" , valTypeString , tree.name);
+                                writerSemanticTree.WriteLine("<node>\"{0}:{1}\"" , valTypeString , tree.name);
+                            }
+                            else
+                            {
+                                flag = true;
+                            }
+                        }
+                        else { Console.WriteLine("Unknown node kind"); }
+                    }
+                }
+                for (i = 0 ; i < 5 ; i++)
+                {
+
+                    printSemanticTree(tree.child[i]);
+                }
+                if (!flag)
+                    writerSemanticTree.WriteLine("</node>");
+                flag = false;
+                tree = tree.sibling;
+            }
+            identno -= 2;
+        }
 //***************************************************************************************************
 		public SyntacticAnalizer() {
 			Lexico lexResults = new Lexico("LexiconAnalisysTokens.txt");
@@ -834,13 +963,18 @@ namespace NSSyntacticAnalizer
 				infoSyntacticAnalisys = new FileStream("infoSyntacticAnalisys.txt", FileMode.Create, FileAccess.Write);
 				writerInfo = new StreamWriter(infoSyntacticAnalisys);
 				writerTree.WriteLine("<?xml version=\"1.0\"?>");
+                semanticTree = new FileStream("SemanticTree.xml" , FileMode.Create , FileAccess.Write);
+                writerSemanticTree = new StreamWriter(semanticTree);              
+                writerSemanticTree.WriteLine("<?xml version=\"1.0\"?>");
 				SyntacticTree = Parse(); //Parse function creates the Syntactic Tree
 				printTree(SyntacticTree);
                 cGen(SyntacticTree.child[1]);
+                printSemanticTree(SyntacticTree);
 			} catch(FileNotFoundException e){Console.WriteLine("File Not Found because " + e.Message);
 			} catch(ArgumentException e){Console.WriteLine("Cannot read file because " + e.Message);
 			} finally {
 				writerTree.Close();
+                writerSemanticTree.Close();
 				writerInfo.Close();
 			}
 		}

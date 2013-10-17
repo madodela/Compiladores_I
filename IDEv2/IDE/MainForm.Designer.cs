@@ -72,10 +72,12 @@ namespace IDE
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.treeViewSemantic = new System.Windows.Forms.TreeView();
             this.menuStrip1.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastColoredTextBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -267,7 +269,7 @@ namespace IDE
             this.tabPage4.Location = new System.Drawing.Point(4, 28);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(342, 301);
+            this.tabPage4.Size = new System.Drawing.Size(342, 287);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Sintáctico";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -281,10 +283,11 @@ namespace IDE
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.treeViewSemantic);
             this.tabPage5.Location = new System.Drawing.Point(4, 28);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(342, 301);
+            this.tabPage5.Size = new System.Drawing.Size(342, 287);
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "Semántico";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -294,7 +297,7 @@ namespace IDE
             this.tabPage6.Location = new System.Drawing.Point(4, 28);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(342, 301);
+            this.tabPage6.Size = new System.Drawing.Size(342, 287);
             this.tabPage6.TabIndex = 3;
             this.tabPage6.Text = "Código intermedio";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -447,6 +450,13 @@ namespace IDE
             this.columnHeader8.Text = "Números de linea";
             this.columnHeader8.Width = 404;
             // 
+            // treeViewSemantic
+            // 
+            this.treeViewSemantic.Location = new System.Drawing.Point(0, 0);
+            this.treeViewSemantic.Name = "treeViewSemantic";
+            this.treeViewSemantic.Size = new System.Drawing.Size(342, 287);
+            this.treeViewSemantic.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -467,6 +477,7 @@ namespace IDE
             this.tabControl2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fastColoredTextBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -515,6 +526,8 @@ namespace IDE
 		{
 			
 		}
+
+        private System.Windows.Forms.TreeView treeViewSemantic;
 		
 	}
 }
