@@ -33,7 +33,7 @@
 <node>"="
 <node>"z"</node>
 <node>"Op: +"
-<node>"Id: y Type: Int Value: 16 "
+<node>"Id: y (Int, 16) "
 </node>
 <node>"Const: 7"
 </node>
@@ -142,7 +142,7 @@
 <node>"="
 <node>"y"</node>
 <node>"Op: +"
-<node>"Id: a Type: Float Value: 0 "
+<node>"Id: a (Float, 0) "
 </node>
 <node>"Const: 3"
 </node>
@@ -169,7 +169,7 @@
 <node>"="
 <node>"y"</node>
 <node>"Op: +"
-<node>"Id: y Type: Int Value: 16 "
+<node>"Id: y (Int, 16) "
 </node>
 <node>"Const: 1"
 </node>
@@ -182,7 +182,7 @@
 <node>"Op: +"
 <node>"Op: *"
 <node>"Op: +"
-<node>"Id: y Type: Int Value: 16 "
+<node>"Id: y (Int, 16) "
 </node>
 <node>"Const: 1"
 </node>
@@ -196,15 +196,15 @@
 </node>
 <node>"if"
 <node>"Op: =="
-<node>"Id: a Type: Float Value: 0 "
+<node>"Id: a (Float, 0) "
 </node>
-<node>"Id: b Type: Float Value: 0 "
+<node>"Id: b (Float, 0) "
 </node>
 </node>
 <node>"="
 <node>"a"</node>
 <node>"Op: +"
-<node>"Id: a Type: Float Value: 0 "
+<node>"Id: a (Float, 0) "
 </node>
 <node>"Const: 1"
 </node>
@@ -213,7 +213,7 @@
 <node>"="
 <node>"b"</node>
 <node>"Op: +"
-<node>"Id: b Type: Float Value: 0 "
+<node>"Id: b (Float, 0) "
 </node>
 <node>"Const: 1"
 </node>
@@ -221,7 +221,7 @@
 </node>
 </node>
 <node>"Op: =="
-<node>"Id: y Type: Int Value: 16 "
+<node>"Id: y (Int, 16) "
 </node>
 <node>"Const: 5"
 </node>
@@ -229,7 +229,7 @@
 </node>
 <node>"Iteration"
 <node>"Write"
-<node>"Id: x Type: Int Value: 8 "
+<node>"Id: x (Int, 8) "
 </node>
 </node>
 <node>"Repeat"
@@ -241,7 +241,7 @@
 <node>"Op: !="
 <node>"Const: 6"
 </node>
-<node>"Id: a Type: Float Value: 0 "
+<node>"Id: a (Float, 0) "
 </node>
 </node>
 <node>"="
@@ -251,7 +251,7 @@
 </node>
 </node>
 <node>"Op: &lt;"
-<node>"Id: x Type: Int Value: 8 "
+<node>"Id: x (Int, 8) "
 </node>
 <node>"Const: 4"
 </node>
