@@ -87,7 +87,8 @@ namespace IDE
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.Pink;
+            this.menuStrip1.BackColor = System.Drawing.Color.Lavender;
+            this.menuStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.menuStrip1.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
@@ -222,7 +223,7 @@ namespace IDE
             this.tabControl2.Location = new System.Drawing.Point(402, 51);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(350, 319);
+            this.tabControl2.Size = new System.Drawing.Size(350, 336);
             this.tabControl2.TabIndex = 8;
             // 
             // tabPage3
@@ -231,7 +232,7 @@ namespace IDE
             this.tabPage3.Location = new System.Drawing.Point(4, 28);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(342, 287);
+            this.tabPage3.Size = new System.Drawing.Size(342, 304);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Léxico";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -248,7 +249,7 @@ namespace IDE
             this.TokenList.GridLines = true;
             this.TokenList.Location = new System.Drawing.Point(0, 0);
             this.TokenList.Name = "TokenList";
-            this.TokenList.Size = new System.Drawing.Size(346, 285);
+            this.TokenList.Size = new System.Drawing.Size(346, 302);
             this.TokenList.TabIndex = 0;
             this.TokenList.UseCompatibleStateImageBehavior = false;
             this.TokenList.View = System.Windows.Forms.View.Details;
@@ -334,7 +335,7 @@ namespace IDE
             this.fastColoredTextBox1.Paddings = new System.Windows.Forms.Padding(0);
             this.fastColoredTextBox1.RightBracket = ')';
             this.fastColoredTextBox1.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fastColoredTextBox1.Size = new System.Drawing.Size(380, 319);
+            this.fastColoredTextBox1.Size = new System.Drawing.Size(380, 336);
             this.fastColoredTextBox1.TabIndex = 9;
             // 
             // panel1
@@ -345,7 +346,7 @@ namespace IDE
             this.panel1.Controls.Add(this.fastColoredTextBox1);
             this.panel1.Location = new System.Drawing.Point(16, 51);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(380, 319);
+            this.panel1.Size = new System.Drawing.Size(380, 336);
             this.panel1.TabIndex = 10;
             // 
             // tabPage2
@@ -404,7 +405,7 @@ namespace IDE
             this.Salidas.Controls.Add(this.tabPage2);
             this.Salidas.Controls.Add(this.tabPage7);
             this.Salidas.Font = new System.Drawing.Font("Segoe Print", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Salidas.Location = new System.Drawing.Point(12, 376);
+            this.Salidas.Location = new System.Drawing.Point(12, 393);
             this.Salidas.Name = "Salidas";
             this.Salidas.SelectedIndex = 0;
             this.Salidas.Size = new System.Drawing.Size(736, 143);
@@ -465,8 +466,8 @@ namespace IDE
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Firebrick;
-            this.ClientSize = new System.Drawing.Size(764, 522);
+            this.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.ClientSize = new System.Drawing.Size(764, 539);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl2);
             this.Controls.Add(this.Salidas);

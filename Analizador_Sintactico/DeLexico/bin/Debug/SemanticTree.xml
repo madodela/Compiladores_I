@@ -13,14 +13,14 @@
 </node>
 </node>
 <node>"="
-<node>"x"</node>
+<node>"x (Int, 23) "</node>
 <node>"Const: 23"
 </node>
 </node>
 <node>"="
-<node>"y"</node>
-<node>"Op: -"
-<node>"Op: +"
+<node>"y (Int, 4) "</node>
+<node>"Op: - (4)"
+<node>"Op: + (5)"
 <node>"Const: 2"
 </node>
 <node>"Const: 3"
@@ -31,8 +31,8 @@
 </node>
 </node>
 <node>"="
-<node>"z"</node>
-<node>"Op: +"
+<node>"z (Int, 11) "</node>
+<node>"Op: + (11)"
 <node>"Id: y (Int, -2) "
 </node>
 <node>"Const: 7"
@@ -40,15 +40,15 @@
 </node>
 </node>
 <node>"="
-<node>"x"</node>
-<node>"Op: *"
-<node>"Op: -"
+<node>"x (Int, 8) "</node>
+<node>"Op: * (8)"
+<node>"Op: - (2)"
 <node>"Const: 5"
 </node>
 <node>"Const: 3"
 </node>
 </node>
-<node>"Op: /"
+<node>"Op: / (4)"
 <node>"Const: 8"
 </node>
 <node>"Const: 2"
@@ -57,17 +57,17 @@
 </node>
 </node>
 <node>"="
-<node>"y"</node>
-<node>"Op: -"
-<node>"Op: -"
-<node>"Op: +"
+<node>"y (Int, -2) "</node>
+<node>"Op: - (-2)"
+<node>"Op: - (7)"
+<node>"Op: + (8)"
 <node>"Const: 5"
 </node>
 <node>"Const: 3"
 </node>
 </node>
-<node>"Op: /"
-<node>"Op: *"
+<node>"Op: / (1)"
+<node>"Op: * (8)"
 <node>"Const: 2"
 </node>
 <node>"Const: 4"
@@ -82,15 +82,15 @@
 </node>
 </node>
 <node>"="
-<node>"z"</node>
-<node>"Op: +"
-<node>"Op: /"
+<node>"z (Int, 64) "</node>
+<node>"Op: + (64)"
+<node>"Op: / (4)"
 <node>"Const: 8"
 </node>
 <node>"Const: 2"
 </node>
 </node>
-<node>"Op: *"
+<node>"Op: * (60)"
 <node>"Const: 15"
 </node>
 <node>"Const: 4"
@@ -99,23 +99,23 @@
 </node>
 </node>
 <node>"="
-<node>"y"</node>
+<node>"y (Int, -2) "</node>
 <node>"Const: 14.54"
 </node>
 </node>
 <node>"="
-<node>"a"</node>
-<node>"Op: -"
-<node>"Op: +"
-<node>"Op: -"
-<node>"Op: +"
+<node>"a (Float, 60) "</node>
+<node>"Op: - (60)"
+<node>"Op: + (61)"
+<node>"Op: - (27)"
+<node>"Op: + (28)"
 <node>"Const: 24"
 </node>
 <node>"Const: 4"
 </node>
 </node>
-<node>"Op: /"
-<node>"Op: *"
+<node>"Op: / (1)"
+<node>"Op: * (3)"
 <node>"Const: 1"
 </node>
 <node>"Const: 3"
@@ -140,8 +140,8 @@
 </node>
 </node>
 <node>"="
-<node>"y"</node>
-<node>"Op: +"
+<node>"y (Int, 0) "</node>
+<node>"Op: + (0)"
 <node>"Id: a (Float, 60) "
 </node>
 <node>"Const: 3"
@@ -156,19 +156,19 @@
 </node>
 </node>
 <node>"="
-<node>"b"</node>
+<node>"b (Float, 0) "</node>
 <node>"Const: 3.2"
 </node>
 </node>
 <node>"="
-<node>"b"</node>
+<node>"b (Float, 0) "</node>
 <node>"Const: 5"
 </node>
 </node>
 </node>
 <node>"="
-<node>"y"</node>
-<node>"Op: +"
+<node>"y (Int, 0) "</node>
+<node>"Op: + (0)"
 <node>"Id: y (Int, -2) "
 </node>
 <node>"Const: 1"
@@ -178,10 +178,10 @@
 </node>
 <node>"Repeat"
 <node>"="
-<node>"y"</node>
-<node>"Op: +"
-<node>"Op: *"
-<node>"Op: +"
+<node>"y (Int, 0) "</node>
+<node>"Op: + (0)"
+<node>"Op: * (0)"
+<node>"Op: + (0)"
 <node>"Id: y (Int, -2) "
 </node>
 <node>"Const: 1"
@@ -202,8 +202,8 @@
 </node>
 </node>
 <node>"="
-<node>"a"</node>
-<node>"Op: +"
+<node>"a (Float, 0) "</node>
+<node>"Op: + (0)"
 <node>"Id: a (Float, 60) "
 </node>
 <node>"Const: 1"
@@ -211,8 +211,8 @@
 </node>
 </node>
 <node>"="
-<node>"b"</node>
-<node>"Op: +"
+<node>"b (Float, 0) "</node>
+<node>"Op: + (0)"
 <node>"Id: b (Float, 0) "
 </node>
 <node>"Const: 1"
@@ -245,7 +245,7 @@
 </node>
 </node>
 <node>"="
-<node>"a"</node>
+<node>"a (Float, 0) "</node>
 <node>"Const: 5"
 </node>
 </node>

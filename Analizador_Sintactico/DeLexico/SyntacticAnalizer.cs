@@ -108,7 +108,9 @@ namespace NSSyntacticAnalizer
 		StreamWriter writerSemanticTree;
 		//Other output file containing the errors found
 		FileStream infoSyntacticAnalisys;
+        FileStream infoSemanticAnalisys;
 		StreamWriter writerInfo;
+        StreamWriter writerInfoSemantic;
 		//Objetc to save the symbol table
 		SymbolTable symbolTable = new SymbolTable();
 		//string currentId;
@@ -548,7 +550,28 @@ namespace NSSyntacticAnalizer
 							writerTree.WriteLine("<node>\"=\"");
 							writerTree.WriteLine("<node>\"{0}\"</node>", tree.name);
 							writerSemanticTree.WriteLine("<node>\"=\"");
-							writerSemanticTree.WriteLine("<node>\"{0}\"</node>", tree.name);
+							//writerSemanticTree.WriteLine("<node>\"{0}\"</node>", tree.name);
+                           // writerTree.WriteLine("<node>\"Id: {0}\"", tree.name);
+								BucketListRec l = symbolTable.st_lookup(tree.name);
+								if (l == null) {
+									writerSemanticTree.WriteLine("<node>\"Id: {0} Error: Variable not declared\"</node>", tree.name);
+									Console.WriteLine("Id: {0} Error:Variable not declared", tree.name);
+								} else {
+									switch (l.tipo) {
+										case "Int":
+                                            writerSemanticTree.WriteLine("<node>\"{0} ({1}, {2}) \"</node>" , tree.name , l.tipo , tree.valInt);
+											Console.WriteLine("{0} ({1}, {2}) ", tree.name, l.tipo, tree.valInt);
+											break;
+										case "Float":
+                                            writerSemanticTree.WriteLine("<node>\"{0} ({1}, {2}) \"</node>" , tree.name , l.tipo , tree.valDouble);
+											Console.WriteLine("{0} ({1}, {2}) ", tree.name, l.tipo, tree.valDouble);
+											break;
+										case "Bool":
+                                            writerSemanticTree.WriteLine("<node>\"{0} ({1}, {2}) \"</node>" , tree.name , l.tipo , tree.valBool);
+											Console.WriteLine("{0} ({1}, {2}) ", tree.name, l.tipo, tree.valBool);
+											break;
+									}
+								}
 							break;
 						case StmtKind.ReadK:
 							Console.Write("Read: {0}\n", tree.name);
@@ -605,14 +628,33 @@ namespace NSSyntacticAnalizer
 										op = "Unknown operator";
 										break; //assumed this error never occur
 								}
-								Console.Write("Op: {0}\n", op);
-								writerTree.WriteLine("<node>\"Op: {0}\"", op);
-								writerSemanticTree.WriteLine("<node>\"Op: {0}\"", op);
+                                if (op == "/" || op == "*" || op == "+" || op == "-" )
+                                {
+                                    if (tree.isIntType)
+                                    {
+                                        Console.Write("Op: {0} ({1})\n" , op , tree.valInt);
+                                        writerTree.WriteLine("<node>\"Op: {0} ({1})\"" , op , tree.valInt);
+                                        writerSemanticTree.WriteLine("<node>\"Op: {0} ({1})\"" , op , tree.valInt);
+                                    }
+                                    else
+                                    {
+                                        Console.Write("Op: {0} ({1})\n" , op , tree.valDouble);
+                                        writerTree.WriteLine("<node>\"Op: {0} ({1})\"" , op , tree.valDouble);
+                                        writerSemanticTree.WriteLine("<node>\"Op: {0} ({1})\"" , op , tree.valDouble);
+                                    }
+                                }
+                                else
+                                {
+                                    Console.Write("Op: {0}\n" , op);
+                                    writerTree.WriteLine("<node>\"Op: {0}\"" , op);
+                                    writerSemanticTree.WriteLine("<node>\"Op: {0}\"" , op);
+                                }
+
 								break;
 							case ExpKind.ConstK:
 								if (tree.isIntType) {
 									Console.Write("Const: {0}\n", tree.valInt);
-									writerTree.WriteLine("<node>\"Const: {0}\"", tree.valInt);
+                                    writerTree.WriteLine("<node>\"Const: {0}\"", tree.valInt);
 									writerSemanticTree.WriteLine("<node>\"Const: {0}\"", tree.valInt);
 								} else {
 									Console.Write("Const: {0}\n", tree.valDouble);
@@ -621,8 +663,8 @@ namespace NSSyntacticAnalizer
 								}
 								break;
 							case ExpKind.IdK:
-								Console.Write("Id: {0}\n", tree.name);
-								writerTree.WriteLine("<node>\"Id: {0}    N° Linea:{1}\"", tree.name, tree.nline);
+								//Console.Write("Id: {0}\n", tree.name);
+								writerTree.WriteLine("<node>\"Id: {0}\"", tree.name);
 								BucketListRec l = symbolTable.st_lookup(tree.name);
 								if (l == null) {
 									writerSemanticTree.WriteLine("<node>\"Id: {0} Error: Variable not declared\"", tree.name);
@@ -724,16 +766,24 @@ namespace NSSyntacticAnalizer
 					tipoActual = l.tipo;
 
 					cGen(tree.child[0]);
+                    
 					Console.WriteLine(tree.name + "<- " + tree.child[0].valInt + " " +tree.child[0].valDouble);
                     if (!tree.child[0].typeError || !tree.child[0].undeclaredError)
                     {
+                        
                         if ((tree.child[0].isIntType && (l.tipo.Equals("Int"))) || (tree.child[0].isIntType == false && l.tipo.Equals("Float")))
                         {
-                            symbolTable.st_insert(tree.name , tree.nline , tree.child[0].valInt , tree.child[0].valDouble , tree.child[0].valBool , l.tipo , false , true);
+                            symbolTable.st_insert(tree.name , tree.nline , tree.child[0].valInt , tree.child[0].valDouble , tree.child
+                                [0].valBool , l.tipo , false , true);
+                            tree.valInt = tree.child[0].valInt;
+                            tree.valDouble = tree.child[0].valDouble;
                         }
                         else
                         {
-                            Console.WriteLine("Error: tipos diferentes. Variables {0} <- {1} {2} " , tree.name , tree.child[0].valInt , tree.child[0].valDouble);
+                            Console.WriteLine("Error: tipos diferentes. Variables {0} <- {1} {2} " , tree.name , l.valI , tree.child[0].valDouble);
+                            tree.valInt = l.valI;
+                            tree.valDouble = l.valF;
+                            writerInfoSemantic.WriteLine("Error: tipos diferentes. Variables {0}: int={1}, float={2}" , tree.name , l.valI , tree.child[0].valDouble);
                         }
                     }
 					break; /* assign_k */
@@ -749,6 +799,7 @@ namespace NSSyntacticAnalizer
 					else
 					{
 						Console.WriteLine("Variable not declared:"+ tree.name);
+                        writerInfoSemantic.WriteLine("Variable not declared:" + tree.name + "N.Linea: " + tree.nline);
 					}
 					break;
 				default:
@@ -792,7 +843,8 @@ namespace NSSyntacticAnalizer
 					else
 					{
                         tree.undeclaredError = true;
-						Console.WriteLine("Variable not  declared", tree.name);
+						Console.WriteLine("Variable not  declared: {0}", tree.name);
+                        writerInfoSemantic.WriteLine("Variable not declared:" + tree.name + "N.Linea: " + tree.nline);
 					}
 					break; /* IdK */
 
@@ -935,7 +987,9 @@ namespace NSSyntacticAnalizer
 				syntacticTree = new FileStream("SyntacticTree.xml", FileMode.Create, FileAccess.Write);
 				writerTree = new StreamWriter(syntacticTree);
 				infoSyntacticAnalisys = new FileStream("infoSyntacticAnalisys.txt", FileMode.Create, FileAccess.Write);
+                infoSemanticAnalisys = new FileStream("infoSemanticAnalisys.txt" , FileMode.Create , FileAccess.Write);
 				writerInfo = new StreamWriter(infoSyntacticAnalisys);
+                writerInfoSemantic = new StreamWriter(infoSemanticAnalisys);
 				writerTree.WriteLine("<?xml version=\"1.0\"?>");
 				semanticTree = new FileStream("SemanticTree.xml" , FileMode.Create , FileAccess.Write);
 				writerSemanticTree = new StreamWriter(semanticTree);
@@ -949,6 +1003,7 @@ namespace NSSyntacticAnalizer
 				writerTree.Close();
 				writerSemanticTree.Close();
 				writerInfo.Close();
+                writerInfoSemantic.Close();
 			}
 		}
 		

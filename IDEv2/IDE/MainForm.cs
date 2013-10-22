@@ -198,6 +198,7 @@ namespace IDE
             FillTreeView(TreeView , "SyntacticTree.xml");
             FillTreeView(treeViewSemantic , "SemanticTree.xml");
 			FillErrorList("infoSyntacticAnalisys.txt");
+            FillErrorList("infoSemanticAnalisys.txt");
             FillSymbolList();
 		}
 		
