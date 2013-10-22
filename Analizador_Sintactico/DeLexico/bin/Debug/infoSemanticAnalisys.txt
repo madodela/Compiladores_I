@@ -1,0 +1,1 @@
+Error: tipos diferentes. Variables y <- 0 14.54 N.Linea: 0 
