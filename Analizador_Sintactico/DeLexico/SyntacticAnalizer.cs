@@ -365,7 +365,12 @@ namespace NSSyntacticAnalizer
 		
 		//expresión-simple → expresión-simple suma-op termino | termino
 		TreeNode simple_exp() {
-			TreeNode t = term();
+            TreeNode t ;
+           if (currentToken.token_type == Token_types.TKN_LPARENT || currentToken.token_type == Token_types.TKN_ID
+               || currentToken.token_type == Token_types.TKN_NUM)
+                t = term();
+            else
+                t = simple_exp();
 			//suma-op → + | -
 			while ((currentToken.token_type == Token_types.TKN_MINUS)
 			       || (currentToken.token_type == Token_types.TKN_ADD)) {
@@ -375,7 +380,7 @@ namespace NSSyntacticAnalizer
 					p.op = currentToken.token_type;
 					t = p;
 					match(currentToken.token_type);
-					t.child[1] = simple_exp();
+					t.child[1] = term();
 				}
 			}
 			return t;
@@ -471,7 +476,7 @@ namespace NSSyntacticAnalizer
 						if (l !=null)
 							symbolTable.st_insert(currentToken.lexema , currentToken.nline , 0 , 0 , true , null , false , false);
 						else
-							Console.WriteLine("Variable not declared");
+							Console.WriteLine("Variable not declared: "+currentToken.lexema);
 					}
 				}
 				currentToken = getToken();
@@ -620,7 +625,7 @@ namespace NSSyntacticAnalizer
 								writerTree.WriteLine("<node>\"Id: {0}    N° Linea:{1}\"", tree.name, tree.nline);
 								BucketListRec l = symbolTable.st_lookup(tree.name);
 								if (l == null) {
-									writerSemanticTree.WriteLine("<node>\"Id: {0} Error: Variable not declared\"");
+									writerSemanticTree.WriteLine("<node>\"Id: {0} Error: Variable not declared\"", tree.name);
 									Console.WriteLine("Id: {0} Error:Variable not declared", tree.name);
 								} else {
 									switch (l.tipo) {
@@ -719,21 +724,16 @@ namespace NSSyntacticAnalizer
 					tipoActual = l.tipo;
 
 					cGen(tree.child[0]);
-					Console.WriteLine(tree.name + " " + tree.child[0].valInt);
+					Console.WriteLine(tree.name + "<- " + tree.child[0].valInt + " " +tree.child[0].valDouble);
                     if (!tree.child[0].typeError || !tree.child[0].undeclaredError)
                     {
                         if ((tree.child[0].isIntType && (l.tipo.Equals("Int"))) || (tree.child[0].isIntType == false && l.tipo.Equals("Float")))
-                            //if ()
-                            //{
+                        {
                             symbolTable.st_insert(tree.name , tree.nline , tree.child[0].valInt , tree.child[0].valDouble , tree.child[0].valBool , l.tipo , false , true);
-                        //}
-                        //else
-                        //{
-                        //Console.WriteLine("Error de tipo");
-                        //}
+                        }
                         else
                         {
-                            Console.WriteLine("Error: tipos diferentes. Variables {0} y {1} {2}:{3}" , tree.child[0].name , l.name , tree.child[0].valInt , tree.child[0].valDouble);
+                            Console.WriteLine("Error: tipos diferentes. Variables {0} <- {1} {2} " , tree.name , tree.child[0].valInt , tree.child[0].valDouble);
                         }
                     }
 					break; /* assign_k */
@@ -805,11 +805,62 @@ namespace NSSyntacticAnalizer
                     {
                         if (!(p1.isIntType && p2.isIntType))
                         {
-                            tree.typeError = true;
-                            Console.WriteLine("Tipos diferentes");
+                           // tree.typeError = true;
+                            //Console.WriteLine("Tipos diferentes");
+                            tree.isIntType = false;
+                            switch (tree.op)
+                            {
+                                case Token_types.TKN_ADD:
+                                    switch (p1.isIntType)
+                                    {
+                                        case true:
+                                            tree.valDouble = tree.child[0].valInt + tree.child[1].valDouble;
+                                            break;
+                                        case false:
+                                            tree.valDouble = tree.child[0].valDouble + tree.child[1].valInt;
+                                            break;
+                                    }
+                                    break;
+                                case Token_types.TKN_MINUS:
+                                    switch (p1.isIntType)
+                                    {
+                                        case true:
+                                            tree.valDouble = tree.child[0].valInt - tree.child[1].valDouble;
+                                            break;
+                                        case false:
+                                            tree.valDouble = tree.child[0].valDouble - tree.child[1].valInt;
+                                            break;
+                                    }
+                                    break;
+                                case Token_types.TKN_PRODUCT:
+                                    switch (p1.isIntType)
+                                    {
+                                        case true:
+                                            tree.valDouble = tree.child[0].valInt * tree.child[1].valDouble;
+                                            break;
+                                        case false:
+                                            tree.valDouble = tree.child[0].valDouble * tree.child[1].valInt;
+                                            break;
+                                    }
+                                    break;
+                                case Token_types.TKN_DIVISION:
+                                    switch (p1.isIntType)
+                                    {
+                                        case true:
+                                            tree.valDouble = tree.child[0].valInt / tree.child[1].valDouble;
+                                            break;
+                                        case false:
+                                            tree.valDouble = tree.child[0].valDouble / tree.child[1].valInt;
+                                            break;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            } /* case op */
                         }
                         else
                         {
+
                             switch (tree.op)
                             {
                                 case Token_types.TKN_ADD:
@@ -891,7 +942,7 @@ namespace NSSyntacticAnalizer
 				writerSemanticTree.WriteLine("<?xml version=\"1.0\"?>");
 				SyntacticTree = Parse(); //Parse function creates the Syntactic Tree
 				cGen(SyntacticTree.child[1]);
-				//printBothTrees(SyntacticTree);
+				printBothTrees(SyntacticTree);
 			} catch(FileNotFoundException e){Console.WriteLine("File Not Found because " + e.Message);
 			} catch(ArgumentException e){Console.WriteLine("Cannot read file because " + e.Message);
 			} finally {

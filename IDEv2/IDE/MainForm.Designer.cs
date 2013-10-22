@@ -57,6 +57,7 @@ namespace IDE
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.TreeView = new System.Windows.Forms.TreeView();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.treeViewSemantic = new System.Windows.Forms.TreeView();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.fastColoredTextBox1 = new FastColoredTextBoxNS.FastColoredTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -72,7 +73,6 @@ namespace IDE
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.treeViewSemantic = new System.Windows.Forms.TreeView();
             this.menuStrip1.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -87,7 +87,7 @@ namespace IDE
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.Tan;
+            this.menuStrip1.BackColor = System.Drawing.Color.Pink;
             this.menuStrip1.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
@@ -276,6 +276,8 @@ namespace IDE
             // 
             // TreeView
             // 
+            this.TreeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.TreeView.Location = new System.Drawing.Point(0, 0);
             this.TreeView.Name = "TreeView";
             this.TreeView.Size = new System.Drawing.Size(342, 311);
@@ -291,6 +293,15 @@ namespace IDE
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "Semántico";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // treeViewSemantic
+            // 
+            this.treeViewSemantic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.treeViewSemantic.Location = new System.Drawing.Point(0, 0);
+            this.treeViewSemantic.Name = "treeViewSemantic";
+            this.treeViewSemantic.Size = new System.Drawing.Size(342, 287);
+            this.treeViewSemantic.TabIndex = 0;
             // 
             // tabPage6
             // 
@@ -450,18 +461,11 @@ namespace IDE
             this.columnHeader8.Text = "Números de linea";
             this.columnHeader8.Width = 404;
             // 
-            // treeViewSemantic
-            // 
-            this.treeViewSemantic.Location = new System.Drawing.Point(0, 0);
-            this.treeViewSemantic.Name = "treeViewSemantic";
-            this.treeViewSemantic.Size = new System.Drawing.Size(342, 287);
-            this.treeViewSemantic.TabIndex = 0;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.BurlyWood;
+            this.BackColor = System.Drawing.Color.Firebrick;
             this.ClientSize = new System.Drawing.Size(764, 522);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl2);

@@ -59,8 +59,8 @@ namespace NSSyntacticAnalizer
 				temp = ((temp << SHIFT) + key2[i]) % SIZE;
 				++i;
 			}
-			Console.Write("<<{0}" , temp);
-			Console.WriteLine();
+			//Console.Write("<<{0}" , temp);
+			//Console.WriteLine();
 			return temp;
 		}
 
@@ -76,13 +76,13 @@ namespace NSSyntacticAnalizer
 			{
 				LineListRec list = new LineListRec(linenu);
 				l = new BucketListRec(name , this.hashTable[h] , list , valI , valF , valB, tipo, haveVal);
-				Console.WriteLine("Nombre: {0}" , l.name );
+				//Console.WriteLine("Nombre: {0}" , l.name );
 				this.hashTable[h] = l;
 			}
 			else /* está en la tabla, de modo que sólo se agrega el número de línea*/
 			{
-				Console.WriteLine("Variable ya en tabla");
-				Console.WriteLine("Nombre: {0}" , l.name );
+				//Console.WriteLine("Variable ya en tabla");
+				//Console.WriteLine("Nombre: {0}" , l.name );
 				LineListRec t = l.lines;
 				if (string.Equals(l.tipo , "Int"))
 					l.valI = valI;
