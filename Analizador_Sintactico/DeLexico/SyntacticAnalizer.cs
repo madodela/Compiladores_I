@@ -438,9 +438,12 @@ namespace NSSyntacticAnalizer
 					{
 						t.name = currentToken.lexema;
 						t.nline = currentToken.nline;
+                       
 					}
+                    
 					match(Token_types.TKN_ID);
-					break;
+					
+                    break;
 					//(exp) option
 				case Token_types.TKN_LPARENT:
 					match(Token_types.TKN_LPARENT);
@@ -466,6 +469,7 @@ namespace NSSyntacticAnalizer
 						string tipo;
 						if (current_valType == Token_types.TKN_INT)
 							tipo = "Int";
+                            
 						else if (current_valType == Token_types.TKN_FLOAT)
 							tipo = "Float";
 						else
@@ -522,7 +526,7 @@ namespace NSSyntacticAnalizer
 						case StmtKind.IfK:
 							Console.Write("If\n");
 							writerTree.WriteLine("<node>\"if\"");
-							writerSemanticTree.WriteLine("<node>\"if\"");
+                            writerSemanticTree.WriteLine("<node>\"if\"");
 							break;
 						case StmtKind.IterationK:
 							Console.Write("Iteration\n");
@@ -632,22 +636,22 @@ namespace NSSyntacticAnalizer
                                 {
                                     if (tree.isIntType)
                                     {
-                                        Console.Write("Op: {0} ({1})\n" , op , tree.valInt);
-                                        writerTree.WriteLine("<node>\"Op: {0} ({1})\"" , op , tree.valInt);
-                                        writerSemanticTree.WriteLine("<node>\"Op: {0} ({1})\"" , op , tree.valInt);
+                                        Console.Write("Op: {0} ({1})\n" , op, tree.valInt);
+                                        writerTree.WriteLine("<node>\"Op: {0} ({1})\"" , op, tree.valInt);
+                                        writerSemanticTree.WriteLine("<node>\"Op: {0} ({1})\"" , op, tree.valInt);
                                     }
                                     else
                                     {
-                                        Console.Write("Op: {0} ({1})\n" , op , tree.valDouble);
-                                        writerTree.WriteLine("<node>\"Op: {0} ({1})\"" , op , tree.valDouble);
-                                        writerSemanticTree.WriteLine("<node>\"Op: {0} ({1})\"" , op , tree.valDouble);
+                                        Console.Write("Op: {0} ({1})\n" , op, tree.valDouble);
+                                        writerTree.WriteLine("<node>\"Op: {0} ({1})\"" , op, tree.valDouble);
+                                        writerSemanticTree.WriteLine("<node>\"Op: {0} ({1})\"" , op, tree.valDouble);
                                     }
                                 }
                                 else
                                 {
-                                    Console.Write("Op: {0}\n" , op);
+                                    Console.Write("Op: {0} ({1})\n" , op, tree.valBool);
                                     writerTree.WriteLine("<node>\"Op: {0}\"" , op);
-                                    writerSemanticTree.WriteLine("<node>\"Op: {0}\"" , op);
+                                    writerSemanticTree.WriteLine("<node>\"Op: {0} ({1})\"" , op, tree.valBool);
                                 }
 
 								break;
@@ -755,35 +759,61 @@ namespace NSSyntacticAnalizer
 		}
 		//int cvalI;
 		//double cvalF;
+        bool enBloque = false;
 		void genStmt(TreeNode tree)
 		{
-			//TreeNode p1 , p2 , p3;
+			TreeNode p1 , p2 , p3;
 			BucketListRec l;
+            
 			switch (tree.stmtK)
 			{
-				case StmtKind.AssignK:
-					l = symbolTable.st_lookup(tree.name);
-					tipoActual = l.tipo;
-
-					cGen(tree.child[0]);
+                case StmtKind.IfK:
+                    cGen(tree.child[0]);
                     
-					Console.WriteLine(tree.name + "<- " + tree.child[0].valInt + " " +tree.child[0].valDouble);
-                    if (!tree.child[0].typeError || !tree.child[0].undeclaredError)
+                    break;
+                case StmtKind.RepeatK:
+                    p1 = tree.child[0];
+                    p2 = tree.child[1];
+                    cGen(p1);
+                    cGen(p2);
+                    break; /* repeat */
+                case StmtKind.IterationK:
+                    p1 = tree.child[0];
+                    p2 = tree.child[1];
+                    cGen(p1);
+                    cGen(p2);
+                    break;
+                case StmtKind.BlockK:
+                    enBloque = true;
+                    cGen(tree.child[0]);
+                    enBloque = false;
+                    break;
+				case StmtKind.AssignK:
+                    if (!enBloque)
                     {
-                        
-                        if ((tree.child[0].isIntType && (l.tipo.Equals("Int"))) || (tree.child[0].isIntType == false && l.tipo.Equals("Float")))
+                        l = symbolTable.st_lookup(tree.name);
+                        tipoActual = l.tipo;
+
+                        cGen(tree.child[0]);
+
+                        Console.WriteLine(tree.name + "<- " + tree.child[0].valInt + " " + tree.child[0].valDouble);
+                        if (!tree.child[0].typeError || !tree.child[0].undeclaredError)
                         {
-                            symbolTable.st_insert(tree.name , tree.nline , tree.child[0].valInt , tree.child[0].valDouble , tree.child
-                                [0].valBool , l.tipo , false , true);
-                            tree.valInt = tree.child[0].valInt;
-                            tree.valDouble = tree.child[0].valDouble;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Error: tipos diferentes. Variables {0} <- {1} {2} " , tree.name , l.valI , tree.child[0].valDouble);
-                            tree.valInt = l.valI;
-                            tree.valDouble = l.valF;
-                            writerInfoSemantic.WriteLine("Error: tipos diferentes. Variables {0}: int={1}, float={2}" , tree.name , l.valI , tree.child[0].valDouble);
+
+                            if ((tree.child[0].isIntType && (l.tipo.Equals("Int"))) || (tree.child[0].isIntType == false && l.tipo.Equals("Float")))
+                            {
+                                symbolTable.st_insert(tree.name , tree.nline , tree.child[0].valInt , tree.child[0].valDouble , tree.child
+                                    [0].valBool , l.tipo , false , true);
+                                tree.valInt = tree.child[0].valInt;
+                                tree.valDouble = tree.child[0].valDouble;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Error: tipos diferentes. Variables {0} <- {1} {2} " , tree.name , l.valI , tree.child[0].valDouble);
+                                tree.valInt = l.valI;
+                                tree.valDouble = l.valF;
+                                writerInfoSemantic.WriteLine("Error: tipos diferentes. Variables {0}: int={1}, float={2}" , tree.name , l.valI , tree.child[0].valDouble);
+                            }
                         }
                     }
 					break; /* assign_k */
@@ -820,6 +850,13 @@ namespace NSSyntacticAnalizer
 				case ExpKind.IdK:
 					
 					l = symbolTable.st_lookup(tree.name);
+                    
+                        if (l.tipo=="Int")
+                        {
+                            tree.isIntType = true;
+                        }
+                        else tree.isIntType = false;
+                    
 					if (l != null)
 					{
 						if (l.haveVal)
@@ -906,6 +943,108 @@ namespace NSSyntacticAnalizer
                                             break;
                                     }
                                     break;
+                                case Token_types.TKN_LTHAN:
+                                    switch (p1.isIntType)
+                                    {
+                                        case true:
+                                            if (tree.child[0].valInt < tree.child[1].valDouble)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                        case false:
+                                            if (tree.child[0].valDouble < tree.child[1].valInt)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                    }
+                                    break;
+                                case Token_types.TKN_LETHAN:
+                                    switch (p1.isIntType)
+                                    {
+                                        case true:
+                                            if (tree.child[0].valInt <= tree.child[1].valDouble)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                        case false:
+                                            if (tree.child[0].valDouble <= tree.child[1].valInt)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                    }
+                                    break;
+                                case Token_types.TKN_GTHAN:
+                                    switch (p1.isIntType)
+                                    {
+                                        case true:
+                                            if (tree.child[0].valInt > tree.child[1].valDouble)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                        case false:
+                                            if (tree.child[0].valDouble > tree.child[1].valInt)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                    }
+                                    break;
+                                case Token_types.TKN_GETHAN:
+                                    switch (p1.isIntType)
+                                    {
+                                        case true:
+                                            if (tree.child[0].valInt >= tree.child[1].valDouble)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                        case false:
+                                            if (tree.child[0].valDouble >= tree.child[1].valInt)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                    }
+                                    break;
+                                case Token_types.TKN_EQUAL:
+                                    switch (p1.isIntType)
+                                    {
+                                        case true:
+                                            if (tree.child[0].valInt == tree.child[1].valDouble)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                        case false:
+                                            if (tree.child[0].valDouble == tree.child[1].valInt)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                    }
+                                    break;
+                                case Token_types.TKN_NEQUAL:
+                                    switch (p1.isIntType)
+                                    {
+                                        case true:
+                                            if (tree.child[0].valInt != tree.child[1].valDouble)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                        case false:
+                                            if (tree.child[0].valDouble != tree.child[1].valInt)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                    }
+                                    break;
                                 default:
                                     break;
                             } /* case op */
@@ -959,12 +1098,114 @@ namespace NSSyntacticAnalizer
                                             break;
                                     }
                                     break;
+                                case Token_types.TKN_LTHAN:
+                                    switch (p1.isIntType)
+                                    {
+                                        case true:
+                                            if (tree.child[0].valInt < tree.child[1].valInt)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                        case false:
+                                            if (tree.child[0].valDouble < tree.child[1].valDouble)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                    }
+                                    break;
+                                case Token_types.TKN_LETHAN:
+                                    switch (p1.isIntType)
+                                    {
+                                        case true:
+                                            if (tree.child[0].valInt <= tree.child[1].valInt)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                        case false:
+                                            if (tree.child[0].valDouble <= tree.child[1].valDouble)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                    }
+                                    break;
+                                case Token_types.TKN_GTHAN:
+                                    switch (p1.isIntType)
+                                    {
+                                        case true:
+                                            if (tree.child[0].valInt > tree.child[1].valInt)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                        case false:
+                                            if (tree.child[0].valDouble > tree.child[1].valDouble)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                    }
+                                    break;
+                                case Token_types.TKN_GETHAN:
+                                    switch (p1.isIntType)
+                                    {
+                                        case true:
+                                            if (tree.child[0].valInt >= tree.child[1].valInt)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                        case false:
+                                            if (tree.child[0].valDouble >= tree.child[1].valDouble)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                    }
+                                    break;
+                                case Token_types.TKN_EQUAL:
+                                    switch (p1.isIntType)
+                                    {
+                                        case true:
+                                            if (tree.child[0].valInt == tree.child[1].valInt)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                        case false:
+                                            if (tree.child[0].valDouble == tree.child[1].valDouble)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                    }
+                                    break;
+                                case Token_types.TKN_NEQUAL:
+                                    switch (p1.isIntType)
+                                    {
+                                        case true:
+                                            if (tree.child[0].valInt != tree.child[1].valInt)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                        case false:
+                                            if (tree.child[0].valDouble != tree.child[1].valDouble)
+                                                tree.valBool = true;
+                                            else
+                                                tree.valBool = false;
+                                            break;
+                                    }
+                                    break;
                                 default:
                                     break;
                             } /* case op */
                         }//fin else
                     }//fin if
-                    else //alguno de los dos hijos tiene alugn tipo de error
+                    else //alguno de los dos hijos tiene alugun tipo de error
                     {
                         if (p1.typeError || p2.typeError) tree.typeError = true;
                         if (p1.undeclaredError || p2.undeclaredError) tree.undeclaredError = true;                        
@@ -997,6 +1238,7 @@ namespace NSSyntacticAnalizer
 				SyntacticTree = Parse(); //Parse function creates the Syntactic Tree
 				cGen(SyntacticTree.child[1]);
 				printBothTrees(SyntacticTree);
+                CodeGenerator codeGenerator = new CodeGenerator(SyntacticTree);
 			} catch(FileNotFoundException e){Console.WriteLine("File Not Found because " + e.Message);
 			} catch(ArgumentException e){Console.WriteLine("Cannot read file because " + e.Message);
 			} finally {
@@ -1010,6 +1252,7 @@ namespace NSSyntacticAnalizer
 		public static void Main(string[] args) {
 			SyntacticAnalizer analizer = new SyntacticAnalizer();
 			analizer.symbolTable.printSymTab();
+            
 			Console.ReadKey();
 		}
 	}

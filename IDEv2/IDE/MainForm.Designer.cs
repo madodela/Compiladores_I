@@ -174,8 +174,7 @@ namespace IDE
             this.compilarToolStripMenuItem.Enabled = false;
             this.compilarToolStripMenuItem.Name = "compilarToolStripMenuItem";
             this.compilarToolStripMenuItem.ShortcutKeyDisplayString = "";
-            this.compilarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.Space)));
+            this.compilarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.compilarToolStripMenuItem.Size = new System.Drawing.Size(76, 25);
             this.compilarToolStripMenuItem.Text = "Compilar";
             this.compilarToolStripMenuItem.ToolTipText = "Compilar el código actual";
@@ -195,7 +194,7 @@ namespace IDE
             // 
             this.salirToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("salirToolStripMenuItem.Image")));
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.salirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.salirToolStripMenuItem.Size = new System.Drawing.Size(65, 25);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.ToolTipText = "Salir del programa";
@@ -270,7 +269,7 @@ namespace IDE
             this.tabPage4.Location = new System.Drawing.Point(4, 28);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(342, 287);
+            this.tabPage4.Size = new System.Drawing.Size(342, 304);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Sintáctico";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -290,7 +289,7 @@ namespace IDE
             this.tabPage5.Location = new System.Drawing.Point(4, 28);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(342, 287);
+            this.tabPage5.Size = new System.Drawing.Size(342, 304);
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "Semántico";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -309,7 +308,7 @@ namespace IDE
             this.tabPage6.Location = new System.Drawing.Point(4, 28);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(342, 287);
+            this.tabPage6.Size = new System.Drawing.Size(342, 304);
             this.tabPage6.TabIndex = 3;
             this.tabPage6.Text = "Código intermedio";
             this.tabPage6.UseVisualStyleBackColor = true;

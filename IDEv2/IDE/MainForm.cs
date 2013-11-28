@@ -175,7 +175,7 @@ namespace IDE
 		void AcercaDeClick(object sender, EventArgs e) {
 			MessageBox.Show(" Universidad Autónoma de Aguascalientes\n   Ingenieria en Sistemas Computacionales"
 			                + "\nMateria:\n    Compiladores I\nAlumnos:\n    María Dolores Delgado Lara\n"
-			                + "    José Luis Díaz Montellano\nProfesor:\n    Dr. Eduardo Serna Pérez", "Información",
+			                + "    José Luis Díaz Montellano", "Información",
 			                MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 		

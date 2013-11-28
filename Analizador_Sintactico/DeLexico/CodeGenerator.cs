@@ -2,15 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.IO;
 namespace NSSyntacticAnalizer
 {
     class CodeGenerator
     {
         SymbolTable symTable;
-        public CodeGenerator(SymbolTable st)
+        FileStream codeFile;
+        StreamWriter writerCode;
+        TreeNode syntacticTree;
+        public CodeGenerator(TreeNode syntacticTree)
         {
-            symTable = st;
+            this.syntacticTree = syntacticTree;
+            //symTable = st;
+        }
+
+        void executeGeneration()
+        {
+            try{
+                codeFile = new FileStream("middleCode.txt" , FileMode.Create , FileAccess.Write);
+                writerCode = new StreamWriter(codeFile);
+                cGen(syntacticTree.child[1]);
+            } catch(FileNotFoundException e){Console.WriteLine("File Not Found because " + e.Message);
+			} catch(ArgumentException e){Console.WriteLine("Cannot read file because " + e.Message);
+			} finally {
+				writerCode.Close();               
+			}
         }
         void cGen(TreeNode tree)
         {
@@ -34,8 +51,8 @@ namespace NSSyntacticAnalizer
         void genStmt(TreeNode tree)
         {
             TreeNode p1 , p2 , p3;
-            //int savedLoc1 , savedLoc2 , currentLoc;
-            BucketListRec l;
+            int savedLoc1 , savedLoc2 , currentLoc;
+            
             switch (tree.stmtK)
             {
 
@@ -78,28 +95,38 @@ namespace NSSyntacticAnalizer
                     //emitRM_Abs("JEQ",ac,savedLoc1,"repeat: jmp back to body");
                     //if (TraceCode)  emitComment("<- repeat") ;
                     break; /* repeat */
-
+                    
+                case StmtKind.IterationK:
+                    
+                    p1 = tree.child[0];
+                    p2 = tree.child[1];
+                    //savedLoc1 = emitSkip(0);
+                    //emitComment("repeat: jump after body comes back here");
+                    /* generate code for body */
+                    cGen(p1);
+                    /* generate code for test */
+                    cGen(p2);
+                    //emitRM_Abs("JEQ",ac,savedLoc1,"repeat: jmp back to body");
+                    //if (TraceCode)  emitComment("<- repeat") ;
+                    break; /* iteratiom */
+               
+                case StmtKind.BlockK:
+                    p1 = tree.child[0];
+                    cGen(p1);
+                    break; /* repeat */
                 case StmtKind.AssignK:
                     //if (TraceCode) emitComment("-> assign") ;
                     /* generate code for rhs */
                     cGen(tree.child[0]);
                     /* now store value */
-                    l = symTable.st_lookup(tree.name);
-                    BucketListRec lchild = symTable.st_lookup(tree.child[0].name);
-                    if (string.Equals(l.name , lchild.name))
-                    {
-                        symTable.st_insert(tree.name , tree.nline , tree.child[0].valInt , tree.child[0].valDouble , tree.child[0].valBool , l.tipo , false , true);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Error de tipo");
-                    }
+                    
                     //emitRM("ST",ac,loc,gp,"assign: store value");
                     //if (TraceCode)  emitComment("<- assign") ;
                     break; /* assign_k */
 
                 case StmtKind.ReadK:
                     //emitRO("IN",ac,0,0,"read integer value");
+                    BucketListRec l;
                     l = symTable.st_lookup(tree.name);
                     //emitRM("ST",ac,loc,gp,"read: store value");
                     break;
@@ -147,65 +174,26 @@ namespace NSSyntacticAnalizer
                   cGen(p2);
                   /* now load left operand */
                   //emitRM("LD",ac1,++tmpOffset,mp,"op: load left");
-                  BucketListRec f , g , h;
-                  f = symTable.st_lookup(tree.name);
-                  g = symTable.st_lookup(tree.child[0].name);
-                  h = symTable.st_lookup(tree.child[1].name);
-                  if (!string.Equals(f.tipo , g.tipo) && !string.Equals(h.tipo , g.tipo))
-                  {
-                      Console.WriteLine("Error de tipos");
-                  }
-                  else
-                  {
+                  
                       switch (tree.op)
                       {
                           case Token_types.TKN_ADD:
-                              switch (f.tipo)
-                              {
-                                  case "Int":
-                                      f.valI = g.valI + h.valI;
-                                      break;
-                                  case "Float":
-                                      f.valF = g.valF + h.valF;
-                                      break;
-                              }
+                              
                               //emitRO("ADD",ac,ac1,ac,"op +");
                               break;
                           case Token_types.TKN_MINUS:
                               //emitRO("SUB",ac,ac1,ac,"op -");
-                              switch (f.tipo)
-                              {
-                                  case "Int":
-                                      f.valI = g.valI - h.valI;
-                                      break;
-                                  case "Float":
-                                      f.valF = g.valF - h.valF;
-                                      break;
-                              }
+                              
+                              
                               break;
                           case Token_types.TKN_PRODUCT:
                               //emitRO("MUL",ac,ac1,ac,"op *");
-                              switch (f.tipo)
-                              {
-                                  case "Int":
-                                      f.valI = g.valI * h.valI;
-                                      break;
-                                  case "Float":
-                                      f.valF = g.valF * h.valF;
-                                      break;
-                              }
+                              
+                              
                               break;
                           case Token_types.TKN_DIVISION:
                               //emitRO("DIV",ac,ac1,ac,"op /");
-                              switch (f.tipo)
-                              {
-                                  case "Int":
-                                      f.valI = g.valI / h.valI;
-                                      break;
-                                  case "Float":
-                                      f.valF = g.valF / h.valF;
-                                      break;
-                              }
+                              
                               break;
                           case Token_types.TKN_LTHAN:
                               //emitRO("SUB",ac,ac1,ac,"op <") ;
@@ -225,7 +213,7 @@ namespace NSSyntacticAnalizer
                               //emitComment("BUG: Unknown operator");
                               break;
                       } /* case op */
-                  }
+                  
 
                   //if (TraceCode)  emitComment("<- Op") ;
                   break; /* OpK */

@@ -129,13 +129,16 @@ namespace Analizador_Lexico
 
 					buffer = linea.ToCharArray();
 					n = buffer.Length;
+                    ncol = 0;
+                    nline++;
 					while(n==0){
 						linea =readerFile.ReadLine();
 						buffer = linea.ToCharArray();
 						n = buffer.Length;
+                        ncol = 0;
+                        nline++;
 					}
-					ncol = 0;
-					nline++;
+					
 				} else {
 					return '$';//End of file
 				}

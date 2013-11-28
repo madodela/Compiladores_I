@@ -133,7 +133,7 @@
 </node>
 </node>
 <node>"if"
-<node>"Op: &gt;"
+<node>"Op: &gt; (False)"
 <node>"Const: 2"
 </node>
 <node>"Const: 3"
@@ -149,7 +149,7 @@
 </node>
 </node>
 <node>"if"
-<node>"Op: =="
+<node>"Op: == (False)"
 <node>"Const: 4"
 </node>
 <node>"Const: 2"
@@ -195,7 +195,7 @@
 </node>
 </node>
 <node>"if"
-<node>"Op: =="
+<node>"Op: == (False)"
 <node>"Id: a (Float, 60) "
 </node>
 <node>"Id: b (Float, 0) "
@@ -220,7 +220,7 @@
 </node>
 </node>
 </node>
-<node>"Op: =="
+<node>"Op: == (False)"
 <node>"Id: y (Int, -2) "
 </node>
 <node>"Const: 5"
@@ -238,7 +238,7 @@
 </node>
 </node>
 <node>"if"
-<node>"Op: !="
+<node>"Op: != (True)"
 <node>"Const: 6"
 </node>
 <node>"Id: a (Float, 60) "
@@ -250,7 +250,7 @@
 </node>
 </node>
 </node>
-<node>"Op: &lt;"
+<node>"Op: &lt; (False)"
 <node>"Id: x (Int, 8) "
 </node>
 <node>"Const: 4"
