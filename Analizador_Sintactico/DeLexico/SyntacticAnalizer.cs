@@ -96,9 +96,9 @@ namespace NSSyntacticAnalizer
 		//private bool error;
 		private int identno = 0;
 		private Token_types current_valType;
-		private bool isDec;
+		private bool isDec; //es declaracion, solo si es, pasa el tipo
 		String tipoActual;
-		
+		private static int memloc = 0;
 		
 		//Output file of the analysis, it contains the syntactic tree
 		FileStream syntacticTree;
@@ -474,13 +474,13 @@ namespace NSSyntacticAnalizer
 							tipo = "Float";
 						else
 							tipo = "Bool";
-						symbolTable.st_insert(currentToken.lexema , currentToken.nline , 0 , 0 , true, tipo , true, false);
+						symbolTable.st_insert(currentToken.lexema , currentToken.nline , 0 , 0 , true, tipo , true, false, memloc++);
 					}
 					else
 					{
 						BucketListRec l = symbolTable.st_lookup(currentToken.lexema);
 						if (l !=null)
-							symbolTable.st_insert(currentToken.lexema , currentToken.nline , 0 , 0 , true , null , false , false);
+							symbolTable.st_insert(currentToken.lexema , currentToken.nline , 0 , 0 , true , null , false , false, memloc++);
 						else
 							Console.WriteLine("Variable not declared: "+currentToken.lexema);
 					}
@@ -803,7 +803,7 @@ namespace NSSyntacticAnalizer
                             if ((tree.child[0].isIntType && (l.tipo.Equals("Int"))) || (tree.child[0].isIntType == false && l.tipo.Equals("Float")))
                             {
                                 symbolTable.st_insert(tree.name , tree.nline , tree.child[0].valInt , tree.child[0].valDouble , tree.child
-                                    [0].valBool , l.tipo , false , true);
+                                    [0].valBool , l.tipo , false , true, memloc++);
                                 tree.valInt = tree.child[0].valInt;
                                 tree.valDouble = tree.child[0].valDouble;
                             }

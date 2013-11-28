@@ -17,7 +17,9 @@ namespace NSSyntacticAnalizer
 		public bool valB;
         public bool haveVal;
 		public BucketListRec next;
-		public BucketListRec(string nom  , BucketListRec next , LineListRec lines , int valI , double valF , bool valB , string tipo, bool haveVal)
+		public int memloc;
+		public BucketListRec(string nom  , BucketListRec next , LineListRec lines , 
+		                     int valI , double valF , bool valB , string tipo, bool haveVal, int memloc)
 		{
 			this.name = nom;
 			this.next = next;
@@ -27,6 +29,7 @@ namespace NSSyntacticAnalizer
 			this.valB = valB;
 			this.tipo = tipo;
             this.haveVal = haveVal;
+            this.memloc = memloc; //localidad de memoria para una variable
 		}
 	}
 
@@ -46,6 +49,7 @@ namespace NSSyntacticAnalizer
 
 		const int SHIFT = 4;
 		const int SIZE = 211;
+		//static int memloc = 0;
 		public BucketListRec[] hashTable = new BucketListRec[211];
 
 
@@ -66,7 +70,7 @@ namespace NSSyntacticAnalizer
 
 
 
-		public void st_insert(string name , int linenu , int valI , double valF ,bool valB, string tipo , bool isDec, bool haveVal )
+		public void st_insert(string name , int linenu , int valI , double valF ,bool valB, string tipo , bool isDec, bool haveVal, int memloc )
 		{
 			int h = hash(name);
 			BucketListRec l = this.hashTable[h];
@@ -75,7 +79,7 @@ namespace NSSyntacticAnalizer
 			if (l == null) /* variable que todavía no está en la tabla */
 			{
 				LineListRec list = new LineListRec(linenu);
-				l = new BucketListRec(name , this.hashTable[h] , list , valI , valF , valB, tipo, haveVal);
+				l = new BucketListRec(name , this.hashTable[h] , list , valI , valF , valB, tipo, haveVal, memloc);
 				//Console.WriteLine("Nombre: {0}" , l.name );
 				this.hashTable[h] = l;
 			}
@@ -116,7 +120,7 @@ namespace NSSyntacticAnalizer
 			FileStream tableSymbolFile = new FileStream("tableSymbolFile.txt" , FileMode.Create , FileAccess.Write);
 			StreamWriter info = new StreamWriter(tableSymbolFile);
 			int i;
-			Console.WriteLine("\nNombre    Tipo    Valor    No Linea");
+			Console.WriteLine("\nNombre    Loc. Mem.    Tipo    Valor    No Linea");
 
 			for (i = 0 ; i < SIZE ; ++i)
 			{
@@ -128,7 +132,9 @@ namespace NSSyntacticAnalizer
 						LineListRec t = l.lines;
 						Console.Write("{0}" , l.name);
 						info.Write("{0}" , l.name);
-						Console.Write("".PadLeft(10 - l.name.Length) + "{0}" , l.tipo);
+						Console.Write("".PadLeft(10 - l.name.Length) + "{0}" , l.memloc);
+						info.Write("\t{0}",l.tipo);
+						Console.Write("".PadLeft(10) + "{0}" , l.tipo);
 						info.Write("\t{0}",l.tipo);
 						if (String.Equals(l.tipo, "Int"))
 						{
@@ -146,7 +152,7 @@ namespace NSSyntacticAnalizer
 							info.Write("\t{0}" , l.valB);
 							// Console.Write("".PadLeft(7) + "{0}" , l.memloc);
 						}
-						Console.Write("".PadLeft(9 - l.tipo.Length));
+						Console.Write("".PadLeft(10 - l.tipo.Length));
 						info.Write("\t");
 						while (t != null)
 						{

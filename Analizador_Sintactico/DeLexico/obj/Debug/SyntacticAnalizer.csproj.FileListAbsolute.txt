@@ -18,3 +18,8 @@ C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\Analizador_Sintactico\DeLe
 C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\Analizador_Sintactico\DeLexico\obj\Debug\SyntacticAnalizer.csprojResolveAssemblyReference.cache
 C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\Analizador_Sintactico\DeLexico\obj\Debug\SyntacticAnalizer.exe
 C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\Analizador_Sintactico\DeLexico\obj\Debug\SyntacticAnalizer.pdb
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\Analizador_Sintactico\DeLexico\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\Analizador_Sintactico\DeLexico\obj\Debug\SyntacticAnalizer.exe
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\Analizador_Sintactico\DeLexico\bin\Debug\SyntacticAnalizer.exe
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\Analizador_Sintactico\DeLexico\bin\Debug\SyntacticAnalizer.pdb
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\Analizador_Sintactico\DeLexico\obj\Debug\SyntacticAnalizer.pdb
