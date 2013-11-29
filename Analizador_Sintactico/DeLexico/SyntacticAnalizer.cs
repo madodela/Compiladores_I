@@ -1238,7 +1238,8 @@ namespace NSSyntacticAnalizer
 				SyntacticTree = Parse(); //Parse function creates the Syntactic Tree
 				cGen(SyntacticTree.child[1]);
 				printBothTrees(SyntacticTree);
-                CodeGenerator codeGenerator = new CodeGenerator(SyntacticTree);
+                CodeGenerator codeGenerator = new CodeGenerator(SyntacticTree, symbolTable);
+                codeGenerator.executeGeneration();
 			} catch(FileNotFoundException e){Console.WriteLine("File Not Found because " + e.Message);
 			} catch(ArgumentException e){Console.WriteLine("Cannot read file because " + e.Message);
 			} finally {

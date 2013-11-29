@@ -1,1 +1,0 @@
-Error: tipos diferentes. Variables y: int=-2, float=14.54
