@@ -1,58 +1,34 @@
 <?xml version="1.0"?>
 <node>"Program"
-<node>"INT:r0"
-<node>"INT:r1"
-<node>"INT:r2"
-</node>
-</node>
-</node>
-<node>"Read: r0"
-</node>
-<node>"if"
-<node>"Op: &lt; (False)"
-<node>"Const: 0"
-</node>
-<node>"Id: r0 (Int, 0) "
-</node>
+<node>"INT:x"
 </node>
 <node>"="
-<node>"r1 (Int, 0) "</node>
-<node>"Const: 1"
+<node>"x (Int, 6) "</node>
+<node>"Const: 6"
 </node>
 </node>
-<node>"="
-<node>"r2 (Int, 0) "</node>
-<node>"Const: 1"
+<node>"Write"
+<node>"Id: x (Int, 6) "
 </node>
 </node>
 <node>"Repeat"
 <node>"="
-<node>"r1 (Int, 0) "</node>
-<node>"Op: * (0)"
-<node>"Id: r1 (Int, 0) "
-</node>
-<node>"Id: r0 (Int, 0) "
-</node>
-</node>
-</node>
-<node>"="
-<node>"r0 (Int, 0) "</node>
+<node>"x (Int, 0) "</node>
 <node>"Op: - (0)"
-<node>"Id: r0 (Int, 0) "
+<node>"Id: x (Int, 6) "
 </node>
-<node>"Id: r2 (Int, 0) "
-</node>
-</node>
-</node>
-<node>"Op: == (False)"
-<node>"Id: r0 (Int, 0) "
-</node>
-<node>"Const: 0"
+<node>"Const: 1"
 </node>
 </node>
 </node>
 <node>"Write"
-<node>"Id: r1 (Int, 0) "
+<node>"Id: x (Int, 6) "
+</node>
+</node>
+<node>"Op: &gt; (True)"
+<node>"Id: x (Int, 6) "
+</node>
+<node>"Const: 0"
 </node>
 </node>
 </node>

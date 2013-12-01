@@ -3,11 +3,12 @@ program {
     read r0;
     if(0<r0){
         r1=1;
-	r2=1;
-	do{
-     	    r1=r1*r0;
-	    r0=r0-r2;
+    r2=1;
+    do{
+            r1=r1*r0;
+        r0=r0-r2;
+	write r0;
         }until(r0==0);
-	write r1;
+    write r1;
     }fi    
 }

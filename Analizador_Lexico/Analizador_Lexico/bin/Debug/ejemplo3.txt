@@ -1,0 +1,9 @@
+program {
+   int x;
+   x=6;
+   write x;
+   do{
+      x=x-1;
+      write x;
+   }until(x>0);
+}
