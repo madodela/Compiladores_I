@@ -25,3 +25,6 @@ C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\Analizador_Sintactico\DeLexi
 C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\Analizador_Sintactico\DeLexico\obj\Debug\SyntacticAnalizer.pdb
 C:\Users\Jose Luis\Documents\GitHub\ProyectoCompiladores\Analizador_Sintactico\DeLexico\obj\Debug\SyntacticAnalizer.exe
 C:\Users\Jose Luis\Documents\GitHub\ProyectoCompiladores\Analizador_Sintactico\DeLexico\obj\Debug\SyntacticAnalizer.pdb
+C:\Users\Jose Luis\Documents\GitHub\ProyectoCompiladores\Analizador_Sintactico\DeLexico\bin\Debug\SyntacticAnalizer.exe
+C:\Users\Jose Luis\Documents\GitHub\ProyectoCompiladores\Analizador_Sintactico\DeLexico\bin\Debug\SyntacticAnalizer.pdb
+C:\Users\Jose Luis\Documents\GitHub\ProyectoCompiladores\Analizador_Sintactico\DeLexico\obj\Debug\SyntacticAnalizer.csprojResolveAssemblyReference.cache
