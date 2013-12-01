@@ -280,7 +280,7 @@ namespace NSSyntacticAnalizer
 			match(Token_types.TKN_LPARENT);
 			if (t != null) t.child[0] = exp();
 			match(Token_types.TKN_RPARENT);
-			if (t != null) t.child[0] = block_stmt();
+			if (t != null) t.child[1] = block_stmt();
 			return t;
 		}
 		

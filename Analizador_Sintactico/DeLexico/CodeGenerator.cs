@@ -75,7 +75,7 @@ namespace NSSyntacticAnalizer
 		void genStmt(TreeNode tree)
 		{
 			TreeNode p1 , p2 , p3;
-			int savedLoc1 , savedLoc2 , currentLoc;
+			int savedLoc0, savedLoc1 , savedLoc2 , currentLoc;
 			int loc;
 			BucketListRec l;
 			switch (tree.stmtK)
@@ -126,14 +126,27 @@ namespace NSSyntacticAnalizer
 					p1 = tree.child[0];
 					p2 = tree.child[1];
 					/* generate code for test */
+                    savedLoc0 = emitSkip(0);
 					cGen(p1);
 					savedLoc1 = emitSkip(1);
-					/* generate code for body */
+					//emitComment("if: jump to else belongs here");
+					/* recurse on then part */
+                    
 					cGen(p2);
-					savedLoc2 = emitSkip(0);
-					//emitComment("iteration: jump after body comes back here");
-					emitRM_Abs("JEQ" , ac , savedLoc1 , "repeat: jmp back to condition");
+					//savedLoc2 = emitSkip(1);
+					//emitComment("if: jump to end belongs here");
+					currentLoc = emitSkip(0);
+					emitBackup(savedLoc1);
+					emitRM_Abs("JEQ" , ac , currentLoc +1 , "while: jmp to end of loop");
+					emitRestore();
+					/* recurse on else part */
 					
+					//currentLoc = emitSkip(0);
+					//emitBackup(savedLoc2);
+					//emitRM_Abs("LDA" , pc , currentLoc , "jmp to end");
+					
+                    emitRM_Abs("LDA" , pc , savedLoc0 , "repeat: jmp back to body");
+                    //emitRestore();
 					//if (TraceCode)  emitComment("<- iterate") ;
 					break; /* iteration */
 

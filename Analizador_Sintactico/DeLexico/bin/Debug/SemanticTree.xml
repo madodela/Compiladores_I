@@ -11,7 +11,13 @@
 <node>"Id: x (Int, 6) "
 </node>
 </node>
-<node>"Repeat"
+<node>"Iteration"
+<node>"Op: &gt; (True)"
+<node>"Id: x (Int, 6) "
+</node>
+<node>"Const: 0"
+</node>
+</node>
 <node>"="
 <node>"x (Int, 0) "</node>
 <node>"Op: - (0)"
@@ -23,12 +29,6 @@
 </node>
 <node>"Write"
 <node>"Id: x (Int, 6) "
-</node>
-</node>
-<node>"Op: &gt; (True)"
-<node>"Id: x (Int, 6) "
-</node>
-<node>"Const: 0"
 </node>
 </node>
 </node>
