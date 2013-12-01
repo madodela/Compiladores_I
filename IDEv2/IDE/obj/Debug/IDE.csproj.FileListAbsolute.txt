@@ -61,3 +61,14 @@ C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\IDE.Ma
 C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\IDE.csproj.GenerateResource.Cache
 C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\IDE.exe
 C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\IDEv2\IDE\obj\Debug\IDE.pdb
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\obj\Debug\IDE.MainForm.resources
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\obj\Debug\IDE.exe
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\bin\Debug\IDE.exe
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\bin\Debug\IDE.pdb
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\bin\Debug\FastColoredTextBox.dll
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\bin\Debug\FastColoredTextBox.pdb
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\bin\Debug\FastColoredTextBox.xml
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\obj\Debug\IDE.pdb

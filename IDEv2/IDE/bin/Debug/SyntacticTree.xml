@@ -1,3 +1,19 @@
 <?xml version="1.0"?>
   <node>"Program"
+    <node>"INT:x"
+      <node>"INT:y"
+</node>
+</node>
+    <node>"Read: x"
+</node>
+    <node>"Read: y"
+</node>
+    <node>"Write"
+      <node>"Id: x"
+</node>
+</node>
+    <node>"Write"
+      <node>"Id: y"
+</node>
+</node>
 </node>

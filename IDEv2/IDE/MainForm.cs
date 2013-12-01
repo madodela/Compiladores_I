@@ -127,6 +127,7 @@ namespace IDE
 			TokenList.Items.Clear();
 			ErrorList.Items.Clear();
 			TreeView.Nodes.Clear();
+			interCode.Text = "";
 		}
 		
 		public void Guardar() {
@@ -200,6 +201,7 @@ namespace IDE
 			FillErrorList("infoSyntacticAnalisys.txt");
             FillErrorList("infoSemanticAnalisys.txt");
             FillSymbolList();
+            FillIntermediateCode();
 		}
 		
 		//Fill the token list in the GUI
@@ -295,6 +297,18 @@ namespace IDE
 			}
 			reader.Close();
 		}
+		
+		void FillIntermediateCode(){
+            FileStream file = new FileStream("middleCode.tm" , FileMode.Open , FileAccess.Read);
+            StreamReader reader = new StreamReader(file);
+            string line = reader.ReadLine();
+            while (line != null)
+            {
+          		interCode.Text += line + '\n';
+                line = reader.ReadLine();
+            }
+            reader.Close();
+		}
 
         //Fill the symbol table list in the GUI
         void FillSymbolList()
@@ -312,5 +326,6 @@ namespace IDE
             }
             reader.Close();
         }
+		
 	}
 }

@@ -1,0 +1,2 @@
+x	Int	Int	0	2, 3, 5
+y	Int	Int	0	2, 4, 6
