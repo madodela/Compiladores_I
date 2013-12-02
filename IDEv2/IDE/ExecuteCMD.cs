@@ -5,6 +5,12 @@ namespace IDE
 {
 	public class ExecuteCMD {
 		string CommandOutput;
+		bool blackWindow = true;
+		
+		public bool BlackWindow {
+			get { return blackWindow; }
+			set { blackWindow = value;}
+		}
 		public ExecuteCMD () {
 			CommandOutput="vacio";
 		}
@@ -14,7 +20,7 @@ namespace IDE
 				return CommandOutput;
 			}
 			set{
-				CommandOutput=value;
+				CommandOutput = value;
 			}
 		}
 		//Execute the command Synchronously
@@ -29,17 +35,19 @@ namespace IDE
 				procStartInfo.RedirectStandardOutput = true;
 				procStartInfo.UseShellExecute = false;
 				// Do not create the black window.
-				procStartInfo.CreateNoWindow = true;
+				procStartInfo.CreateNoWindow = blackWindow;
 				// Now we create a process, assign its ProcessStartInfo and start it
 				System.Diagnostics.Process proc = new System.Diagnostics.Process();
 				proc.StartInfo = procStartInfo;
 				proc.Start();
 
 				// Get the output into a string
-				string result = proc.StandardOutput.ReadToEnd();
-				CmdOutput = result;
+				if(blackWindow){
+					string result = proc.StandardOutput.ReadToEnd();
+					CmdOutput = result;
+				}
 			} catch (Exception e) {
-				// Log the exception 
+				// Log the exception
 			}
 		}
 
