@@ -15,3 +15,8 @@ C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\Analizador_Lexico\Analizador_
 C:\Users\Jose Luis\Documents\GitHub\Compiladores-I\Analizador_Lexico\Analizador_Lexico\obj\Debug\Analizador_Lexico.csprojResolveAssemblyReference.cache
 C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\Analizador_Lexico\Analizador_Lexico\obj\Debug\Analizador_Lexico.exe
 C:\Users\Loli Delgado\Documents\GitHub\Compiladores_I\Analizador_Lexico\Analizador_Lexico\obj\Debug\Analizador_Lexico.pdb
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\Analizador_Lexico\Analizador_Lexico\bin\Debug\Analizador_Lexico.exe
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\Analizador_Lexico\Analizador_Lexico\bin\Debug\Analizador_Lexico.pdb
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\Analizador_Lexico\Analizador_Lexico\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\Analizador_Lexico\Analizador_Lexico\obj\Debug\Analizador_Lexico.exe
+C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\Analizador_Lexico\Analizador_Lexico\obj\Debug\Analizador_Lexico.pdb

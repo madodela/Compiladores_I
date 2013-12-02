@@ -408,7 +408,7 @@ namespace Analizador_Lexico
 				writer.WriteLine("{0}\t{1}\t{2}", token.TokenType, token.Lexema, token.Nline);
 				reader.Close();
 				writer.Close();
-				writer2.WriteLine("$Analized Lines:"+ nline);
+				writer2.WriteLine("$Analized Lines: "+ nline);
 				writer2.Close();
 			} catch(FileNotFoundException e) {
 				Console.WriteLine("File Not Found\n" + e.Message);
