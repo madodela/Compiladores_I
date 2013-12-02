@@ -762,7 +762,7 @@ namespace NSSyntacticAnalizer
         bool enBloque = false;
 		void genStmt(TreeNode tree)
 		{
-			TreeNode p1 , p2 , p3;
+			TreeNode p1 , p2 /*, p3*/;
 			BucketListRec l;
             
 			switch (tree.stmtK)
