@@ -105,7 +105,7 @@ namespace IDE
 		void Cerrar_ArchivoClick(object sender, EventArgs e) {
 			if (!guardado) {
 				DialogResult result;
-				result = MessageBox.Show("Deséa guardar los cambios?", "Guardar",
+				result = MessageBox.Show("Desea guardar los cambios?", "Guardar",
 				                         MessageBoxButtons.YesNoCancel,
 				                         MessageBoxIcon.Question,
 				                         MessageBoxDefaultButton.Button3);
@@ -127,7 +127,9 @@ namespace IDE
 			TokenList.Items.Clear();
 			ErrorList.Items.Clear();
 			TreeView.Nodes.Clear();
+			treeViewSemantic.Nodes.Clear();
 			interCode.Text = "";
+			tableSymbolList.Items.Clear();
 		}
 		
 		public void Guardar() {
@@ -174,8 +176,8 @@ namespace IDE
 		}
 		
 		void AcercaDeClick(object sender, EventArgs e) {
-			MessageBox.Show(" Universidad Autónoma de Aguascalientes\n   Ingenieria en Sistemas Computacionales"
-			                + "\nMateria:\n    Compiladores I\nAlumnos:\n    María Dolores Delgado Lara\n"
+			MessageBox.Show(" Universidad Autónoma de Aguascalientes\n   Ingeniería en Sistemas Computacionales"
+			                + "\nMateria:\n    Compiladores \nAlumnos:\n    María Dolores Delgado Lara\n"
 			                + "    José Luis Díaz Montellano", "Información",
 			                MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
@@ -190,18 +192,23 @@ namespace IDE
 			string command = "";
 			ExecuteCMD cmd = new ExecuteCMD();
 			command += "Analizador_Lexico.exe temp" + archivo_actual.Nombre_de_Archivo;
+			Console.Write(command);
 			cmd.ExecuteCommandSync(command);//Excecute the command to run the Lexicon Analisys
 			System.IO.File.Delete("temp" + archivo_actual.Nombre_de_Archivo);//Delete the file copy
 			FillTokenList();
 			FillErrorList("infoLexiconAnalisysTokens.txt");
 			command = "SyntacticAnalizer.exe";//Execute the command to run the Syntactic Analisys
 			cmd.ExecuteCommandSync(command);
-            FillTreeView(TreeView , "SyntacticTree.xml");
-            FillTreeView(treeViewSemantic , "SemanticTree.xml");
+			FillTreeView(TreeView , "SyntacticTree.xml");
+			FillTreeView(treeViewSemantic , "SemanticTree.xml");
 			FillErrorList("infoSyntacticAnalisys.txt");
-            FillErrorList("infoSemanticAnalisys.txt");
-            FillSymbolList();
-            FillIntermediateCode();
+			FillErrorList("infoSemanticAnalisys.txt");
+			FillSymbolList();
+			FillIntermediateCode();
+			string commando = "TM.exe middleCode.tm";//Execute the command to run the Syntactic Analisys
+			cmd.BlackWindow = false;
+			cmd.ExecuteCommandSync(commando);
+			//cmd.BlackWindow = true;
 		}
 		
 		//Fill the token list in the GUI
@@ -299,33 +306,33 @@ namespace IDE
 		}
 		
 		void FillIntermediateCode(){
-            FileStream file = new FileStream("middleCode.tm" , FileMode.Open , FileAccess.Read);
-            StreamReader reader = new StreamReader(file);
-            string line = reader.ReadLine();
-            while (line != null)
-            {
-          		interCode.Text += line + '\n';
-                line = reader.ReadLine();
-            }
-            reader.Close();
+			FileStream file = new FileStream("middleCode.tm" , FileMode.Open , FileAccess.Read);
+			StreamReader reader = new StreamReader(file);
+			string line = reader.ReadLine();
+			while (line != null)
+			{
+				interCode.Text += line + '\n';
+				line = reader.ReadLine();
+			}
+			reader.Close();
 		}
 
-        //Fill the symbol table list in the GUI
-        void FillSymbolList()
-        {
-            tableSymbolList.Items.Clear();//Clear the list avoiding to append the new tokens.
-            FileStream file = new FileStream("tableSymbolFile.txt" , FileMode.Open , FileAccess.Read);
-            StreamReader reader = new StreamReader(file);
-            string[] variable;
-            string line = reader.ReadLine();
-            while (line != null)
-            {
-                variable = line.Split('\t');
-                tableSymbolList.Items.Add(new ListViewItem(variable));
-                line = reader.ReadLine();
-            }
-            reader.Close();
-        }
+		//Fill the symbol table list in the GUI
+		void FillSymbolList()
+		{
+			tableSymbolList.Items.Clear();//Clear the list avoiding to append the new tokens.
+			FileStream file = new FileStream("tableSymbolFile.txt" , FileMode.Open , FileAccess.Read);
+			StreamReader reader = new StreamReader(file);
+			string[] variable;
+			string line = reader.ReadLine();
+			while (line != null)
+			{
+				variable = line.Split('\t');
+				tableSymbolList.Items.Add(new ListViewItem(variable));
+				line = reader.ReadLine();
+			}
+			reader.Close();
+		}
 		
 	}
 }

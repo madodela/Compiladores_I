@@ -59,6 +59,7 @@ namespace IDE
 			this.tabPage5 = new System.Windows.Forms.TabPage();
 			this.treeViewSemantic = new System.Windows.Forms.TreeView();
 			this.tabPage6 = new System.Windows.Forms.TabPage();
+			this.interCode = new System.Windows.Forms.RichTextBox();
 			this.fastColoredTextBox1 = new FastColoredTextBoxNS.FastColoredTextBox();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -73,7 +74,6 @@ namespace IDE
 			this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
 			this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
 			this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
-			this.interCode = new System.Windows.Forms.RichTextBox();
 			this.menuStrip1.SuspendLayout();
 			this.tabControl2.SuspendLayout();
 			this.tabPage3.SuspendLayout();
@@ -248,9 +248,9 @@ namespace IDE
 									this.columnHeader2});
 			this.TokenList.FullRowSelect = true;
 			this.TokenList.GridLines = true;
-			this.TokenList.Location = new System.Drawing.Point(0, 0);
+			this.TokenList.Location = new System.Drawing.Point(-4, 0);
 			this.TokenList.Name = "TokenList";
-			this.TokenList.Size = new System.Drawing.Size(346, 302);
+			this.TokenList.Size = new System.Drawing.Size(350, 308);
 			this.TokenList.TabIndex = 0;
 			this.TokenList.UseCompatibleStateImageBehavior = false;
 			this.TokenList.View = System.Windows.Forms.View.Details;
@@ -280,9 +280,9 @@ namespace IDE
 			// 
 			this.TreeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
 									| System.Windows.Forms.AnchorStyles.Left)));
-			this.TreeView.Location = new System.Drawing.Point(0, 0);
+			this.TreeView.Location = new System.Drawing.Point(-4, 0);
 			this.TreeView.Name = "TreeView";
-			this.TreeView.Size = new System.Drawing.Size(342, 311);
+			this.TreeView.Size = new System.Drawing.Size(350, 308);
 			this.TreeView.TabIndex = 0;
 			// 
 			// tabPage5
@@ -300,9 +300,9 @@ namespace IDE
 			// 
 			this.treeViewSemantic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
 									| System.Windows.Forms.AnchorStyles.Left)));
-			this.treeViewSemantic.Location = new System.Drawing.Point(0, 0);
+			this.treeViewSemantic.Location = new System.Drawing.Point(-4, 0);
 			this.treeViewSemantic.Name = "treeViewSemantic";
-			this.treeViewSemantic.Size = new System.Drawing.Size(342, 287);
+			this.treeViewSemantic.Size = new System.Drawing.Size(350, 308);
 			this.treeViewSemantic.TabIndex = 0;
 			// 
 			// tabPage6
@@ -315,6 +315,18 @@ namespace IDE
 			this.tabPage6.TabIndex = 3;
 			this.tabPage6.Text = "Código intermedio";
 			this.tabPage6.UseVisualStyleBackColor = true;
+			// 
+			// interCode
+			// 
+			this.interCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+									| System.Windows.Forms.AnchorStyles.Left) 
+									| System.Windows.Forms.AnchorStyles.Right)));
+			this.interCode.Location = new System.Drawing.Point(0, 0);
+			this.interCode.Name = "interCode";
+			this.interCode.ReadOnly = true;
+			this.interCode.Size = new System.Drawing.Size(342, 304);
+			this.interCode.TabIndex = 0;
+			this.interCode.Text = "";
 			// 
 			// fastColoredTextBox1
 			// 
@@ -371,11 +383,11 @@ namespace IDE
 									this.columnHeader4});
 			this.ErrorList.FullRowSelect = true;
 			this.ErrorList.GridLines = true;
-			this.ErrorList.Location = new System.Drawing.Point(0, 0);
+			this.ErrorList.Location = new System.Drawing.Point(-4, 0);
 			this.ErrorList.MultiSelect = false;
 			this.ErrorList.Name = "ErrorList";
 			this.ErrorList.ShowGroups = false;
-			this.ErrorList.Size = new System.Drawing.Size(728, 111);
+			this.ErrorList.Size = new System.Drawing.Size(740, 111);
 			this.ErrorList.TabIndex = 0;
 			this.ErrorList.UseCompatibleStateImageBehavior = false;
 			this.ErrorList.View = System.Windows.Forms.View.Details;
@@ -463,17 +475,6 @@ namespace IDE
 			// 
 			this.columnHeader8.Text = "Números de linea";
 			this.columnHeader8.Width = 404;
-			// 
-			// interCode
-			// 
-			this.interCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-									| System.Windows.Forms.AnchorStyles.Left) 
-									| System.Windows.Forms.AnchorStyles.Right)));
-			this.interCode.Location = new System.Drawing.Point(0, 0);
-			this.interCode.Name = "interCode";
-			this.interCode.Size = new System.Drawing.Size(342, 304);
-			this.interCode.TabIndex = 0;
-			this.interCode.Text = "";
 			// 
 			// MainForm
 			// 
