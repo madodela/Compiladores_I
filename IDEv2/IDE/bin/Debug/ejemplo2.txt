@@ -1,0 +1,25 @@
+program {
+    int x,y,z;
+    float a;
+    x=3;
+    a=3.1;
+    write a;
+    y=x*1;
+    z=x*3-1/y*2;
+    do{
+    a=3.5*12.1;
+    write a;
+    write z;
+    write y;
+        if(x==3){
+	    read x;
+            write x;
+        }
+        else {
+            read y;
+            z=y*2;
+        }
+        fi
+    }until(z<5);
+    write z;
+}

@@ -73,7 +73,7 @@ typedef enum {
 typedef struct {
       int iop  ;
       int iarg1  ;
-      int iarg2  ;
+      float iarg2  ;
       int iarg3  ;
    } INSTRUCTION;
 
@@ -169,16 +169,53 @@ int getNum (void)
     }
     term = 0 ;
     nonBlank();
-    while (isdigit(ch))
-    { temp = TRUE ;
-      term = term * 10 + ( ch - '0' ) ;
+    while (isdigit(ch) )
+    { temp = TRUE ;             
+            term = term * 10 + ( ch - '0' ) ;
       getCh();
     }
     num = num + (term * sign) ;
   } while ( (nonBlank()) && ((ch == '+') || (ch == '-')) ) ;
   return temp;
 } /* getNum */
-
+int getNumF (void)
+{ int sign;
+  float term;
+  int termf;
+  int temp = FALSE;
+  num = 0 ;
+  do
+  { sign = 1;
+    while ( nonBlank() && ((ch == '+') || (ch == '-')) )
+    { temp = FALSE ;
+      if (ch == '-')  sign = - sign ;
+      getCh();
+    }
+    term = 0 ;
+    termf = 0;
+    nonBlank();
+    int dot = false;
+    while (isdigit(ch) || ch == '.')
+    { temp = true ;           
+        if(ch == '.')
+        {
+              dot = true;
+              termf = termf +1;
+        }
+        else
+                term = term * 10 + ( ch - '0' ) ;
+                
+      getCh();
+    }
+    dot = false;
+    num = num + (term * sign);
+    for(int i=0 ; i<termf; i++)
+    {
+        num = num / 10;
+    }
+  } while ( (nonBlank()) && ((ch == '+') || (ch == '-')) ) ;
+  return temp;
+} /* getNum */
 /********************************************/
 int getWord (void)
 { int temp = FALSE;
@@ -220,7 +257,8 @@ int error( char * msg, int lineNo, int instNo)
 /********************************************/
 int readInstructions (void)
 { OPCODE op;
-  int arg1, arg2, arg3;
+  int arg1, arg3;
+  float arg2;
   int loc, regNo, lineNo;
   for (regNo = 0 ; regNo < NO_REGS ; regNo++)
       reg[regNo] = 0 ;
@@ -283,9 +321,9 @@ int readInstructions (void)
         arg1 = (int)num;
         if ( ! skipCh(','))
             return error("Missing comma", lineNo,loc);
-        if (! getNum ())
+        if (! getNumF ())
             return error("Bad displacement", lineNo,loc);
-        arg2 = (int)num;
+        arg2 = num;
         if ( ! skipCh('(') && ! skipCh(',') )
             return error("Missing LParen", lineNo,loc);
         if ( (! getNum ()) || (num < 0) || (num >= NO_REGS))
@@ -307,7 +345,8 @@ int readInstructions (void)
 STEPRESULT stepTM (void)
 { INSTRUCTION currentinstruction  ;
   int pc  ;
-  int r,s,t,m  ;
+  int r,t;
+  float m,s;
   int ok ;
 
   pc = (int)reg[PC_REG] ;
@@ -327,7 +366,7 @@ STEPRESULT stepTM (void)
     /***********************************/
       r = currentinstruction.iarg1 ;
       s = currentinstruction.iarg3 ;
-      m = currentinstruction.iarg2 + (int)reg[s] ;
+      m = currentinstruction.iarg2 + reg[(int)s] ;
       if ( (m < 0) || (m > DADDR_SIZE))
          return srDMEM_ERR ;
       break;
@@ -336,7 +375,7 @@ STEPRESULT stepTM (void)
     /***********************************/
       r = currentinstruction.iarg1 ;
       s = currentinstruction.iarg3 ;
-      m = currentinstruction.iarg2 + (int)reg[s] ;
+      m = currentinstruction.iarg2 + reg[(int)s] ;
       break;
   } /* case */
 
@@ -368,19 +407,19 @@ STEPRESULT stepTM (void)
     case opOUT :  
       printf ("OUT instruction prints: %f\n", reg[r] ) ;
       break;
-    case opADD :  reg[r] = reg[s] + reg[t] ;  break;
-    case opSUB :  reg[r] = reg[s] - reg[t] ;  break;
-    case opMUL :  reg[r] = reg[s] * reg[t] ;  break;
+    case opADD :  reg[r] = reg[(int)s] + reg[t] ;  break;
+    case opSUB :  reg[r] = reg[(int)s] - reg[t] ;  break;
+    case opMUL :  reg[r] = reg[(int)s] * reg[t] ;  break;
 
     case opDIV :
     /***********************************/
-      if ( reg[t] != 0 ) reg[r] = reg[s] / reg[t];
+      if ( reg[t] != 0 ) reg[r] = reg[(int)s] / reg[t];
       else return srZERODIVIDE ;
       break;
 
     /*************** RM instructions ********************/
-    case opLD :    reg[r] = dMem[m] ;  break;
-    case opST :    dMem[m] = reg[r] ;  break;
+    case opLD :    reg[r] = dMem[(int)m] ;  break;
+    case opST :    dMem[(int)m] = reg[r] ;  break;
 
     /*************** RA instructions ********************/
     case opLDA :    reg[r] = m ; break;
