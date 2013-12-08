@@ -12,7 +12,7 @@ program {
     write z;
     write y;
         if(x==3){
-	    read x;
+        read x;
             write x;
         }
         else {

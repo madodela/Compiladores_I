@@ -14,6 +14,15 @@
 </node>
 </node>
 <node>"="
+<node>"a (Float, 3.1) "</node>
+<node>"Const: 3.1"
+</node>
+</node>
+<node>"Write"
+<node>"Id: a (Float, 3.1) "
+</node>
+</node>
+<node>"="
 <node>"y (Int, 3) "</node>
 <node>"Op: * (3)"
 <node>"Id: x (Int, 3) "
@@ -53,12 +62,26 @@
 </node>
 </node>
 </node>
+<node>"Write"
+<node>"Id: a (Float, 3.1) "
+</node>
+</node>
+<node>"Write"
+<node>"Id: z (Int, 9) "
+</node>
+</node>
+<node>"Write"
+<node>"Id: y (Int, 3) "
+</node>
+</node>
 <node>"if"
 <node>"Op: == (True)"
 <node>"Id: x (Int, 3) "
 </node>
 <node>"Const: 3"
 </node>
+</node>
+<node>"Read: x"
 </node>
 <node>"Write"
 <node>"Id: x (Int, 3) "

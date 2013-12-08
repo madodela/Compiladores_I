@@ -14,6 +14,15 @@
 </node>
 </node>
     <node>"="
+<node>"a"</node>
+      <node>"Const: 3.1"
+</node>
+</node>
+    <node>"Write"
+      <node>"Id: a"
+</node>
+</node>
+    <node>"="
 <node>"y"</node>
       <node>"Op: * (3)"
         <node>"Id: x"
@@ -53,6 +62,18 @@
 </node>
 </node>
 </node>
+        <node>"Write"
+          <node>"Id: a"
+</node>
+</node>
+        <node>"Write"
+          <node>"Id: z"
+</node>
+</node>
+        <node>"Write"
+          <node>"Id: y"
+</node>
+</node>
         <node>"if"
           <node>"Op: =="
             <node>"Id: x"
@@ -60,7 +81,9 @@
             <node>"Const: 3"
 </node>
 </node>
-                      <node>"Write"
+                      <node>"Read: x"
+</node>
+            <node>"Write"
               <node>"Id: x"
 </node>
 </node>

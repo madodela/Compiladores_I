@@ -133,7 +133,7 @@ namespace NSSyntacticAnalizer
 						Console.Write("{0}" , l.name);
 						info.Write("{0}" , l.name);
 						Console.Write("".PadLeft(10 - l.name.Length) + "{0}" , l.memloc);
-						info.Write("\t{0}",l.tipo);
+						info.Write("\t{0}",l.memloc);
 						Console.Write("".PadLeft(10) + "{0}" , l.tipo);
 						info.Write("\t{0}",l.tipo);
 						if (String.Equals(l.tipo, "Int"))

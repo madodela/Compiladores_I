@@ -1,4 +1,4 @@
-a	Float	Float	0	3, 8
-x	Int	Int	3	2, 4, 5, 6, 9, 10
-y	Int	Int	3	2, 5, 6, 13, 14
-z	Int	Int	9	2, 6, 14, 17, 18
+a	Float	Float	3.1	3, 5, 6, 10, 11
+x	Int	Int	3	2, 4, 7, 8, 14, 15, 16
+y	Int	Int	3	2, 7, 8, 13, 19, 20
+z	Int	Int	9	2, 8, 12, 20, 23, 24
