@@ -74,6 +74,7 @@ namespace IDE
 			this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
 			this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
 			this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
+			this.columnHeader9 = new System.Windows.Forms.ColumnHeader();
 			this.menuStrip1.SuspendLayout();
 			this.tabControl2.SuspendLayout();
 			this.tabPage3.SuspendLayout();
@@ -442,6 +443,7 @@ namespace IDE
 									| System.Windows.Forms.AnchorStyles.Right)));
 			this.tableSymbolList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
 									this.columnHeader5,
+									this.columnHeader9,
 									this.columnHeader6,
 									this.columnHeader7,
 									this.columnHeader8});
@@ -459,7 +461,7 @@ namespace IDE
 			// columnHeader5
 			// 
 			this.columnHeader5.Text = "Nombre";
-			this.columnHeader5.Width = 150;
+			this.columnHeader5.Width = 100;
 			// 
 			// columnHeader6
 			// 
@@ -474,7 +476,12 @@ namespace IDE
 			// columnHeader8
 			// 
 			this.columnHeader8.Text = "Números de linea";
-			this.columnHeader8.Width = 404;
+			this.columnHeader8.Width = 400;
+			// 
+			// columnHeader9
+			// 
+			this.columnHeader9.Text = "Localidad de memoria";
+			this.columnHeader9.Width = 80;
 			// 
 			// MainForm
 			// 
@@ -506,6 +513,7 @@ namespace IDE
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.ColumnHeader columnHeader9;
 		private System.Windows.Forms.RichTextBox interCode;
 		private System.Windows.Forms.ColumnHeader columnHeader8;
 		private System.Windows.Forms.ColumnHeader columnHeader7;
