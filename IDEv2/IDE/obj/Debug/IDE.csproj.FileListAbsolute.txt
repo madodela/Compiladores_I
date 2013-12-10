@@ -72,3 +72,13 @@ C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\bin\Debug\FastColo
 C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\bin\Debug\FastColoredTextBox.pdb
 C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\bin\Debug\FastColoredTextBox.xml
 C:\Users\Cuca\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\obj\Debug\IDE.pdb
+C:\Users\Jose Luis\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\obj\Debug\IDE.exe
+C:\Users\Jose Luis\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\obj\Debug\IDE.pdb
+C:\Users\Jose Luis\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\bin\Debug\IDE.exe
+C:\Users\Jose Luis\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\bin\Debug\IDE.pdb
+C:\Users\Jose Luis\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\bin\Debug\FastColoredTextBox.dll
+C:\Users\Jose Luis\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\bin\Debug\FastColoredTextBox.pdb
+C:\Users\Jose Luis\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\bin\Debug\FastColoredTextBox.xml
+C:\Users\Jose Luis\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\obj\Debug\IDE.csprojResolveAssemblyReference.cache
+C:\Users\Jose Luis\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\obj\Debug\IDE.MainForm.resources
+C:\Users\Jose Luis\Documents\GitHub\ProyectoCompiladores\IDEv2\IDE\obj\Debug\IDE.csproj.GenerateResource.Cache

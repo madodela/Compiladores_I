@@ -32,20 +32,20 @@ namespace IDE
 					new System.Diagnostics.ProcessStartInfo("cmd", "/c " + command);
 				// The following commands are needed to redirect the standard output.
 				//This means that it will be redirected to the Process.StandardOutput StreamReader.
-				procStartInfo.RedirectStandardOutput = true;
+				procStartInfo.RedirectStandardOutput = false;
 				procStartInfo.UseShellExecute = false;
 				// Do not create the black window.
-				procStartInfo.CreateNoWindow = blackWindow;
+				procStartInfo.CreateNoWindow = false;
 				// Now we create a process, assign its ProcessStartInfo and start it
 				System.Diagnostics.Process proc = new System.Diagnostics.Process();
 				proc.StartInfo = procStartInfo;
 				proc.Start();
 
 				// Get the output into a string
-				if(blackWindow){
+				//if(blackWindow){
 					string result = proc.StandardOutput.ReadToEnd();
 					CmdOutput = result;
-				}
+				//}
 			} catch (Exception e) {
 				// Log the exception
 			}
