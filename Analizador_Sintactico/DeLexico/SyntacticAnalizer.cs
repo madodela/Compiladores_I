@@ -1254,7 +1254,7 @@ namespace NSSyntacticAnalizer
 			SyntacticAnalizer analizer = new SyntacticAnalizer();
 			analizer.symbolTable.printSymTab();
             
-			Console.ReadKey();
+			//Console.ReadKey();
 		}
 	}
 }

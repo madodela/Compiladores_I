@@ -1,113 +1,286 @@
 <?xml version="1.0"?>
 <node>"Program"
-<node>"INT:x"
-<node>"INT:y"
-<node>"INT:z"
+<node>"INT:cont"
+<node>"INT:u"
+<node>"INT:d"
+<node>"INT:c"
+<node>"INT:m"
+<node>"INT:dm"
+<node>"INT:r"
 </node>
 </node>
 </node>
-<node>"FLOAT:a"
 </node>
-<node>"="
-<node>"x (Int, 3) "</node>
-<node>"Const: 3"
-</node>
-</node>
-<node>"="
-<node>"a (Float, 3.1) "</node>
-<node>"Const: 3.1"
-</node>
-</node>
-<node>"Write"
-<node>"Id: a (Float, 3.1) "
-</node>
-</node>
-<node>"="
-<node>"y (Int, 3) "</node>
-<node>"Op: * (3)"
-<node>"Id: x (Int, 3) "
-</node>
-<node>"Const: 1"
 </node>
 </node>
 </node>
 <node>"="
-<node>"z (Int, 9) "</node>
-<node>"Op: - (9)"
-<node>"Op: * (9)"
-<node>"Id: x (Int, 3) "
-</node>
-<node>"Const: 3"
+<node>"cont (Int, 0) "</node>
+<node>"Const: 0"
 </node>
 </node>
-<node>"Op: * (0)"
+<node>"Iteration"
+<node>"Op: &lt;= (True)"
+<node>"Id: cont (Int, 0) "
+</node>
+<node>"Const: 99999"
+</node>
+</node>
+<node>"="
+<node>"dm (Int, 0) "</node>
 <node>"Op: / (0)"
-<node>"Const: 1"
+<node>"Id: cont (Int, 0) "
 </node>
-<node>"Id: y (Int, 3) "
-</node>
-</node>
-<node>"Const: 2"
+<node>"Const: 10000"
 </node>
 </node>
 </node>
-</node>
-<node>"Repeat"
 <node>"="
-<node>"a (Float, 0) "</node>
+<node>"m (Int, 0) "</node>
+<node>"Op: / (0)"
+<node>"Op: - (0)"
+<node>"Id: cont (Int, 0) "
+</node>
 <node>"Op: * (0)"
-<node>"Const: 3.5"
+<node>"Id: dm (Int, 0) "
 </node>
-<node>"Const: 12.1"
-</node>
-</node>
-</node>
-<node>"Write"
-<node>"Id: a (Float, 3.1) "
+<node>"Const: 10000"
 </node>
 </node>
-<node>"Write"
-<node>"Id: z (Int, 9) "
+</node>
+<node>"Const: 1000"
 </node>
 </node>
-<node>"Write"
-<node>"Id: y (Int, 3) "
+</node>
+<node>"="
+<node>"c (Int, 0) "</node>
+<node>"Op: / (0)"
+<node>"Op: - (0)"
+<node>"Op: - (0)"
+<node>"Id: cont (Int, 0) "
+</node>
+<node>"Op: * (0)"
+<node>"Id: dm (Int, 0) "
+</node>
+<node>"Const: 10000"
+</node>
+</node>
+</node>
+<node>"Op: * (0)"
+<node>"Id: m (Int, 0) "
+</node>
+<node>"Const: 1000"
+</node>
+</node>
+</node>
+<node>"Const: 100"
+</node>
+</node>
+</node>
+<node>"="
+<node>"d (Int, 0) "</node>
+<node>"Op: / (0)"
+<node>"Op: - (0)"
+<node>"Op: - (0)"
+<node>"Op: - (0)"
+<node>"Id: cont (Int, 0) "
+</node>
+<node>"Op: * (0)"
+<node>"Id: dm (Int, 0) "
+</node>
+<node>"Const: 10000"
+</node>
+</node>
+</node>
+<node>"Op: * (0)"
+<node>"Id: m (Int, 0) "
+</node>
+<node>"Const: 1000"
+</node>
+</node>
+</node>
+<node>"Op: * (0)"
+<node>"Id: c (Int, 0) "
+</node>
+<node>"Const: 100"
+</node>
+</node>
+</node>
+<node>"Const: 10"
+</node>
+</node>
+</node>
+<node>"="
+<node>"u (Int, 0) "</node>
+<node>"Op: - (0)"
+<node>"Op: - (0)"
+<node>"Op: - (0)"
+<node>"Op: - (0)"
+<node>"Id: cont (Int, 0) "
+</node>
+<node>"Op: * (0)"
+<node>"Id: dm (Int, 0) "
+</node>
+<node>"Const: 10000"
+</node>
+</node>
+</node>
+<node>"Op: * (0)"
+<node>"Id: m (Int, 0) "
+</node>
+<node>"Const: 1000"
+</node>
+</node>
+</node>
+<node>"Op: * (0)"
+<node>"Id: c (Int, 0) "
+</node>
+<node>"Const: 100"
+</node>
+</node>
+</node>
+<node>"Op: * (0)"
+<node>"Id: d (Int, 0) "
+</node>
+<node>"Const: 10"
+</node>
+</node>
 </node>
 </node>
 <node>"if"
-<node>"Op: == (True)"
-<node>"Id: x (Int, 3) "
+<node>"Op: == (False)"
+<node>"Id: dm (Int, 0) "
 </node>
 <node>"Const: 3"
 </node>
 </node>
-<node>"Read: x"
+<node>"="
+<node>"dm (Int, 0) "</node>
+<node>"Const: 50000"
 </node>
-<node>"Write"
-<node>"Id: x (Int, 3) "
-</node>
-</node>
-<node>"Read: y"
 </node>
 <node>"="
-<node>"z (Int, 0) "</node>
+<node>"dm (Int, 0) "</node>
 <node>"Op: * (0)"
-<node>"Id: y (Int, 3) "
+<node>"Id: dm (Int, 0) "
 </node>
-<node>"Const: 2"
-</node>
-</node>
+<node>"Const: 10000"
 </node>
 </node>
-<node>"Op: &lt; (False)"
-<node>"Id: z (Int, 9) "
 </node>
+</node>
+<node>"if"
+<node>"Op: == (False)"
+<node>"Id: m (Int, 0) "
+</node>
+<node>"Const: 3"
+</node>
+</node>
+<node>"="
+<node>"m (Int, 0) "</node>
+<node>"Const: 5000"
+</node>
+</node>
+<node>"="
+<node>"m (Int, 0) "</node>
+<node>"Op: * (0)"
+<node>"Id: m (Int, 0) "
+</node>
+<node>"Const: 1000"
+</node>
+</node>
+</node>
+</node>
+<node>"if"
+<node>"Op: == (False)"
+<node>"Id: c (Int, 0) "
+</node>
+<node>"Const: 3"
+</node>
+</node>
+<node>"="
+<node>"c (Int, 0) "</node>
+<node>"Const: 500"
+</node>
+</node>
+<node>"="
+<node>"c (Int, 0) "</node>
+<node>"Op: * (0)"
+<node>"Id: c (Int, 0) "
+</node>
+<node>"Const: 100"
+</node>
+</node>
+</node>
+</node>
+<node>"if"
+<node>"Op: == (False)"
+<node>"Id: d (Int, 0) "
+</node>
+<node>"Const: 3"
+</node>
+</node>
+<node>"="
+<node>"d (Int, 0) "</node>
+<node>"Const: 50"
+</node>
+</node>
+<node>"="
+<node>"d (Int, 0) "</node>
+<node>"Op: * (0)"
+<node>"Id: d (Int, 0) "
+</node>
+<node>"Const: 10"
+</node>
+</node>
+</node>
+</node>
+<node>"if"
+<node>"Op: == (False)"
+<node>"Id: u (Int, 0) "
+</node>
+<node>"Const: 3"
+</node>
+</node>
+<node>"="
+<node>"u (Int, 0) "</node>
 <node>"Const: 5"
 </node>
 </node>
 </node>
+<node>"="
+<node>"r (Int, 0) "</node>
+<node>"Op: + (0)"
+<node>"Op: + (0)"
+<node>"Op: + (0)"
+<node>"Op: + (0)"
+<node>"Id: dm (Int, 0) "
+</node>
+<node>"Id: m (Int, 0) "
+</node>
+</node>
+<node>"Id: c (Int, 0) "
+</node>
+</node>
+<node>"Id: d (Int, 0) "
+</node>
+</node>
+<node>"Id: u (Int, 0) "
+</node>
+</node>
+</node>
 <node>"Write"
-<node>"Id: z (Int, 9) "
+<node>"Id: r (Int, 0) "
+</node>
+</node>
+<node>"="
+<node>"cont (Int, 0) "</node>
+<node>"Op: + (0)"
+<node>"Id: cont (Int, 0) "
+</node>
+<node>"Const: 1"
+</node>
+</node>
 </node>
 </node>
 </node>

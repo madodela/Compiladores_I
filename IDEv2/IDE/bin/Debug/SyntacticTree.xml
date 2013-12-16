@@ -1,113 +1,286 @@
 <?xml version="1.0"?>
   <node>"Program"
-    <node>"INT:x"
-      <node>"INT:y"
-        <node>"INT:z"
+    <node>"INT:cont"
+      <node>"INT:u"
+        <node>"INT:d"
+          <node>"INT:c"
+            <node>"INT:m"
+              <node>"INT:dm"
+                <node>"INT:r"
 </node>
 </node>
 </node>
-    <node>"FLOAT:a"
 </node>
-    <node>"="
-<node>"x"</node>
-      <node>"Const: 3"
-</node>
-</node>
-    <node>"="
-<node>"a"</node>
-      <node>"Const: 3.1"
-</node>
-</node>
-    <node>"Write"
-      <node>"Id: a"
-</node>
-</node>
-    <node>"="
-<node>"y"</node>
-      <node>"Op: * (3)"
-        <node>"Id: x"
-</node>
-        <node>"Const: 1"
 </node>
 </node>
 </node>
     <node>"="
-<node>"z"</node>
-      <node>"Op: - (9)"
-        <node>"Op: * (9)"
-          <node>"Id: x"
-</node>
-          <node>"Const: 3"
+<node>"cont"</node>
+      <node>"Const: 0"
 </node>
 </node>
-        <node>"Op: * (0)"
-          <node>"Op: / (0)"
-            <node>"Const: 1"
+    <node>"Iteration"
+      <node>"Op: &lt;="
+        <node>"Id: cont"
 </node>
-            <node>"Id: y"
-</node>
-</node>
-          <node>"Const: 2"
+        <node>"Const: 99999"
 </node>
 </node>
-</node>
-</node>
-    <node>"Repeat"
               <node>"="
-<node>"a"</node>
-          <node>"Op: * (0)"
-            <node>"Const: 3.5"
+<node>"dm"</node>
+          <node>"Op: / (0)"
+            <node>"Id: cont"
 </node>
-            <node>"Const: 12.1"
-</node>
-</node>
-</node>
-        <node>"Write"
-          <node>"Id: a"
+            <node>"Const: 10000"
 </node>
 </node>
-        <node>"Write"
-          <node>"Id: z"
+</node>
+        <node>"="
+<node>"m"</node>
+          <node>"Op: / (0)"
+            <node>"Op: - (0)"
+              <node>"Id: cont"
+</node>
+              <node>"Op: * (0)"
+                <node>"Id: dm"
+</node>
+                <node>"Const: 10000"
 </node>
 </node>
-        <node>"Write"
-          <node>"Id: y"
+</node>
+            <node>"Const: 1000"
+</node>
+</node>
+</node>
+        <node>"="
+<node>"c"</node>
+          <node>"Op: / (0)"
+            <node>"Op: - (0)"
+              <node>"Op: - (0)"
+                <node>"Id: cont"
+</node>
+                <node>"Op: * (0)"
+                  <node>"Id: dm"
+</node>
+                  <node>"Const: 10000"
+</node>
+</node>
+</node>
+              <node>"Op: * (0)"
+                <node>"Id: m"
+</node>
+                <node>"Const: 1000"
+</node>
+</node>
+</node>
+            <node>"Const: 100"
+</node>
+</node>
+</node>
+        <node>"="
+<node>"d"</node>
+          <node>"Op: / (0)"
+            <node>"Op: - (0)"
+              <node>"Op: - (0)"
+                <node>"Op: - (0)"
+                  <node>"Id: cont"
+</node>
+                  <node>"Op: * (0)"
+                    <node>"Id: dm"
+</node>
+                    <node>"Const: 10000"
+</node>
+</node>
+</node>
+                <node>"Op: * (0)"
+                  <node>"Id: m"
+</node>
+                  <node>"Const: 1000"
+</node>
+</node>
+</node>
+              <node>"Op: * (0)"
+                <node>"Id: c"
+</node>
+                <node>"Const: 100"
+</node>
+</node>
+</node>
+            <node>"Const: 10"
+</node>
+</node>
+</node>
+        <node>"="
+<node>"u"</node>
+          <node>"Op: - (0)"
+            <node>"Op: - (0)"
+              <node>"Op: - (0)"
+                <node>"Op: - (0)"
+                  <node>"Id: cont"
+</node>
+                  <node>"Op: * (0)"
+                    <node>"Id: dm"
+</node>
+                    <node>"Const: 10000"
+</node>
+</node>
+</node>
+                <node>"Op: * (0)"
+                  <node>"Id: m"
+</node>
+                  <node>"Const: 1000"
+</node>
+</node>
+</node>
+              <node>"Op: * (0)"
+                <node>"Id: c"
+</node>
+                <node>"Const: 100"
+</node>
+</node>
+</node>
+            <node>"Op: * (0)"
+              <node>"Id: d"
+</node>
+              <node>"Const: 10"
+</node>
+</node>
 </node>
 </node>
         <node>"if"
           <node>"Op: =="
-            <node>"Id: x"
+            <node>"Id: dm"
 </node>
             <node>"Const: 3"
 </node>
 </node>
-                      <node>"Read: x"
+                      <node>"="
+<node>"dm"</node>
+              <node>"Const: 50000"
 </node>
-            <node>"Write"
-              <node>"Id: x"
 </node>
-</node>
-                      <node>"Read: y"
-</node>
-            <node>"="
-<node>"z"</node>
+                      <node>"="
+<node>"dm"</node>
               <node>"Op: * (0)"
-                <node>"Id: y"
+                <node>"Id: dm"
 </node>
-                <node>"Const: 2"
-</node>
-</node>
-</node>
-</node>
-      <node>"Op: &lt;"
-        <node>"Id: z"
-</node>
-        <node>"Const: 5"
+                <node>"Const: 10000"
 </node>
 </node>
 </node>
-    <node>"Write"
-      <node>"Id: z"
+</node>
+        <node>"if"
+          <node>"Op: =="
+            <node>"Id: m"
+</node>
+            <node>"Const: 3"
+</node>
+</node>
+                      <node>"="
+<node>"m"</node>
+              <node>"Const: 5000"
+</node>
+</node>
+                      <node>"="
+<node>"m"</node>
+              <node>"Op: * (0)"
+                <node>"Id: m"
+</node>
+                <node>"Const: 1000"
+</node>
+</node>
+</node>
+</node>
+        <node>"if"
+          <node>"Op: =="
+            <node>"Id: c"
+</node>
+            <node>"Const: 3"
+</node>
+</node>
+                      <node>"="
+<node>"c"</node>
+              <node>"Const: 500"
+</node>
+</node>
+                      <node>"="
+<node>"c"</node>
+              <node>"Op: * (0)"
+                <node>"Id: c"
+</node>
+                <node>"Const: 100"
+</node>
+</node>
+</node>
+</node>
+        <node>"if"
+          <node>"Op: =="
+            <node>"Id: d"
+</node>
+            <node>"Const: 3"
+</node>
+</node>
+                      <node>"="
+<node>"d"</node>
+              <node>"Const: 50"
+</node>
+</node>
+                      <node>"="
+<node>"d"</node>
+              <node>"Op: * (0)"
+                <node>"Id: d"
+</node>
+                <node>"Const: 10"
+</node>
+</node>
+</node>
+</node>
+        <node>"if"
+          <node>"Op: =="
+            <node>"Id: u"
+</node>
+            <node>"Const: 3"
+</node>
+</node>
+                      <node>"="
+<node>"u"</node>
+              <node>"Const: 5"
+</node>
+</node>
+</node>
+        <node>"="
+<node>"r"</node>
+          <node>"Op: + (0)"
+            <node>"Op: + (0)"
+              <node>"Op: + (0)"
+                <node>"Op: + (0)"
+                  <node>"Id: dm"
+</node>
+                  <node>"Id: m"
+</node>
+</node>
+                <node>"Id: c"
+</node>
+</node>
+              <node>"Id: d"
+</node>
+</node>
+            <node>"Id: u"
+</node>
+</node>
+</node>
+        <node>"Write"
+          <node>"Id: r"
+</node>
+</node>
+        <node>"="
+<node>"cont"</node>
+          <node>"Op: + (0)"
+            <node>"Id: cont"
+</node>
+            <node>"Const: 1"
+</node>
+</node>
 </node>
 </node>
 </node>

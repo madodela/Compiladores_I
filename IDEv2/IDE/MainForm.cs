@@ -205,8 +205,8 @@ namespace IDE
 			FillErrorList("infoSemanticAnalisys.txt");
 			FillSymbolList();
 			FillIntermediateCode();
-			string commando = "TM.exe middleCode.tm";//Execute the command to run the Syntactic Analisys
-			cmd.BlackWindow = false;
+            string commando = "TM.exe middleCode.tm";//Execute the command to run the Syntactic Analisys
+        	cmd.BlackWindow = false;
 			cmd.ExecuteCommandSync(commando);
 			//cmd.BlackWindow = true;
 		}

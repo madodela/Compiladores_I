@@ -32,7 +32,7 @@ namespace IDE
 					new System.Diagnostics.ProcessStartInfo("cmd", "/c " + command);
 				// The following commands are needed to redirect the standard output.
 				//This means that it will be redirected to the Process.StandardOutput StreamReader.
-				procStartInfo.RedirectStandardOutput = false;
+				procStartInfo.RedirectStandardOutput = blackWindow;
 				procStartInfo.UseShellExecute = false;
 				// Do not create the black window.
 				procStartInfo.CreateNoWindow = false;

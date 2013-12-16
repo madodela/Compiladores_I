@@ -1,0 +1,9 @@
+program{
+ int a,b;
+ b=1;
+ read a;
+ while(b<=a){
+   write b;
+   b=b+1;
+ }
+}

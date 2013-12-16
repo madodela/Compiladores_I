@@ -1,0 +1,42 @@
+program{
+ float b,h,opc,tipoT,a,r,p,l2,l3;
+ read opc;
+ if(opc==1){
+    read b;
+    read h;
+    a=b*h/2;
+    read tipoT;
+    if(tipoT==1){
+        p=3*b;
+    }else{
+        if(tipoT==2){
+            p=0.5*b*h;
+        }else{
+           read l2;
+           read l3;
+           p=b+l2+l3;
+        }fi
+    }fi
+ }else{
+    if(opc==2){
+        read b;
+        read h;
+        a=b*h;
+        p=2*b+2*h;
+    }else{
+        if(opc==3){
+            read b;
+            a=b*b;
+            p=4*b;
+        }else{
+            if(opc==4){
+                read r;
+                a=3.1416*r*r;
+                p=2*3.1416*r;
+            }fi
+        }fi
+    }fi
+ }fi
+ write a;
+ write p;
+}

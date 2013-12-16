@@ -1,0 +1,21 @@
+program{
+ float saldo,capital,comp,mob,ins,incen,pres;
+ read capital;
+ if(capital<0){
+    pres=10000-capital;
+    capital=10000;
+ }fi
+ if(capital>0){
+    if(capital>20000){
+        pres=20000-capital;
+        capital=20000;
+    }fi
+ }fi
+ comp=5000;
+ mob=2000;
+ ins=(capital-(comp+mob))/2;
+ incen=ins;
+ write ins;
+ write incen;
+ write pres;
+}

@@ -1,0 +1,9 @@
+program{
+ int n,cont;
+ read n;
+ cont=100;
+ while(cont>=0){
+   write cont;
+   cont = cont-n;
+ }
+}

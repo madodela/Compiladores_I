@@ -196,11 +196,15 @@ int getNumF (void)
     nonBlank();
     int dot = false;
     while (isdigit(ch) || ch == '.')
-    { temp = true ;           
+    { temp = true ;   
+           if(dot == true)
+           {
+                  termf = termf +1;
+                  }        
         if(ch == '.')
         {
               dot = true;
-              termf = termf +1;
+              
         }
         else
                 term = term * 10 + ( ch - '0' ) ;
@@ -209,6 +213,7 @@ int getNumF (void)
     }
     dot = false;
     num = num + (term * sign);
+    
     for(int i=0 ; i<termf; i++)
     {
         num = num / 10;
